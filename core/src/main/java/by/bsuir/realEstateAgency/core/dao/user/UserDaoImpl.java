@@ -1,16 +1,13 @@
 package by.bsuir.realEstateAgency.core.dao.user;
 
-import by.bsuir.realEstateAgency.core.model.Realtor;
-import by.bsuir.realEstateAgency.core.model.TypeUser;
 import by.bsuir.realEstateAgency.core.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
 @Repository
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
 
     @Resource
     private SessionFactory sessionFactory;
@@ -23,9 +20,6 @@ public class UserDaoImpl implements UserDao{
     @Override
     public User get(Long key) {
         User user = sessionFactory.getCurrentSession().get(User.class, key);
-        if(user.getTypeUser() == TypeUser.REALTOR){
-            user = sessionFactory.getCurrentSession().get(Realtor.class, key);
-        }
         return user;
     }
 }

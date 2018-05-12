@@ -6,7 +6,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Realtor extends Employee {
+public class Client extends User {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Immobility> immobilities;
