@@ -1,11 +1,8 @@
 package by.bsuir.realEstateAgency.core.dao.user;
 
 import by.bsuir.realEstateAgency.core.model.Realtor;
-import by.bsuir.realEstateAgency.core.model.TypeUser;
-import by.bsuir.realEstateAgency.core.model.User;
-import static org.junit.Assert.*;
-
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,6 +14,8 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Date;
 
+import static org.junit.Assert.assertTrue;
+
 @RunWith(SpringRunner.class)
 @Transactional
 @ContextConfiguration("classpath:context/applicationContext-core.xml")
@@ -27,9 +26,11 @@ public class UserDaoImplTest {
     @Resource
     private UserDao userDao;
 
+    @Resource
+    private SessionFactory sessionFactory;
+
     @Test
-    public void startTest(){
-        URL url = UserDaoImplTest.class.getClassLoader().getResource("log4j.properties");
+    public void startTest() {
         log.debug("LLLLLOOOOOOOOOLLLLLL");
         Realtor user = new Realtor();
         user.setLogin("admin");
@@ -43,8 +44,9 @@ public class UserDaoImplTest {
         user.setSalary(new BigDecimal(500));
         userDao.add(user);
 
-        Realtor user2 = (Realtor)userDao.get(user.getId());
-        assertEquals(user.getTypeUser(),user2.getTypeUser());
+        long var = user.getId();
+
+        Realtor user2 = (Realtor) userDao.get(var);
         assertTrue(user.getSalary().compareTo(user2.getSalary()) == 0);
     }
 }

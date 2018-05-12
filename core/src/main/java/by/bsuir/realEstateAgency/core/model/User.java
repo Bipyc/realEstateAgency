@@ -6,7 +6,11 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Users")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
+
+    @OneToOne(mappedBy = "user")
+    private PassportData passport;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,12 +37,6 @@ public class User {
     @Column
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
-
-    @Enumerated
-    @Column(columnDefinition = "smallint")
-    private TypeUser typeUser;
-
-    public User() {}
 
     public Long getId() {
         return id;
@@ -104,11 +102,11 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public TypeUser getTypeUser() {
-        return typeUser;
+    public PassportData getPassport() {
+        return passport;
     }
 
-    public void setTypeUser(TypeUser typeUser) {
-        this.typeUser = typeUser;
+    public void setPassport(PassportData passport) {
+        this.passport = passport;
     }
 }
