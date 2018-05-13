@@ -1,4 +1,4 @@
-package by.bsuir.realEstateAgency.core.model;
+package by.bsuir.realEstateAgency.web.bean.user;
 
 public enum TypeUser {
     CLIENT, REALTOR, ADMIN

@@ -1,5 +1,6 @@
 package by.bsuir.realEstateAgency.core.dao.user;
 
+import by.bsuir.realEstateAgency.core.dao.UserDao;
 import by.bsuir.realEstateAgency.core.model.Realtor;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
@@ -11,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.net.URL;
 import java.util.Date;
 
 import static org.junit.Assert.assertTrue;
@@ -42,7 +42,7 @@ public class UserDaoImplTest {
         user.setPatronymic("Michailovich");
         user.setEmploymentDate(new Date());
         user.setSalary(new BigDecimal(500));
-        userDao.add(user);
+        userDao.save(user);
 
         long var = user.getId();
 
