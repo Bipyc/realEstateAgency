@@ -1,5 +1,6 @@
 package by.bsuir.realEstateAgency.core.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,16 +10,19 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private PassportData passport;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @NotEmpty
+
+    @Column(nullable = false)
     private String firstName;
 
+    @NotEmpty
     @Column
     private String lastName;
 
@@ -27,6 +31,9 @@ public class User {
 
     @Column
     private String email;
+
+    @Column
+    private String phone;
 
     @Column
     private String login;
@@ -68,6 +75,14 @@ public class User {
 
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
