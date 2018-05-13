@@ -1,11 +1,12 @@
 package by.bsuir.realEstateAgency.core.dao;
 
+import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
 import by.bsuir.realEstateAgency.core.model.User;
 
 import java.util.List;
 
 public interface UserDao {
-    void save(User user);
+    void save(User user) throws ValueNotUniqueException;
 
     User get(Long key);
 

@@ -1,5 +1,6 @@
 package by.bsuir.realEstateAgency.web.controller;
 
+import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
 import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.UserService;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
@@ -14,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,6 +37,8 @@ public class UserController {
     private static final String CREATE_USER_ATTRIBUTE = "createUser";
 
     private static final String TYPE_USER_ATTRIBUTE = "typeUser";
+
+    private static final String ERROR_MESSAGE_ATTRIBUTE = "errorMessage";
 
 
     @Resource
@@ -90,9 +94,18 @@ public class UserController {
                                   @Valid UserDto user, BindingResult bindingResult,
                                   Model model) {
         if (!bindingResult.hasErrors()) {
-            userFacade.saveOrUpdate(user);
-            return "redirect:/users/" + user.getId();
+            if(user.getPassword() == null){
+                bindingResult.addError(new ObjectError("password",new String[]{"NotEmpty.userDto.password"},null,"value must not be empty"));
+            }
+            try {
+                userFacade.saveOrUpdate(user);
+                return "redirect:/users/" + user.getId();
+            }catch (ValueNotUniqueException e){
+                model.addAttribute(ERROR_MESSAGE_ATTRIBUTE, "some values are not unique");
+            }
         }
+        model.addAttribute(CREATE_USER_ATTRIBUTE,true);
+        model.addAttribute(TYPE_USER_ATTRIBUTE,typeUser);
         return "userDetails";
     }
 

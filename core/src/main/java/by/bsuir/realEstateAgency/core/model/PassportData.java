@@ -11,14 +11,14 @@ public class PassportData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(unique = true)
     private String number;
 
     @Column
     @Temporal(TemporalType.DATE)
     private Date dateOfIssue;
 
-    @Column(name = "identNumber")
+    @Column(unique = true, name = "identNumber")
     private String identificationNumber;
 
     @Column

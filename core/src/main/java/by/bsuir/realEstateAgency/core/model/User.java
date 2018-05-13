@@ -18,8 +18,7 @@ public class User {
     private Long id;
 
     @NotEmpty
-
-    @Column(nullable = false)
+    @Column
     private String firstName;
 
     @NotEmpty
@@ -29,13 +28,13 @@ public class User {
     @Column
     private String patronymic;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @Column
     private String phone;
 
-    @Column
+    @Column(unique = true)
     private String login;
 
     @Column
