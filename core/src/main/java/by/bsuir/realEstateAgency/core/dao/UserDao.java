@@ -10,6 +10,8 @@ public interface UserDao {
 
     User get(Long key);
 
+    User getByLoginOrEmail(String key);
+
     List<User> findAll(int offset, int limit);
 
     long count();

@@ -13,6 +13,8 @@ public interface UserService extends FindAllInterface {
 
     User get(Long key);
 
+    User getByLoginOrEmail(String key);
+
     @Override
     List<User> findAll(int offset, int limit);
 

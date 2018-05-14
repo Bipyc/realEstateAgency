@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/templates" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page catalogTabIsActive="${true}">
     <form method="post" >
         <table class="table table-hover">
@@ -47,6 +48,7 @@
         <button type="submit" name="remove" class="btn btn-danger">
             Remove
         </button>
+        <sec:csrfInput/>
     </form>
     <template:pagination targetPage="users" pagination="${pagedList.pagination}"/>
 </template:page>
