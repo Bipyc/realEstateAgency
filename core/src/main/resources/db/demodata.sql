@@ -6,7 +6,7 @@ VALUES (1, 'Первомайский РОВД', '2017-01-01', '3110111111EEE', '
 
 INSERT INTO Users (id, dateOfBirth, phone, email, firstName, lastName, login, password, patronymic, employmentDate, salary, DTYPE)
 VALUES (2, '1998-03-11', '+375291234567', '3cx2b@mail.ru', 'Kirillov', 'Alexander', 'realtor',
-           '$2a$11$fjRMze4xfp6.1rD1nAy9kOrriGltAfgObtRqt5kgZ/iYaMw2E6GPm',  'Olegovich', '2018-04-10',
+           '$2a$11$fjRMze4xfp6.1rD1nAy9kOrriGltAfgObtRqt5kgZ/iYaMw2E6GPm', 'Olegovich', '2018-04-10',
            500, 'Realtor');
 INSERT INTO Passports (id, authority, dateOfIssue, identNumber, number, user_id)
 VALUES (2, 'Первомайский РОВД', '2017-01-01', '3222222222EEE', 'BM4444444', 2);
