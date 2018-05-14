@@ -4,8 +4,6 @@ import by.bsuir.realEstateAgency.core.service.common.FindAllInterface;
 import by.bsuir.realEstateAgency.web.bean.pagedList.PagedListPage;
 import by.bsuir.realEstateAgency.web.bean.pagedList.Pagination;
 
-import java.util.List;
-
 public interface PageService {
 
     int AMOUNT_PHONES_ON_PAGE = 10;

@@ -5,8 +5,6 @@ import by.bsuir.realEstateAgency.web.bean.pagedList.PagedListPage;
 import by.bsuir.realEstateAgency.web.bean.pagedList.Pagination;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class PageServiceImpl implements PageService {
 
@@ -27,12 +25,12 @@ public class PageServiceImpl implements PageService {
 
     @Override
     public PagedListPage getPagedList(int pageNumber, FindAllInterface objectService) {
-        int itemsCount = (int)objectService.count();
+        int itemsCount = (int) objectService.count();
         int normalizedPageNumber = normalizePageNumber(pageNumber, itemsCount);
         int offset = ((normalizedPageNumber - 1) * AMOUNT_PHONES_ON_PAGE);
         int limit = AMOUNT_PHONES_ON_PAGE;
 
-        return new PagedListPage(objectService.findAll(offset,limit),getPagination(normalizedPageNumber,itemsCount));
+        return new PagedListPage(objectService.findAll(offset, limit), getPagination(normalizedPageNumber, itemsCount));
     }
 
     @Override
