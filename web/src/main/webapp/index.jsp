@@ -3,5 +3,5 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/templates" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
-    <h2><c:out value="${helloWorldAttribute}"/></h2>
+    <h2>Hello from Real Estate Agency</h2>
 </template:page>

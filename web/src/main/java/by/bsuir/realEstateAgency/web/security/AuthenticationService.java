@@ -20,11 +20,11 @@ public class AuthenticationService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
         by.bsuir.realEstateAgency.core.model.User userInfo = userService.getByLoginOrEmail(username);
-        if(userInfo == null){
-            throw new UsernameNotFoundException("User "+username+" not found");
+        if (userInfo == null) {
+            throw new UsernameNotFoundException("User " + username + " not found");
         }
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+userInfo.getClass().getSimpleName().toUpperCase());
-        UserDetails userDetails = (UserDetails)new User(userInfo.getLogin(),
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + userInfo.getClass().getSimpleName().toUpperCase());
+        UserDetails userDetails = (UserDetails) new User(userInfo.getLogin(),
                 userInfo.getPassword(), Arrays.asList(authority));
         return userDetails;
     }

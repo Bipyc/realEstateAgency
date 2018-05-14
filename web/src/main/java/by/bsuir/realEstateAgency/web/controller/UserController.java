@@ -1,7 +1,6 @@
 package by.bsuir.realEstateAgency.web.controller;
 
 import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
-import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.UserService;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedList;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -84,8 +82,8 @@ public class UserController {
 
     @GetMapping(value = "/new")
     private String createUserForm(@RequestParam(value = "typeUser", defaultValue = "CLIENT") TypeUser typeUser, Model model) {
-        model.addAttribute(CREATE_USER_ATTRIBUTE,true);
-        model.addAttribute(TYPE_USER_ATTRIBUTE,typeUser);
+        model.addAttribute(CREATE_USER_ATTRIBUTE, true);
+        model.addAttribute(TYPE_USER_ATTRIBUTE, typeUser);
         model.addAttribute(USER_ATTRIBUTE, new UserDto());
         return "userDetails";
     }
@@ -95,9 +93,9 @@ public class UserController {
                                   @Valid UserDto user, BindingResult bindingResult,
                                   Model model) {
         if (!bindingResult.hasErrors()) {
-            if(user.getPassword()== null || user.getPassword().isEmpty()){
-                bindingResult.addError(new FieldError("userDto", "password", null, false, new String[]{"NotEmpty.userDto.password"},null,"value must not be empty"));
-            }else {
+            if (user.getPassword() == null || user.getPassword().isEmpty()) {
+                bindingResult.addError(new FieldError("userDto", "password", null, false, new String[]{"NotEmpty.userDto.password"}, null, "value must not be empty"));
+            } else {
                 try {
                     userFacade.saveOrUpdate(user);
                     return "redirect:/users/" + user.getId();
@@ -106,8 +104,8 @@ public class UserController {
                 }
             }
         }
-        model.addAttribute(CREATE_USER_ATTRIBUTE,true);
-        model.addAttribute(TYPE_USER_ATTRIBUTE,typeUser);
+        model.addAttribute(CREATE_USER_ATTRIBUTE, true);
+        model.addAttribute(TYPE_USER_ATTRIBUTE, typeUser);
         return "userDetails";
     }
 

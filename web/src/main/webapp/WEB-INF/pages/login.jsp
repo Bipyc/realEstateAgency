@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <div class="pt-3">
+        <a href="<c:url value="/registration"/>">Registration</a>
         <form method="post">
             <c:if test="${param.error != null}">
                 <p class="error-message">

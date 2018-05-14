@@ -18,6 +18,7 @@
 <body>
 <div class="auth">
     <sec:authorize access="hasRole('ANONYMOUS')">
+        <a href="<c:url value="/registration"/>">Registration</a>
         <a href="<c:url value="/login"/>">Login</a>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">

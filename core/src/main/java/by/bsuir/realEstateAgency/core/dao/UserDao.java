@@ -19,7 +19,6 @@ public interface UserDao {
     void remove(Long key);
 
     /**
-     *
      * @param keys - id list
      */
     void removeList(List<Long> keys);

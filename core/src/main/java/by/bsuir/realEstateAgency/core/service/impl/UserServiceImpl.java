@@ -25,9 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(User user) {
-        if(user.getId() != null){
+        if (user.getId() != null) {
             RuntimeException t = new IllegalArgumentException();
-            log.error("Creating user with set id",t);
+            log.error("Creating user with set id", t);
             throw t;
         }
         encryptPassword(user);
@@ -36,17 +36,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(User user) {
-        if(user.getId() == null){
+        if (user.getId() == null) {
             RuntimeException t = new IllegalArgumentException();
-            log.error("Updating user without id",t);
+            log.error("Updating user without id", t);
             throw t;
         }
         encryptPassword(user);
         userDao.save(user);
     }
 
-    private void encryptPassword(User user){
-        if(!user.getPassword().isEmpty()){
+    private void encryptPassword(User user) {
+        if (!user.getPassword().isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
     }
