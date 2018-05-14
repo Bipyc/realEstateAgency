@@ -20,7 +20,7 @@
     <sec:authorize access="hasRole('ANONYMOUS')">
         <a href="<c:url value="/login"/>">Login</a>
     </sec:authorize>
-    <sec:authorize access="hasRole('ADMIN')">
+    <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
         <form action="<c:url value="/logout"/>" method="post">
             <sec:csrfInput/>
             <span><sec:authentication property="principal.username"/></span>

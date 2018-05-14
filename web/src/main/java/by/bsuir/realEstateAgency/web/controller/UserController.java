@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
@@ -94,14 +95,15 @@ public class UserController {
                                   @Valid UserDto user, BindingResult bindingResult,
                                   Model model) {
         if (!bindingResult.hasErrors()) {
-            if(user.getPassword() == null){
-                bindingResult.addError(new ObjectError("password",new String[]{"NotEmpty.userDto.password"},null,"value must not be empty"));
-            }
-            try {
-                userFacade.saveOrUpdate(user);
-                return "redirect:/users/" + user.getId();
-            }catch (ValueNotUniqueException e){
-                model.addAttribute(ERROR_MESSAGE_ATTRIBUTE, "some values are not unique");
+            if(user.getPassword()== null || user.getPassword().isEmpty()){
+                bindingResult.addError(new FieldError("userDto", "password", null, false, new String[]{"NotEmpty.userDto.password"},null,"value must not be empty"));
+            }else {
+                try {
+                    userFacade.saveOrUpdate(user);
+                    return "redirect:/users/" + user.getId();
+                } catch (ValueNotUniqueException e) {
+                    model.addAttribute(ERROR_MESSAGE_ATTRIBUTE, "some values are not unique");
+                }
             }
         }
         model.addAttribute(CREATE_USER_ATTRIBUTE,true);

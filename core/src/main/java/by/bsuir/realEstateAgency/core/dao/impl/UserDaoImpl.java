@@ -74,4 +74,13 @@ public class UserDaoImpl implements UserDao {
             q.executeUpdate();
         }
     }
+
+    @Override
+    public User getByLoginOrEmail(String key) {
+        return (User) sessionFactory.getCurrentSession()
+                .createQuery("select u from User u where u.login= :login or u.email=:email")
+                .setParameter("login", key)
+                .setParameter("email", key)
+                .getSingleResult();
+    }
 }

@@ -4,6 +4,7 @@ import by.bsuir.realEstateAgency.core.dao.UserDao;
 import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,9 @@ public class UserServiceImpl implements UserService {
     static Logger log = Logger.getLogger(UserServiceImpl.class.getName());
 
     @Resource
+    private PasswordEncoder passwordEncoder;
+
+    @Resource
     private UserDao userDao;
 
     @Override
@@ -26,6 +30,7 @@ public class UserServiceImpl implements UserService {
             log.error("Creating user with set id",t);
             throw t;
         }
+        encryptPassword(user);
         userDao.save(user);
     }
 
@@ -36,7 +41,14 @@ public class UserServiceImpl implements UserService {
             log.error("Updating user without id",t);
             throw t;
         }
+        encryptPassword(user);
         userDao.save(user);
+    }
+
+    private void encryptPassword(User user){
+        if(!user.getPassword().isEmpty()){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
     }
 
     @Override
@@ -62,5 +74,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void removeList(List<Long> keys) {
         userDao.removeList(keys);
+    }
+
+    @Override
+    public User getByLoginOrEmail(String key) {
+        return userDao.getByLoginOrEmail(key);
     }
 }
