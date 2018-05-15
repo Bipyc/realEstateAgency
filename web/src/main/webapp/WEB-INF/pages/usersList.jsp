@@ -3,7 +3,7 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/templates" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<template:page catalogTabIsActive="${true}">
+<template:page>
     <form method="post">
         <table class="table table-hover">
             <thead>
