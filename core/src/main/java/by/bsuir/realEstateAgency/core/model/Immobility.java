@@ -23,7 +23,7 @@ public class Immobility {
     private String description;
 
     @Column
-    private BigDecimal currency;
+    private BigDecimal price;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private City city;
@@ -32,7 +32,7 @@ public class Immobility {
     private int numberOfRooms;
 
     @Column
-    private int square;
+    private double square;
 
     @Column
     private String address;
