@@ -4,9 +4,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="span" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form:form method="post" modelAttribute="userDto">
         <c:choose>
+            <c:when test="${not empty registration}">
+                <form:hidden path="typeUser"/>
+            </c:when>
             <c:when test="${not empty createUser}">
                 <select id="typeUser" name="typeUser">
                     <option ${typeUser eq "CLIENT" ? 'selected' : ''} value="CLIENT">Client</option>
@@ -73,7 +77,7 @@
         </div>
         <div class="form-group">
             <label for="dateOfBirth">Date of Birth*</label>
-            <fmt:formatDate value="${userDto.dateOfBirth}" var="dateString" pattern="yyyy-MM-dd" />
+            <fmt:formatDate value="${userDto.dateOfBirth}" var="dateString" pattern="yyyy-MM-dd"/>
             <form:input type="date" path="dateOfBirth" value="${dateString}" class="form-control" id="dateOfBirth"/>
             <div class="error-message" id="error-message">
                 <form:errors path="dateOfBirth"/>
@@ -88,8 +92,9 @@
         </div>
         <div class="form-group">
             <label for="dateOfIssue">Date of Issue*</label>
-            <fmt:formatDate value="${userDto.dateOfIssue}" var="dateStringIssue" pattern="yyyy-MM-dd" />
-            <form:input type="date" path="dateOfIssue" value="${dateStringIssue}" class="form-control" id="dateOfIssue"/>
+            <fmt:formatDate value="${userDto.dateOfIssue}" var="dateStringIssue" pattern="yyyy-MM-dd"/>
+            <form:input type="date" path="dateOfIssue" value="${dateStringIssue}" class="form-control"
+                        id="dateOfIssue"/>
             <div class="error-message" id="error-message">
                 <form:errors path="dateOfIssue"/>
             </div>
@@ -112,8 +117,9 @@
             <c:when test="${userDto.typeUser ne \"CLIENT\" && typeUser ne \"CLIENT\"}">
                 <div class="form-group">
                     <label for="employmentDate">EmploymentDate*</label>
-                    <fmt:formatDate value="${userDto.employmentDate}" var="dateString" pattern="yyyy-MM-dd" />
-                    <form:input type="date" path="employmentDate" value="${dateString}" class="form-control" id="employmentDate"/>
+                    <fmt:formatDate value="${userDto.employmentDate}" var="dateString" pattern="yyyy-MM-dd"/>
+                    <form:input type="date" path="employmentDate" value="${dateString}" class="form-control"
+                                id="employmentDate"/>
                     <div class="error-message" id="error-message">
                         <form:errors path="employmentDate"/>
                     </div>
@@ -141,14 +147,15 @@
                 </button>
             </c:if>
         </div>
+        <sec:csrfInput/>
     </form:form>
     <script>
-        $(function(){
+        $(function () {
             // bind change event to select
             $('#typeUser').on('change', function () {
                 var value = $(this).val(); // get selected value
                 if (value) { // require a URL
-                    window.location = window.location.href.split('?')[0]+"?typeUser="+value; // redirect
+                    window.location = window.location.href.split('?')[0] + "?typeUser=" + value; // redirect
                 }
                 return false;
             });

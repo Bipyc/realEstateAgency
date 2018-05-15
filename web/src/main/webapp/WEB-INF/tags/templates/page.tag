@@ -69,9 +69,10 @@
         </nav>
         <div class="auth">
             <sec:authorize access="hasRole('ANONYMOUS')">
+                <a href="<c:url value="/registration"/>">Registration</a>
                 <a href="<c:url value="/login"/>">Login</a>
             </sec:authorize>
-            <sec:authorize access="hasRole('ADMIN')">
+            <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
                 <form action="<c:url value="/logout"/>" method="post">
                     <sec:csrfInput/>
                     <span><sec:authentication property="principal.username"/></span>
@@ -79,14 +80,6 @@
                 </form>
             </sec:authorize>
         </div>
-        <div class="container">
-
-
-        </div>
-        <script>
-            var context_path = "<c:out value="${pageContext.request.contextPath}"/>";
-        </script>
-
     </div>
     <div class="hero">
         <jsp:doBody/>
@@ -95,5 +88,8 @@
         Dima Bipyc and two asshols, 2018
     </div>
 </div>
+  <script>
+      var context_path = "<c:out value="${pageContext.request.contextPath}"/>";
+  </script>
 </body>
 </html>

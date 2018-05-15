@@ -38,4 +38,9 @@
         <jdbc:script location="classpath:db/demodata.sql"/>
     </jdbc:initialize-database>
 
+    <bean id="passwordEncoder"
+          class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg value="11"/>
+    </bean>
+
 </beans>

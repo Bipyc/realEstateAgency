@@ -1,7 +1,5 @@
 package by.bsuir.realEstateAgency.web.bean.pagedList;
 
-import javax.persistence.Column;
-
 public class CheckedItem {
     private Long id;
 

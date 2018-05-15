@@ -10,6 +10,8 @@ public interface UserDao {
 
     User get(Long key);
 
+    User getByLoginOrEmail(String key);
+
     List<User> findAll(int offset, int limit);
 
     long count();
@@ -17,7 +19,6 @@ public interface UserDao {
     void remove(Long key);
 
     /**
-     *
      * @param keys - id list
      */
     void removeList(List<Long> keys);
