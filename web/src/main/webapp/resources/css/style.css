@@ -1,23 +1,43 @@
 :root {
-    --main-font-color: #061e52;
-    --main-hover-font-color: white;
+    --main-font-color: white;
+    /*--main-font-color: #061e52;*/
+    --main-hover-font-color: black;
+    --header-background-color: rgba(72, 170, 179, 0.53);
+    --footer-background-color: rgba(20, 43, 43, 0.79);
 }
 
-body, html {
+* { padding: 0; margin: 0; }
+
+
+body, html{
     font-family: "Arial Black", Gadget, sans-serif;
+    min-height: 100% !important;
     height: 100%;
-    margin: 0;
 }
 
-.bg {
-    display: flex;
+.wrapper-bg {
     flex-flow: column;
+    min-height: 100%;
     color: #b4b4b4;
+    display: flex;
+    flex-direction: column;
     background: url("../img/background2.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+.content{
+    flex: 2 ;
+    overflow: auto;
+}
+.header{
+    background-color: var(--header-background-color);
+}
+
+.navbar-default{
+    background-color: transparent;
 }
 
 .header .navbar-nav > li > a {
@@ -28,11 +48,9 @@ body, html {
 
 .header .navbar {
     margin-bottom: 0px;
-    padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
     border-bottom: none;
-    background-color: rgba(191, 192, 194, 0.55);
     min-width: 400px;
     border: none;
 }
@@ -75,22 +93,21 @@ body, html {
     color: var(--main-hover-font-color);
 }
 
-.hero {
-    height: 100%;
+.content_dark_background {
     margin-left: 15%;
     margin-right: 15%;
     padding: 3%;
     background: rgba(0, 0, 0, 0.6);
 }
 
-.hero h1 {
+.content_dark_background h1 {
     color: white;
     font-weight: bold;
     font-size: 60px;
     margin-bottom: 36px;
 }
 
-.hero p {
+.content_dark_background p {
     color: rgba(255, 255, 255, 0.6);
     font-size: 22px;
     max-width: 660px;
@@ -99,7 +116,7 @@ body, html {
     line-height: 1.5;
 }
 
-.header .btn-primary {
+.header .btn-prim {
     color: #fff;
     background-color: transparent;
     border-color: #fffbfb !important;
@@ -111,11 +128,11 @@ body, html {
     transition: 0.2s background-color;
 }
 
-.header .btn-primary:hover {
+.header .btn-prim:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.header .btn-primary:active {
+.header .btn-prim:active {
     transform: translateY(1px);
 }
 
@@ -136,14 +153,37 @@ body, html {
         box-shadow: none;
     }
 
-    .header .hero {
+    .header .content_dark_background {
         margin-top: 40px;
         margin-bottom: 40px;
     }
 
-    .header .hero h1 {
+    .header .content_dark_background h1 {
         font-size: 42px;
     }
+}
+
+
+.main-text{
+    margin: 15%;
+    color: var(--main-font-color);
+    -webkit-text-stroke-color: var(--main-hover-font-color);
+    text-align: center;
+
+}
+
+.main-text h1{
+    font-weight: bold;
+    font-size: 80px;
+    -webkit-text-stroke-width: 2px;
+
+}
+
+.main-text p{
+    font-size: 35px;
+    font-weight: normal;
+    -webkit-text-stroke-width: 1px;
+    line-height: 1.5;
 }
 
 .auth {
@@ -169,8 +209,31 @@ body, html {
 .footer {
     padding: 0.5%;
     width: 100%;
-    background-color: rgba(61, 64, 58, 0.79);
+    background-color: var(--footer-background-color);
     color: white;
     text-align: center;
+    flex: 0 0 auto;
+}
+
+.btn-prim {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: #fffbfb !important;
+    outline:none;
+    margin-right: 20px;
+    margin-top: 20px;
+    font-size: 24px;
+    padding: 18px 24px;
+    transition:0.2s background-color;
+}
+
+.btn-prim:hover {
+    background-color:rgba(255,255,255,0.15);
+    color: white;
+}
+
+.btn-prim:active {
+    background-color: var(--header-background-color);
+    transform:translateY(1px);
 }
 
