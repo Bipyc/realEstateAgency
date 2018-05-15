@@ -29,7 +29,7 @@ public interface ImmobilityDao {
     void removeByUser(Long key, Long userId);
 
     /**
-     * @param keys - id list
+     *  @param keys - id list
      */
     void removeListByUser(List<Long> keys, Long userId);
 }
