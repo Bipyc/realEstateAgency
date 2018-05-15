@@ -18,13 +18,26 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-<c:if test="${not empty errorMessage}">
-    <div class="alert alert-danger">
-        <strong><c:out value="${errorMessage}"/></strong>
-    </div>
-</c:if>
-<div class="bg">
+<div class="wrapper-bg">
+    <c:if test="${not empty errorMessage}">
+        <div class="alert alert-danger">
+            <strong><c:out value="${errorMessage}"/></strong>
+        </div>
+    </c:if>
     <div class="header">
+        <div class="auth ">
+            <sec:authorize access="hasRole('ANONYMOUS')">
+                <a href="<c:url value="/registration"/>">Registration</a>
+                <a href="<c:url value="/login"/>">Login</a>
+            </sec:authorize>
+            <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
+                <form action="<c:url value="/logout"/>" method="post">
+                    <sec:csrfInput/>
+                    <span><sec:authentication property="principal.username"/></span>
+                    <button class="logout_button" type="submit">Logout</button>
+                </form>
+            </sec:authorize>
+        </div>
         <nav class="navbar navbar-default">
             <div class="container">
                 <a class="navbar-brand" href="<c:url value="/"/>">REALT</a>
@@ -37,7 +50,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">HOME</a></li>
+                        <li><a href="<c:url value="/"/>">HOME</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">NEWS <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -66,28 +79,19 @@
                     </ul>
                 </div>
             </div>
+            </li>
         </nav>
-        <div class="auth">
-            <sec:authorize access="hasRole('ANONYMOUS')">
-                <a href="<c:url value="/registration"/>">Registration</a>
-                <a href="<c:url value="/login"/>">Login</a>
-            </sec:authorize>
-            <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
-                <form action="<c:url value="/logout"/>" method="post">
-                    <sec:csrfInput/>
-                    <span><sec:authentication property="principal.username"/></span>
-                    <button class="logout_button" type="submit">Logout</button>
-                </form>
-            </sec:authorize>
-        </div>
     </div>
-    <div ${isDark ? 'class="hero"' : ''} >
-        <jsp:doBody/>
+    <div class="content">
+        <div ${isDark ? 'class="content_dark_background"' : 'class="main-text"'} >
+            <jsp:doBody/>
+        </div>
     </div>
     <div class="footer">
         Dima Bipyc and two asshols, 2018
     </div>
 </div>
+
   <script>
       var context_path = "<c:out value="${pageContext.request.contextPath}"/>";
   </script>

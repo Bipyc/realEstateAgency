@@ -7,9 +7,9 @@
         <a href="<c:url value="/registration"/>">Registration</a>
         <form method="post">
             <c:if test="${param.error != null}">
-                <p class="error-message">
+                <div class="error-message">
                     Invalid username or password.
-                </p>
+                </div>
             </c:if>
             <p>
                 <label for="username">Username</label>
