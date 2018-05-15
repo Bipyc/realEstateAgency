@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ tag body-content="scriptless" trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ attribute name="catalogTabIsActive" type="java.lang.Boolean" %>
-<%@ attribute name="ordersTabIsActive" type="java.lang.Boolean" %>
+<%@ attribute name="isDark" type="java.lang.Boolean" %>
+<c:set var="isDark" value="${(empty isDark) ? true : isDark}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,7 +81,7 @@
             </sec:authorize>
         </div>
     </div>
-    <div class="hero">
+    <div ${isDark ? 'class="hero"' : ''} >
         <jsp:doBody/>
     </div>
     <div class="footer">
