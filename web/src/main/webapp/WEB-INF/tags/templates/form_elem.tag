@@ -9,18 +9,17 @@
     <label for="${path}">${label}</label>
     <c:choose>
         <c:when test="${type eq 'password'}">
-            <form:password path="${path}" class="form-control" id="${path}"/>
+            <form:password path="${path}" class="form-control input-field" id="${path}" />
         </c:when>
         <c:when test="${type eq 'textarea'}">
-            <form:textarea path="${path}" class="form-control" id="${path}"/>
+            <form:textarea path="${path}" class="form-control input-field" id="${path}" />
         </c:when>
         <c:when test="${not empty value}">
-            <form:input path="${path}" type="${not empty type ? type: 'input'}" class="form-control" id="${path}"
-                        value="${value}"/>
+            <form:input path="${path}" type="${not empty type ? type: 'input'}" class="form-control input-field" id="${path}" value="${value}"/>
         </c:when>
         <c:otherwise>
-            <form:input path="${path}" type="${not empty type ? type: 'input'}" class="form-control" id="${path}"/>
-        </c:otherwise>
+            <form:input path="${path}" type="${not empty type ? type: 'input'}" class="form-control input-field" id="${path}"/>
+         </c:otherwise>
     </c:choose>
 
     <div class="error-message" id="error-message">
