@@ -39,7 +39,7 @@ public class ImmobilityDto {
     private Double square;
 
     @NotEmpty
-    @Size(max=1024)
+    @Size(max = 1024)
     private String address;
 
     private TypeImmobility typeImmobility;

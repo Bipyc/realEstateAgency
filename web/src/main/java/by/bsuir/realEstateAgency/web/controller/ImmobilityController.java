@@ -4,7 +4,6 @@ import by.bsuir.realEstateAgency.core.service.ImmobilityService;
 import by.bsuir.realEstateAgency.web.bean.immobility.ImmobilityDto;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedList;
-import by.bsuir.realEstateAgency.web.bean.user.UserDto;
 import by.bsuir.realEstateAgency.web.exceptions.BadRequestException;
 import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
 import by.bsuir.realEstateAgency.web.facade.ImmobilityFacade;
@@ -46,15 +45,15 @@ public class ImmobilityController {
 
     @GetMapping
     private String getImmobilities(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
-                            Model model) {
+                                   Model model) {
         model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, immobilityService));
         return "immobilitiesList";
     }
 
     @PostMapping(params = "remove")
-    private String removeImmobilities(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM,  defaultValue = "1") int pageNumber,
-                               CheckedList checkedList, BindingResult bindingResult,
-                               Authentication authentication, Model model) throws Exception {
+    private String removeImmobilities(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
+                                      CheckedList checkedList, BindingResult bindingResult,
+                                      Authentication authentication, Model model) throws Exception {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (bindingResult.hasErrors()) {
             log.error("Bad request params for deleting Users. HTTP400");
@@ -63,13 +62,13 @@ public class ImmobilityController {
         if (checkedList.getCheckedList() != null) {
             immobilityService.removeList(checkedList.getCheckedList()
                     .stream().filter(CheckedItem::isChecked)
-                    .map(CheckedItem::getId).collect(Collectors.toList()),userDetails.getUser());
+                    .map(CheckedItem::getId).collect(Collectors.toList()), userDetails.getUser());
         }
         return "redirect:/immobilities?page=" + pageNumber;
     }
 
     @GetMapping("/new")
-    public String getNewForm(Model model){
+    public String getNewForm(Model model) {
         model.addAttribute(CREATE_USER_ATTRIBUTE, true);
         model.addAttribute(IMMOBILITY_DTO_ATTRIBUTE, new ImmobilityDto());
         return "immobilityDetails";
@@ -77,21 +76,21 @@ public class ImmobilityController {
 
     @PostMapping("/new")
     public String createImmobility(@Valid ImmobilityDto immobilityDto, BindingResult bindingResult,
-                                   Authentication authentication, Model model){
+                                   Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             model.addAttribute(CREATE_USER_ATTRIBUTE, true);
             return "immobilityDetails";
         }
-        if(immobilityDto.getUploadedFiles() != null && immobilityDto.getUploadedFiles().size()>0){
+        if (immobilityDto.getUploadedFiles() != null && immobilityDto.getUploadedFiles().size() > 0) {
             immobilityDto.getUploadedFiles().remove(0);
         }
         immobilityFacade.saveOrUpdate(immobilityDto, userDetails.getUser());
-        return "redirect:/immobilities/"+immobilityDto.getId();
+        return "redirect:/immobilities/" + immobilityDto.getId();
     }
 
     @GetMapping("/{id}")
-    public String getImmobility(@PathVariable("id") long id, Model model){
+    public String getImmobility(@PathVariable("id") long id, Model model) {
         ImmobilityDto immobilityDto = immobilityFacade.getImmobility(id);
         if (immobilityDto == null) {
             log.error("User not found. HTTP404");
@@ -103,23 +102,23 @@ public class ImmobilityController {
 
     @PostMapping(value = "/{id}", params = "save")
     public String updateImmobility(@PathVariable("id") long id,
-                                @Valid ImmobilityDto immobilityDto, BindingResult bindingResult,
-                                Authentication authentication, Model model){
+                                   @Valid ImmobilityDto immobilityDto, BindingResult bindingResult,
+                                   Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "immobilityDetails";
         }
-        if(immobilityDto.getUploadedFiles() != null && immobilityDto.getUploadedFiles().size()>0){
+        if (immobilityDto.getUploadedFiles() != null && immobilityDto.getUploadedFiles().size() > 0) {
             immobilityDto.getUploadedFiles().remove(0);
         }
         immobilityFacade.saveOrUpdate(immobilityDto, userDetails.getUser());
-        return "redirect:/immobilities/"+id;
+        return "redirect:/immobilities/" + id;
     }
 
     @PostMapping(value = "/{id}", params = "remove")
-    public String removeImmobility(@PathVariable("id") long id, Authentication authentication, Model model){
+    public String removeImmobility(@PathVariable("id") long id, Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
-        immobilityService.remove(id,userDetails.getUser());
+        immobilityService.remove(id, userDetails.getUser());
         return "redirect:/immobilities";
     }
 }

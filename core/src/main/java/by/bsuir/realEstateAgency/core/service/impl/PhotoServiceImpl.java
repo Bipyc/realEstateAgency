@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PhotoServiceImpl implements PhotoService{
+public class PhotoServiceImpl implements PhotoService {
 
     @Resource
     private PhotoDao photoDao;

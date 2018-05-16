@@ -1,7 +1,6 @@
 package by.bsuir.realEstateAgency.core.model;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.math.BigDecimal;
 import java.util.List;
 

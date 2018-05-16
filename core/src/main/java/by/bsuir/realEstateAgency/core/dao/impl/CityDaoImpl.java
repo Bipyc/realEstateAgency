@@ -21,7 +21,7 @@ public class CityDaoImpl implements CityDao {
     @Override
     public City get(String name) {
         return (City) sessionFactory.getCurrentSession().createQuery("select c from City c where c.name = :name")
-                .setParameter("name",name)
+                .setParameter("name", name)
                 .uniqueResult();
     }
 

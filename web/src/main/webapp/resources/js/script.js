@@ -1,6 +1,7 @@
 let dropArea = document.getElementById("drop-area")
 var appendedFiles = [];
-function preventDefaults (e) {
+
+function preventDefaults(e) {
     e.preventDefault()
     e.stopPropagation()
 }
@@ -22,7 +23,9 @@ function handleDrop(e) {
 }
 
 function handleFiles(files) {
-    appendedFiles.forEach(function (value) { document.getElementById('gallery').removeChild(value) })
+    appendedFiles.forEach(function (value) {
+        document.getElementById('gallery').removeChild(value)
+    })
     appendedFiles = [];
     files.forEach(previewFile)
 }
@@ -30,7 +33,7 @@ function handleFiles(files) {
 function previewFile(file) {
     let reader = new FileReader()
     reader.readAsDataURL(file)
-    reader.onloadend = function() {
+    reader.onloadend = function () {
         let img = document.createElement('img')
         img.src = reader.result
         document.getElementById('gallery').appendChild(img)
@@ -38,15 +41,15 @@ function previewFile(file) {
 }
 
 function uploadFile(file, i) {
-    $("input[name=fileLoadInput]").clone().appendTo( $("input[name=fileLoadInput]").parent() ).val('');
+    $("input[name=fileLoadInput]").clone().appendTo($("input[name=fileLoadInput]").parent()).val('');
     $("input[name=fileLoadInput]").hide();
     //$("#fileLoadInput").val(uploadedFiles);
 }
 
-function addFileInput(){
+function addFileInput() {
     let reader = new FileReader()
     reader.readAsDataURL(document.getElementById('inputFile').files[0])
-    reader.onloadend = function() {
+    reader.onloadend = function () {
         let div = document.getElementsByClassName('previewImageTemplate')[0].cloneNode(true);
         div.removeAttribute("class");
         let img = div.getElementsByClassName('previewImage')[0];

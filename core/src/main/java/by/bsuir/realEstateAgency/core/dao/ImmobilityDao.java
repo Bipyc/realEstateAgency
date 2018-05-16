@@ -1,8 +1,6 @@
 package by.bsuir.realEstateAgency.core.dao;
 
-import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
 import by.bsuir.realEstateAgency.core.model.Immobility;
-import by.bsuir.realEstateAgency.core.model.User;
 
 import java.util.List;
 

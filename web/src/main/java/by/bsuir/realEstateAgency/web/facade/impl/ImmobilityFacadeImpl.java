@@ -45,7 +45,7 @@ public class ImmobilityFacadeImpl implements ImmobilityFacade {
     @Override
     public ImmobilityDto getImmobility(Long key) {
         Immobility immobility = immobilityService.get(key);
-        if(immobility == null){
+        if (immobility == null) {
             return null;
         }
         ImmobilityDto immobilityDto = new ImmobilityDto();
@@ -60,8 +60,8 @@ public class ImmobilityFacadeImpl implements ImmobilityFacade {
         immobilityDto.setAddress(immobility.getAddress());
         immobilityDto.setTypeImmobility(immobility.getType());
         immobilityDto.setPhotos(immobility.getPhotos().stream()
-                    .map(photo -> new PhotoDto(photo.getId(),photo.getPath()))
-                    .collect(Collectors.toList()));
+                .map(photo -> new PhotoDto(photo.getId(), photo.getPath()))
+                .collect(Collectors.toList()));
 
         return immobilityDto;
     }
@@ -83,7 +83,7 @@ public class ImmobilityFacadeImpl implements ImmobilityFacade {
         String cityName = immobilityDto.getCityName();
 
         City city = cityService.get(cityName);
-        if(city==null){
+        if (city == null) {
             city = new City();
             city.setName(cityName);
             cityService.save(city);
@@ -100,31 +100,30 @@ public class ImmobilityFacadeImpl implements ImmobilityFacade {
     private static String randomAlphaNumeric(int count) {
         StringBuilder builder = new StringBuilder();
         while (count-- != 0) {
-            int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+            int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
             builder.append(ALPHA_NUMERIC_STRING.charAt(character));
         }
         return builder.toString();
     }
 
     @Transactional
-    protected Immobility getImmobilityWithCheck(ImmobilityDto immobilityDto, User user){
+    protected Immobility getImmobilityWithCheck(ImmobilityDto immobilityDto, User user) {
         Immobility immobility = null;
-        if(immobilityDto.getId() != null){
-            immobility =  immobilityService.get(immobilityDto.getId());
-            if(immobility == null){
+        if (immobilityDto.getId() != null) {
+            immobility = immobilityService.get(immobilityDto.getId());
+            if (immobility == null) {
                 RuntimeException e = new IllegalStateException();
                 log.error("Trying update a nonexistent object", e);
                 throw e;
             }
-            if(!user.equals(immobility.getOwner())&& !(user instanceof Admin)){
+            if (!user.equals(immobility.getOwner()) && !(user instanceof Admin)) {
                 RuntimeException e = new IllegalStateException();
                 log.error("Trying update immobility by not the owner or admin", e);
                 throw e;
             }
-        }
-        else{
+        } else {
             immobility = new Immobility();
-            if(!(user instanceof Client)){
+            if (!(user instanceof Client)) {
                 RuntimeException e = new IllegalStateException();
                 log.error("Creating immobility with by not a client", e);
                 throw e;
@@ -135,15 +134,15 @@ public class ImmobilityFacadeImpl implements ImmobilityFacade {
     }
 
     @Transactional
-    protected void updatePhotos(Immobility immobility, ImmobilityDto immobilityDto){
+    protected void updatePhotos(Immobility immobility, ImmobilityDto immobilityDto) {
         int photoCount = 0;
         int uploadPhotoCount = 0;
         List<Long> deletedPhotoIds = null;
-        if(immobilityDto.getPhotos() == null){
+        if (immobilityDto.getPhotos() == null) {
             immobilityDto.setPhotos(new ArrayList<>());
         }
 
-        if(immobility.getPhotos() != null){
+        if (immobility.getPhotos() != null) {
             photoCount = immobilityDto.getPhotos().size();
 
             List<Long> leftPhotoIdList = immobilityDto.getPhotos().stream().map(PhotoDto::getId)
@@ -158,43 +157,43 @@ public class ImmobilityFacadeImpl implements ImmobilityFacade {
         }
 
 
-        if(immobilityDto.getUploadedFiles() != null){
+        if (immobilityDto.getUploadedFiles() != null) {
             uploadPhotoCount = immobilityDto.getUploadedFiles().size();
         }
 
-        if(photoCount + uploadPhotoCount>MAX_FILE_COUNT){
+        if (photoCount + uploadPhotoCount > MAX_FILE_COUNT) {
             RuntimeException e = new IllegalStateException();
-            log.error("Trying upload mo then "+MAX_FILE_COUNT+" files!", e);
+            log.error("Trying upload mo then " + MAX_FILE_COUNT + " files!", e);
             throw e;
         }
 
-        if(deletedPhotoIds != null) {
+        if (deletedPhotoIds != null) {
             photoService.removeByList(deletedPhotoIds);
         }
     }
 
     @Transactional
-    protected void saveFiles(Immobility immobility, ImmobilityDto immobilityDto){
-        if(immobilityDto.getUploadedFiles() != null) {
-            if(immobility.getPhotos() == null){
+    protected void saveFiles(Immobility immobility, ImmobilityDto immobilityDto) {
+        if (immobilityDto.getUploadedFiles() != null) {
+            if (immobility.getPhotos() == null) {
                 immobility.setPhotos(new ArrayList<>());
             }
             for (MultipartFile file : immobilityDto.getUploadedFiles()) {
-                String[] fileNameOriginSplit = file.getOriginalFilename().split("\\.",2);
+                String[] fileNameOriginSplit = file.getOriginalFilename().split("\\.", 2);
                 String extension = "";
-                if(fileNameOriginSplit.length>1){
-                    extension = "."+fileNameOriginSplit[1];
+                if (fileNameOriginSplit.length > 1) {
+                    extension = "." + fileNameOriginSplit[1];
                 }
                 String filename = null;
                 File imageFile = null;
                 do {
                     filename = randomAlphaNumeric(LENGTH_FILE_NAME);
-                    imageFile = new File(servletContext.getRealPath("/images"),filename+extension);
+                    imageFile = new File(servletContext.getRealPath("/images"), filename + extension);
                 } while (imageFile.exists());
                 try {
                     file.transferTo(imageFile);
                     Photo photo = new Photo();
-                    photo.setPath(filename+extension);
+                    photo.setPath(filename + extension);
                     photo.setImmobility(immobility);
                     photoService.save(photo);
                     immobility.getPhotos().add(photo);

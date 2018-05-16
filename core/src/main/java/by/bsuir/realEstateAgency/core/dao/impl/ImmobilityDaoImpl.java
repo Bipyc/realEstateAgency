@@ -3,7 +3,6 @@ package by.bsuir.realEstateAgency.core.dao.impl;
 import by.bsuir.realEstateAgency.core.dao.ImmobilityDao;
 import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
 import by.bsuir.realEstateAgency.core.model.Immobility;
-import by.bsuir.realEstateAgency.core.model.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class ImmobilityDaoImpl implements ImmobilityDao{
+public class ImmobilityDaoImpl implements ImmobilityDao {
 
     static Logger log = Logger.getLogger(ImmobilityDaoImpl.class.getName());
 
@@ -65,7 +64,7 @@ public class ImmobilityDaoImpl implements ImmobilityDao{
             Long count = (Long) sessionFactory.getCurrentSession()
                     .createQuery("select count(i) from Immobility i Where i.id in (:list) and i.owner.id=:userId")
                     .setParameterList("list", keys)
-                    .setParameter("userId",userId)
+                    .setParameter("userId", userId)
                     .getSingleResult();
             return count == keys.size();
         }

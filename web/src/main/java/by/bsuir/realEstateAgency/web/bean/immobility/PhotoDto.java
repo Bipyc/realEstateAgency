@@ -1,7 +1,5 @@
 package by.bsuir.realEstateAgency.web.bean.immobility;
 
-import javax.persistence.Column;
-
 public class PhotoDto {
     private Long id;
 

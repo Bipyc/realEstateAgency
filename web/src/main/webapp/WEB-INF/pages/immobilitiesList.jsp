@@ -19,13 +19,16 @@
                 <tr>
                     <td>
                         <input name="checkedList[${i.index}].checked" type="checkbox" value="true"/>
-                        <input type="hidden" name="checkedList[${i.index}].id" value="<c:out value="${immobilities.id}"/>"/>
+                        <input type="hidden" name="checkedList[${i.index}].id"
+                               value="<c:out value="${immobilities.id}"/>"/>
                     </td>
                     <td>
-                        <a href="<c:url value="/immobilities/${immobilities.id}"/>"><c:out value="${immobilities.name}"/></a>
+                        <a href="<c:url value="/immobilities/${immobilities.id}"/>"><c:out
+                                value="${immobilities.name}"/></a>
                     </td>
                     <td>
-                        <a href="<c:url value="/immobilities/${immobilities.id}"/>"><c:out value="${immobilities.name}"/></a>
+                        <a href="<c:url value="/immobilities/${immobilities.id}"/>"><c:out
+                                value="${immobilities.name}"/></a>
                     </td>
                     <td>
                         <c:out value="${immobilities.city.name}"/>

@@ -6,7 +6,7 @@
 <%@ taglib prefix="span" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
-    <form:form  method="post" enctype="multipart/form-data" modelAttribute="immobilityDto">
+    <form:form method="post" enctype="multipart/form-data" modelAttribute="immobilityDto">
         <sec:csrfInput/>
         <template:form_elem label="Name*" path="name"/>
         <c:if test="${empty create}">
@@ -26,23 +26,24 @@
             <label for="typeImmobility">Type</label>
             <select id="typeImmobility" name="typeImmobility">
                 <option ${immobilityDto.typeImmobility eq "HOUSE" ? 'selected' : ''} value="HOUSE">House</option>
-                <option ${immobilityDto.typeImmobility eq "APARTMENT" ? 'selected' : ''} value="APARTMENT">Apartment</option>
+                <option ${immobilityDto.typeImmobility eq "APARTMENT" ? 'selected' : ''} value="APARTMENT">Apartment
+                </option>
             </select>
         </div>
         <div class="form-group">
             <label for="inputFile">Images</label>
-            <input type="file" name="uploadedFiles" accept="image/*"  id="inputFile"  onchange="addFileInput()">
+            <input type="file" name="uploadedFiles" accept="image/*" id="inputFile" onchange="addFileInput()">
         </div>
         <div id="gallery">
-            <c:forEach var="photo" items="${immobilityDto.photos}" varStatus="i" >
+            <c:forEach var="photo" items="${immobilityDto.photos}" varStatus="i">
                 <div>
                     <a href="#" class="deleteImage">Delete</a>
                     <img class="previewImage" src="<c:url value="/images/${photo.path}"/>"/>
-                    <form:hidden path="photos[${i.index}].id" />
+                    <form:hidden path="photos[${i.index}].id"/>
                 </div>
             </c:forEach>
             <div class="previewImageTemplate">
-                <a href="#"class="deleteImage">Delete</a>
+                <a href="#" class="deleteImage">Delete</a>
                 <img class="previewImage"/>
             </div>
         </div>

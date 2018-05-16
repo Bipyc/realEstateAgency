@@ -48,12 +48,12 @@ public class ImmobilityServiceImpl implements ImmobilityService {
 
     @Override
     public void remove(Long key, User user) {
-        removeList(Arrays.asList(key),user);
+        removeList(Arrays.asList(key), user);
     }
 
     @Override
     public void removeList(List<Long> keys, User user) {
-        if(!(user instanceof Admin)){
+        if (!(user instanceof Admin)) {
             if (!immobilityDao.checkUser(keys, user.getId())) {
                 RuntimeException e = new IllegalStateException();
                 log.error("Trying remove immobility by not the owner or admin", e);
