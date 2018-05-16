@@ -27,14 +27,14 @@
     <div class="header">
         <div class="auth ">
             <sec:authorize access="hasRole('ANONYMOUS')">
-                <a href="<c:url value="/registration"/>">Registration</a>
-                <a href="<c:url value="/login"/>">Login</a>
+                <a class="auth-link" href="<c:url value="/registration"/>">Registration</a>
+                <a class="auth-link" href="<c:url value="/login"/>">Login</a>
             </sec:authorize>
             <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
-                <form action="<c:url value="/logout"/>" method="post">
+                <form  action="<c:url value="/logout"/>" method="post">
                     <sec:csrfInput/>
                     <span><sec:authentication property="principal.username"/></span>
-                    <button class="logout_button" type="submit">Logout</button>
+                    <button class="auth-link" type="submit">Logout</button>
                 </form>
             </sec:authorize>
         </div>
