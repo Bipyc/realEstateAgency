@@ -8,9 +8,11 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -38,42 +40,54 @@ public class ImmobilityDaoImpl implements ImmobilityDao{
     }
 
     @Override
-    public List<User> findAll(int offset, int limit) {
-        return null;
+    public List<Immobility> findAll(int offset, int limit) {
+        return sessionFactory.getCurrentSession().createQuery("Select i from Immobility i")
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
     }
 
     @Override
     public long count() {
-        return 0;
+        return (Long) sessionFactory.getCurrentSession()
+                .createQuery("select count(i) from Immobility i")
+                .getSingleResult();
     }
 
     @Override
     public void remove(Long key) {
+        removeList(Arrays.asList(key));
+    }
 
+    @Override
+    public boolean checkUser(List<Long> keys, Long userId) {
+        if (keys.size() > 0) {
+            Long count = (Long) sessionFactory.getCurrentSession()
+                    .createQuery("select count(i) from Immobility i Where i.id in (:list) and i.owner.id=:userId")
+                    .setParameterList("list", keys)
+                    .setParameter("userId",userId)
+                    .getSingleResult();
+            return count == keys.size();
+        }
+        return true;
     }
 
     @Override
     public void removeList(List<Long> keys) {
-
+        if (keys.size() > 0) {
+            Query query = sessionFactory.getCurrentSession().createQuery("DELETE FROM Immobility i WHERE i.id IN (:list)");
+            query.setParameterList("list", keys);
+            query.executeUpdate();
+        }
     }
 
     @Override
-    public List<User> findAllByUser(int offset, int limit, Long userId) {
+    public List<Immobility> findAllByUser(int offset, int limit, Long userId) {
         return null;
     }
 
     @Override
     public long countByUser(Long userId) {
         return 0;
-    }
-
-    @Override
-    public void removeByUser(Long key, Long userId) {
-
-    }
-
-    @Override
-    public void removeListByUser(List<Long> keys, Long userId) {
-
     }
 }

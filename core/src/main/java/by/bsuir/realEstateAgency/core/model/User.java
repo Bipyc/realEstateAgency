@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Users")
@@ -122,5 +123,20 @@ public class User {
 
     public void setPassport(PassportData passport) {
         this.passport = passport;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(login, user.login);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, login);
     }
 }
