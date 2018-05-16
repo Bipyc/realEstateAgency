@@ -258,6 +258,7 @@ body, html{
     text-align: center;
     color: var(--main-font-color);
     background: var(--header-background-color);
+    border: none;
 }
 
 .login-button:hover{
@@ -265,17 +266,26 @@ body, html{
 }
 
 .auth-block{
-    margin: 30px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.auth-record{
     font-size: 30px;
     color: var(--main-font-color);
 }
 
 .input-field{
+    color: black;
     font-size: 25px;
 }
 .information-text{
     color: var(--main-font-color);
     text-align: center;
     font-size: 40px;
+}
+
+.choise{
+    color: black;
 }
 

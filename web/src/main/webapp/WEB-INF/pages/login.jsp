@@ -5,7 +5,6 @@
 <template:page>
     <div class="pt-3">
         <p class="information-text">Log in</p>
-        <a class="auth-link" href="<c:url value="/registration"/>">Registration</a>
         <form method="post" >
             <c:if test="${param.error != null}">
                 <div class="error-message">
@@ -13,17 +12,21 @@
                 </div>
             </c:if>
             <div class="auth-block">
-                <div class="form-group">
+                <a class="auth-link" href="<c:url value="/registration"/>">Registration</a>
+                <br />
+                <br />
+                <div class="form-group auth-record">
                     <label for="username">Username</label>
                     <input class="input-field form-control" type="text" id="username" name="username"/>
                 </div>
-                <div class="form-group">
+                <div class="form-group auth-record">
                     <label for="password">Password</label>
                     <input class="input-field form-control" type="password" id="password" name="password"/>
                 </div>
+                <br />
+                <button type="submit" class="btn login-button">Log in</button>
             </div>
             <sec:csrfInput/>
-            <button type="submit" class="btn login-button">Log in</button>
         </form>
     </div>
 </template:page>
