@@ -4,23 +4,26 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <div class="pt-3">
-        <a href="<c:url value="/registration"/>">Registration</a>
-        <form method="post">
+        <p class="information-text">Log in</p>
+        <a class="auth-link" href="<c:url value="/registration"/>">Registration</a>
+        <form method="post" >
             <c:if test="${param.error != null}">
                 <div class="error-message">
                     Invalid username or password.
                 </div>
             </c:if>
-            <p>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username"/>
-            </p>
-            <p>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password"/>
-            </p>
+            <div class="auth-block">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input class="input-field form-control" type="text" id="username" name="username"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="input-field form-control" type="password" id="password" name="password"/>
+                </div>
+            </div>
             <sec:csrfInput/>
-            <button type="submit" class="btn">Log in</button>
+            <button type="submit" class="btn login-button">Log in</button>
         </form>
     </div>
 </template:page>
