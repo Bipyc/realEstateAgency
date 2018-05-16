@@ -91,7 +91,6 @@
         Dima Bipyc and two asshols, 2018
     </div>
 </div>
-
   <script>
       var context_path = "<c:out value="${pageContext.request.contextPath}"/>";
   </script>
