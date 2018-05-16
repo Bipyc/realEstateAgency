@@ -2,7 +2,7 @@
 <%@ tag body-content="scriptless" trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ attribute name="isDark" type="java.lang.Boolean" %>
-<c:set var="isDark" value="${(empty isDark) ? true : isDark}" />
+<c:set var="isDark" value="${(empty isDark) ? true : isDark}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,8 +91,9 @@
         Dima Bipyc and two asshols, 2018
     </div>
 </div>
-  <script>
-      var context_path = "<c:out value="${pageContext.request.contextPath}"/>";
-  </script>
+<script>
+    var context_path = "<c:out value="${pageContext.request.contextPath}"/>";
+</script>
+<script src="<c:url value="/resources/js/script.js"/>"></script>
 </body>
 </html>

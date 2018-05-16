@@ -6,10 +6,12 @@
     --footer-background-color: rgba(20, 43, 43, 0.79);
 }
 
-* { padding: 0; margin: 0; }
+* {
+    padding: 0;
+    margin: 0;
+}
 
-
-body, html{
+body, html {
     font-family: "Arial Black", Gadget, sans-serif;
     min-height: 100% !important;
     height: 100%;
@@ -28,15 +30,16 @@ body, html{
     background-size: cover;
 }
 
-.content{
-    flex: 2 ;
+.content {
+    flex: 2;
     overflow: auto;
 }
-.header{
+
+.header {
     background-color: var(--header-background-color);
 }
 
-.navbar-default{
+.navbar-default {
     background-color: transparent;
 }
 
@@ -163,8 +166,7 @@ body, html{
     }
 }
 
-
-.main-text{
+.main-text {
     margin: 15%;
     color: var(--main-font-color);
     -webkit-text-stroke-color: var(--main-hover-font-color);
@@ -172,14 +174,14 @@ body, html{
 
 }
 
-.main-text h1{
+.main-text h1 {
     font-weight: bold;
     font-size: 80px;
     -webkit-text-stroke-width: 2px;
 
 }
 
-.main-text p{
+.main-text p {
     font-size: 35px;
     font-weight: normal;
     -webkit-text-stroke-width: 1px;
@@ -235,22 +237,31 @@ body, html{
     color: #fff;
     background-color: rgba(0, 0, 0, 0.5);
     border-color: #fffbfb !important;
-    outline:none;
+    outline: none;
     margin-right: 20px;
     margin-top: 20px;
     font-size: 24px;
     padding: 18px 24px;
-    transition:0.2s background-color;
+    transition: 0.2s background-color;
 }
 
 .btn-prim:hover {
-    background-color:rgba(255,255,255,0.15);
+    background-color: rgba(255, 255, 255, 0.15);
     color: white;
 }
 
 .btn-prim:active {
     background-color: var(--header-background-color);
-    transform:translateY(1px);
+    transform: translateY(1px);
+}
+
+#gallery input {
+    display: none;
+}
+
+#gallery .previewImage {
+    height: 200px;
+    width: auto;
 }
 
 .login-button{
@@ -279,3 +290,6 @@ body, html{
     font-size: 40px;
 }
 
+.previewImageTemplate {
+    display: none;
+}

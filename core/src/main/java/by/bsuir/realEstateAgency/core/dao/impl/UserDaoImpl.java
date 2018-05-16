@@ -77,6 +77,6 @@ public class UserDaoImpl implements UserDao {
                 .createQuery("select u from User u where u.login= :login or u.email=:email")
                 .setParameter("login", key)
                 .setParameter("email", key)
-                .getSingleResult();
+                .uniqueResult();
     }
 }

@@ -1,15 +1,11 @@
 package by.bsuir.realEstateAgency.web.security;
 
 import by.bsuir.realEstateAgency.core.service.UserService;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 
 public class AuthenticationService implements UserDetailsService {
 

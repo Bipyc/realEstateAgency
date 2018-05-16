@@ -43,7 +43,8 @@
         <c:choose>
             <c:when test="${userDto.typeUser ne \"CLIENT\" && typeUser ne \"CLIENT\"}">
                 <fmt:formatDate value="${userDto.dateOfIssue}" var="employmentDate" pattern="yyyy-MM-dd"/>
-                <template:form_elem label="Employment Date*" path="employmentDate" value="${employmentDate}" type="date"/>
+                <template:form_elem label="Employment Date*" path="employmentDate" value="${employmentDate}"
+                                    type="date"/>
                 <template:form_elem label="Salary*" path="salary"/>
             </c:when>
             <c:otherwise>
