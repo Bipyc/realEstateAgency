@@ -16,4 +16,11 @@ public interface ImmobilityService extends FindAllInterface {
 
     @Override
     long count();
+
+    void remove(Long key, User user);
+
+    /**
+     * @param keys - id list
+     */
+    void removeList(List<Long> keys, User user);
 }
