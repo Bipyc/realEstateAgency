@@ -48,7 +48,7 @@ body, html{
 
 .header .navbar {
     margin-bottom: 0px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     width: 100%;
     border-bottom: none;
     min-width: 400px;
@@ -107,14 +107,14 @@ body, html{
     margin-bottom: 36px;
 }
 
-.content_dark_background p {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 22px;
-    max-width: 660px;
-    margin: 0 auto 20px;
-    font-weight: normal;
-    line-height: 1.5;
-}
+/*.content_dark_background p {*/
+    /*color: rgba(255, 255, 255, 0.6);*/
+    /*font-size: 22px;*/
+    /*max-width: 660px;*/
+    /*margin: 0 auto 20px;*/
+    /*font-weight: normal;*/
+    /*line-height: 1.5;*/
+/*}*/
 
 .header .btn-prim {
     color: #fff;
@@ -189,8 +189,24 @@ body, html{
 .auth {
     text-align: right;
     padding-right: 20px;
+
 }
 
+.auth-link{
+    margin-right: 10px;
+    color: var(--main-font-color);
+    text-decoration: none;
+
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+
+}
+
+.auth-link:hover{
+    color: var(--main-hover-font-color);
+    text-decoration: none;
+}
 
 .error-message {
     color: red;
@@ -235,5 +251,31 @@ body, html{
 .btn-prim:active {
     background-color: var(--header-background-color);
     transform:translateY(1px);
+}
+
+.login-button{
+    font-size: 25px;
+    text-align: center;
+    color: var(--main-font-color);
+    background: var(--header-background-color);
+}
+
+.login-button:hover{
+    color: var(--main-hover-font-color);
+}
+
+.auth-block{
+    margin: 30px;
+    font-size: 30px;
+    color: var(--main-font-color);
+}
+
+.input-field{
+    font-size: 25px;
+}
+.information-text{
+    color: var(--main-font-color);
+    text-align: center;
+    font-size: 40px;
 }
 
