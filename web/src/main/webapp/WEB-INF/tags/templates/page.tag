@@ -43,5 +43,6 @@
 <script>
     var context_path = "<c:out value="${pageContext.request.contextPath}"/>";
 </script>
+<script src="<c:url value="/resources/js/script.js"/>"></script>
 </body>
 </html>
