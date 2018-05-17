@@ -14,6 +14,7 @@ public class LoginController {
         if (isAuthenticated()) {
             return "redirect:/";
         }
+        
         return "login";
     }
 }
