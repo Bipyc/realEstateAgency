@@ -1,37 +1,15 @@
 package by.bsuir.realEstateAgency.core.dao.impl;
 
 import by.bsuir.realEstateAgency.core.dao.ImmobilityDao;
-import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
 import by.bsuir.realEstateAgency.core.model.Immobility;
-import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class ImmobilityDaoImpl implements ImmobilityDao {
-
-    static Logger log = Logger.getLogger(ImmobilityDaoImpl.class.getName());
-
-    @Resource
-    private SessionFactory sessionFactory;
-
-    @Override
-    public void save(Immobility immobility) {
-        try {
-            Session session = sessionFactory.getCurrentSession();
-            session.saveOrUpdate(immobility);
-        } catch (ConstraintViolationException e) {
-            log.info("Get ConstraintViolationException", e);
-            throw new ValueNotUniqueException(e);
-        }
-    }
+public class ImmobilityDaoImpl  extends AbstractDaoImpl<Immobility> implements ImmobilityDao {
 
     @Override
     public Immobility get(Long key) {
@@ -40,17 +18,12 @@ public class ImmobilityDaoImpl implements ImmobilityDao {
 
     @Override
     public List<Immobility> findAll(int offset, int limit) {
-        return sessionFactory.getCurrentSession().createQuery("Select i from Immobility i")
-                .setFirstResult(offset)
-                .setMaxResults(limit)
-                .getResultList();
+        return super.findAll(offset, limit, "Select i from Immobility i");
     }
 
     @Override
     public long count() {
-        return (Long) sessionFactory.getCurrentSession()
-                .createQuery("select count(i) from Immobility i")
-                .getSingleResult();
+        return super.count("select count(i) from Immobility i");
     }
 
     @Override

@@ -2,26 +2,13 @@ package by.bsuir.realEstateAgency.core.dao.impl;
 
 import by.bsuir.realEstateAgency.core.dao.PhotoDao;
 import by.bsuir.realEstateAgency.core.model.Photo;
-import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Repository
-public class PhotoDaoImpl implements PhotoDao {
-
-    static Logger log = Logger.getLogger(PhotoDaoImpl.class.getName());
-
-    @Resource
-    private SessionFactory sessionFactory;
-
-    @Override
-    public void save(Photo photo) {
-        sessionFactory.getCurrentSession().saveOrUpdate(photo);
-    }
+public class PhotoDaoImpl extends AbstractDaoImpl<Photo> implements PhotoDao {
 
     @Override
     public void removeByList(List<Long> ids) {
