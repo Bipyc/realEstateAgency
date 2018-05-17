@@ -6,16 +6,10 @@ import by.bsuir.realEstateAgency.core.service.common.FindAllInterface;
 
 import java.util.List;
 
-public interface ImmobilityService extends FindAllInterface {
+public interface ImmobilityService extends FindAllInterface<Immobility> {
     void save(Immobility immobility);
 
     Immobility get(Long key);
-
-    @Override
-    List<Immobility> findAll(int offset, int limit);
-
-    @Override
-    long count();
 
     void remove(Long key, User user);
 

@@ -29,3 +29,5 @@ target
 # Eclipse
 *.classpath
 *.project
+
+web/src/main/webapp/images

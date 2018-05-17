@@ -74,8 +74,12 @@ public class UserController {
                               @Valid UserDto user, BindingResult bindingResult,
                               Model model) {
         if (!bindingResult.hasErrors()) {
-            userFacade.saveOrUpdate(user);
-            return "redirect:/users/" + id;
+            try {
+                userFacade.saveOrUpdate(user);
+                return "redirect:/users/" + user.getId();
+            } catch (ValueNotUniqueException e) {
+                model.addAttribute(ERROR_MESSAGE_ATTRIBUTE, "some values are not unique");
+            }
         }
         return "userDetails";
     }

@@ -2,8 +2,8 @@ package by.bsuir.realEstateAgency.core.service.common;
 
 import java.util.List;
 
-public interface FindAllInterface {
-    List findAll(int offset, int limit);
+public interface FindAllInterface<T> {
+    List<T> findAll(int offset, int limit);
 
     long count();
 }

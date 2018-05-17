@@ -5,22 +5,17 @@ import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
 import by.bsuir.realEstateAgency.core.model.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
 
     static Logger log = Logger.getLogger(UserDaoImpl.class.getName());
-
-    @Resource
-    private SessionFactory sessionFactory;
 
     @Override
     public void save(User user) {
@@ -43,15 +38,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAll(int offset, int limit) {
-        return sessionFactory.getCurrentSession().createQuery("Select u from User u")
-                .setFirstResult(offset)
-                .setMaxResults(limit)
-                .getResultList();
+        return super.findAll(offset,limit, "Select u from User u");
     }
 
     @Override
     public long count() {
-        return (Long) sessionFactory.getCurrentSession().createQuery("select count(u) from User u").getSingleResult();
+        return super.count("select count(u) from User u");
     }
 
     @Override
