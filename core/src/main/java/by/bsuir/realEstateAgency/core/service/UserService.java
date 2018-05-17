@@ -5,7 +5,7 @@ import by.bsuir.realEstateAgency.core.service.common.FindAllInterface;
 
 import java.util.List;
 
-public interface UserService extends FindAllInterface {
+public interface UserService extends FindAllInterface<User> {
     void update(User user);
 
     void create(User user);
@@ -13,12 +13,6 @@ public interface UserService extends FindAllInterface {
     User get(Long key);
 
     User getByLoginOrEmail(String key);
-
-    @Override
-    List<User> findAll(int offset, int limit);
-
-    @Override
-    long count();
 
     void remove(Long key);
 

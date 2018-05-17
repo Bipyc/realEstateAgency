@@ -8,10 +8,12 @@ import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Repository
 public class TypeApplicationDaoImpl extends AbstractDaoImpl<TypeApplication> implements TypeApplicationDao {
 
     static Logger log = Logger.getLogger(TypeApplicationDaoImpl.class.getName());

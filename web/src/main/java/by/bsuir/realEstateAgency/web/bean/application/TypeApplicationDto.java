@@ -1,23 +1,27 @@
-package by.bsuir.realEstateAgency.core.model;
+package by.bsuir.realEstateAgency.web.bean.application;
 
-import javax.persistence.*;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.Column;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "TypeApplications")
-public class TypeApplication {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TypeApplicationDto {
     private Long id;
 
-    @Column(unique = true)
+    @NotEmpty
+    @Size(max = 20)
     private String name;
 
-    @Column
+    @NotNull
+    @Min(0L)
+    @Max(100L)
     private BigDecimal commission;
 
-    public Long getId()  {
+    public Long getId() {
         return id;
     }
 
