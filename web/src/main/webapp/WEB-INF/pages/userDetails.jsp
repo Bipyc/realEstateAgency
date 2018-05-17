@@ -7,7 +7,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form:form method="post" modelAttribute="userDto">
-        <p class="information-text">Registration</p>
+        <p class="information-text outlined-text">Registration</p>
         <div class="auth-block">
             <div class="auth-record">
                 <div class="choise">
@@ -16,16 +16,19 @@
                             <form:hidden path="typeUser"/>
                         </c:when>
                         <c:when test="${not empty createUser}">
-                            <select id="typeUser" name="typeUser">
+                            <div class="form-group">
+                            <span>User type: </span>
+                            <select id="typeUser" name="typeUser" class="select-style">
                                 <option ${typeUser eq "CLIENT" ? 'selected' : ''} value="CLIENT">Client</option>
                                 <option ${typeUser eq "REALTOR" ? 'selected' : ''} value="REALTOR">Realtor</option>
                                 <option ${typeUser eq "ADMIN" ? 'selected' : ''} value="ADMIN">Admin</option>
                             </select>
+                            </div>
                         </c:when>
                         <c:otherwise>
                             <form:hidden path="typeUser"/>
                             <div class="form-group">
-                                <span>TypeUser:</span>
+                                <span>User type: </span>
                                 <span>${userDto.typeUser}</span>
                             </div>
                         </c:otherwise>
