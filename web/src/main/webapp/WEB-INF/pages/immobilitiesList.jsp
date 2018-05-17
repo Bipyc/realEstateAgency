@@ -23,8 +23,11 @@
                                value="<c:out value="${immobilities.id}"/>"/>
                     </td>
                     <td>
-                        <a href="<c:url value="/immobilities/${immobilities.id}"/>"><c:out
-                                value="${immobilities.name}"/></a>
+                        <a href="<c:url value="/immobilities/${immobilities.id}"/>">
+                            <img src="<c:url value="/images"/>/<c:out value="${empty immobilities.photos ||
+                            empty immobilities.photos[0] ? 'default.png' : immobilities.photos[0].path}"/>"
+                            width="100" height="100"/>
+                        </a>
                     </td>
                     <td>
                         <a href="<c:url value="/immobilities/${immobilities.id}"/>"><c:out

@@ -9,5 +9,4 @@
     <div class="btn btn-prim">Catalog</div>
     <div class="btn btn-prim">About us</div>
 
-
 </template:page>
