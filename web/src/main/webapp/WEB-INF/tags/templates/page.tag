@@ -33,7 +33,7 @@
             <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
                 <form  action="<c:url value="/logout"/>" method="post">
                     <sec:csrfInput/>
-                    <span><sec:authentication property="principal.username"/></span>
+                    <span class="username noselect"><sec:authentication property="principal.username"/></span>
                     <button class="auth-link" type="submit">Logout</button>
                 </form>
             </sec:authorize>
