@@ -6,7 +6,7 @@
 
     <h1>Discover a place you’ll love to live</h1>
     <p>Here you can find flats for rent or for sale. Let's start!</p>
-    <div class="btn btn-prim">Catalog</div>
-    <div class="btn btn-prim">About us</div>
+    <a class="btn btn-prim" href="#">Catalog</a>
+    <a class="btn btn-prim" href="<c:url value="/about"/>" >About us</a>
 
 </template:page>

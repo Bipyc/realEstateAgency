@@ -210,6 +210,8 @@ body, html {
 
 .error-message {
     color: red;
+    font-size: 14px;
+    font-weight: normal;
 }
 
 .logout_button {
@@ -387,5 +389,68 @@ img{
     margin-right: 1%;
     margin-left: 1%;
     font-size: 20px;
+}
+
+.close {
+    position: relative;
+
+    top: 8px;
+    left: 46px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.5;
+    float: left;
+    border: 2px solid white;
+
+    border-radius: 16px;
+    background-color: white;
+}
+.close:hover {
+    opacity: 1;
+}
+.close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+}
+.close:before {
+    transform: rotate(45deg);
+}
+.close:after {
+    transform: rotate(-45deg);
+}
+
+.about-img img{
+    width: 100%;
+    border-radius: 50%;
+    border-width: 5px;
+    height: auto;
+}
+
+.about-img img:hover{
+    transform: scale(1.05);
+}
+
+.about-column{
+    height: 100%;
+    width: 32%;
+    display: inline-block;
+    padding: 1%;
+    font-size: 18px;
+    color: var(--main-font-color);
+    font-family: Consolas;
+    font-style: italic;
+    vertical-align: top;
+}
+
+.about-context .right-border{
+    border-right: groove 3px white;
+}
+
+.about-text{
+    text-align: center;
 }
 
