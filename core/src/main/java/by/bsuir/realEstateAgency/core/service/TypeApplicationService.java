@@ -11,4 +11,6 @@ public interface TypeApplicationService extends FindAllInterface<TypeApplication
     TypeApplication get(Long key);
 
     void remove(Long key);
+
+    List<TypeApplication> getAll();
 }

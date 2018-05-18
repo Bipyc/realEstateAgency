@@ -78,7 +78,7 @@ public class TypeApplicationController {
             bingErrorNotUnqiue(bindingResult);
             return "typeApplicationDetails";
         }
-        return "redirect:/typeApplications/" + typeApplicationDto.getId();
+        return "redirect:/typeApplications";
     }
 
     @GetMapping("/{id}")
@@ -105,7 +105,7 @@ public class TypeApplicationController {
             bingErrorNotUnqiue(bindingResult);
             return "typeApplicationDetails";
         }
-        return "redirect:/typeApplications/" + id;
+        return "redirect:/typeApplications";
     }
 
     @PostMapping(value = "/{id}", params = "remove")

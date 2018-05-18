@@ -41,4 +41,9 @@ public class TypeApplicationServiceImpl implements TypeApplicationService {
     public long count() {
         return typeApplicationDao.count();
     }
+
+    @Override
+    public List<TypeApplication> getAll() {
+        return typeApplicationDao.findAll(0, Integer.MAX_VALUE);
+    }
 }

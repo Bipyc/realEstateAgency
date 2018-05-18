@@ -24,9 +24,16 @@
                     </td>
                     <td>
                         <a href="<c:url value="/immobilities/${immobilities.id}"/>">
-                            <img src="<c:url value="/images"/>/<c:out value="${empty immobilities.photos ||
-                            empty immobilities.photos[0] ? 'default.png' : immobilities.photos[0].path}"/>"
-                            width="100" height="100"/>
+                            <c:choose>
+                                <c:when test="${empty immobilities.photos || empty immobilities.photos[0]}">
+                                    <img src="<c:url value="/resources/img/default.png"/>" width="100" height="100"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="<c:url value="/images"/>/<c:out value="${immobilities.photos[0].path}"/>"
+                                         width="100" height="100"/>
+                                </c:otherwise>
+                            </c:choose>
+
                         </a>
                     </td>
                     <td>

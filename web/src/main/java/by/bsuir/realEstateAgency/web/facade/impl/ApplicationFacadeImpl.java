@@ -9,11 +9,14 @@ import by.bsuir.realEstateAgency.web.bean.application.ApplicationDto;
 import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
 import by.bsuir.realEstateAgency.web.facade.ApplicationFacade;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
+@Service
 public class ApplicationFacadeImpl implements ApplicationFacade {
 
     static Logger log = Logger.getLogger(ApplicationFacadeImpl.class.getName());
@@ -53,7 +56,7 @@ public class ApplicationFacadeImpl implements ApplicationFacade {
     public boolean saveOrUpdate(ApplicationDto applicationDto, User user, BindingResult bindingResult) {
         Application application = null;
         if (applicationDto.getId() != null) {
-            application = applicationService.get(application.getId());
+            application = applicationService.get(applicationDto.getId());
             if (application == null) {
                 RuntimeException e = new IllegalStateException();
                 log.error("Trying update a nonexistent object", e);
@@ -61,10 +64,11 @@ public class ApplicationFacadeImpl implements ApplicationFacade {
             }
         } else {
             application = new Application();
+            application.setDate(new Date());
         }
 
-        application.setId(application.getId());
-        application.setStatus(application.getStatus());
+        application.setId(applicationDto.getId());
+        application.setStatus(applicationDto.getStatus());
         User realtor = userService.getByLoginOrEmail(applicationDto.getRealtorName());
         if(realtor == null || !(realtor instanceof Realtor)){
             bindingResult.addError(new FieldError("applicationDto", "realtorName", null, false,
@@ -94,6 +98,10 @@ public class ApplicationFacadeImpl implements ApplicationFacade {
         else {
             application.setType(typeApplication);
         }
-        return !bindingResult.hasErrors();
+        if(!bindingResult.hasErrors()) {
+            applicationService.save(application);
+            applicationDto.setId(application.getId());
+        }
+        return bindingResult.hasErrors();
     }
 }

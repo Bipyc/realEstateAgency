@@ -86,7 +86,7 @@ public class ImmobilityController {
             immobilityDto.getUploadedFiles().remove(0);
         }
         immobilityFacade.saveOrUpdate(immobilityDto, userDetails.getUser());
-        return "redirect:/immobilities/" + immobilityDto.getId();
+        return "redirect:/immobilities";
     }
 
     @GetMapping("/{id}")
@@ -112,7 +112,7 @@ public class ImmobilityController {
             immobilityDto.getUploadedFiles().remove(0);
         }
         immobilityFacade.saveOrUpdate(immobilityDto, userDetails.getUser());
-        return "redirect:/immobilities/" + id;
+        return "redirect:/immobilities";
     }
 
     @PostMapping(value = "/{id}", params = "remove")

@@ -4,8 +4,11 @@ import by.bsuir.realEstateAgency.core.model.ApplicationStatus;
 import by.bsuir.realEstateAgency.core.model.Immobility;
 import by.bsuir.realEstateAgency.core.model.Realtor;
 import by.bsuir.realEstateAgency.core.model.TypeApplication;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.util.Date;
 
@@ -14,10 +17,15 @@ public class ApplicationDto {
 
     private Date date;
 
+    @NotEmpty
     private String realtorName;
 
+    @NotNull
+    @Min(1L)
     private Long immobilityId;
 
+    @NotNull
+    @Min(0L)
     private Long typeId;
 
     private ApplicationStatus status;
