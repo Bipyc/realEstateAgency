@@ -210,6 +210,8 @@ body, html {
 
 .error-message {
     color: red;
+    font-size: 14px;
+    font-weight: normal;
 }
 
 .logout_button {

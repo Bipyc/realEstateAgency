@@ -7,7 +7,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form:form method="post" modelAttribute="applicationDto">
-        <p class="information-text">Registration</p>
+        <p class="information-text">Order</p>
         <div class="auth-block">
             <div class="auth-record">
                 <c:if test="${empty create}">
@@ -22,7 +22,7 @@
                 <div class="choise">
                     <div class="form-group">
                         <span>Type:</span>
-                        <select name="typeId">
+                        <select name="typeId" class="select-style">
                             <c:forEach var="type" items="${typeApplications}">
                                 <option ${applicationDto.typeId eq type.id ? 'selected' : ''} value="${type.id}"><c:out value="${type.name}"/></option>
                             </c:forEach>
@@ -32,7 +32,7 @@
                 <div class="choise">
                     <div class="form-group">
                         <span>Status:</span>
-                        <select name="status">
+                        <select name="status" class="select-style">
                             <option ${applicationDto.status eq "OPEN" ? 'selected' : ''} value="OPEN">Open</option>
                             <option ${applicationDto.status eq "CANCELED" ? 'selected' : ''} value="CANCELED">Canceled</option>
                             <option ${applicationDto.status eq "ACTIVE" ? 'selected' : ''} value="ACTIVE">Active</option>
@@ -42,11 +42,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" name="save" class="btn btn-success login-button">
+                <button type="submit" name="save" class="btn btn-success">
                     Save
                 </button>
                 <c:if test="${empty create}">
-                    <button type="submit" name="remove" class="btn btn-danger login-button">
+                    <button type="submit" name="remove" class="btn btn-danger">
                         Remove
                     </button>
                 </c:if>
