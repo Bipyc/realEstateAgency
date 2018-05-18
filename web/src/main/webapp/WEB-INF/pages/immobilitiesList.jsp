@@ -14,6 +14,7 @@
                     <th class="right-border">Photo</th>
                     <th>Name</th>
                     <th>City</th>
+                    <th>Type</th>
                     <th>Price</th>
                 </tr>
                 </thead>
@@ -43,6 +44,9 @@
                         </td>
                         <td>
                             <c:out value="${immobilities.city.name}"/>
+                        </td>
+                        <td>
+                            <c:out value="${immobilities.type}"/>
                         </td>
                         <td>
                             <c:out value="${immobilities.price}"/>

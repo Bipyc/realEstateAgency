@@ -43,21 +43,23 @@
                         </select>
                     </div>
                 </div>
+                <br />
             </div>
-            <div class="form-group center">
+            <div class="form-group">
                 <label for="inputFile" class="information-text">Images/Photos</label>
                 <input type="file" name="uploadedFiles" accept="image/*" id="inputFile" onchange="addFileInput()">
             </div>
             <div id="gallery">
                 <c:forEach var="photo" items="${immobilityDto.photos}" varStatus="i">
                     <div>
-                        <a href="#" class="deleteImage">Delete</a>
+                        <a class="close deleteImage"></a>
                         <img class="previewImage" src="<c:url value="/images/${photo.path}"/>"/>
                         <form:hidden path="photos[${i.index}].id"/>
                     </div>
                 </c:forEach>
                 <div class="previewImageTemplate">
-                    <a href="#" class="deleteImage">Delete</a>
+                    <%--<a href="#" class="deleteImage">Delete</a>--%>
+                    <a class="close deleteImage"></a>
                     <img class="previewImage"/>
                 </div>
             </div>
