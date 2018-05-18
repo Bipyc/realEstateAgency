@@ -2,11 +2,13 @@ package by.bsuir.realEstateAgency.core.dao.impl;
 
 import by.bsuir.realEstateAgency.core.dao.InspectionDao;
 import by.bsuir.realEstateAgency.core.model.Inspection;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Arrays;
 import java.util.List;
 
+@Repository
 public class InspectionDaoImpl extends AbstractDaoImpl<Inspection> implements InspectionDao {
 
     @Override

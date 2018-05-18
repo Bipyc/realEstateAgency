@@ -2,10 +2,12 @@ package by.bsuir.realEstateAgency.core.dao.impl;
 
 import by.bsuir.realEstateAgency.core.dao.DealDao;
 import by.bsuir.realEstateAgency.core.model.Deal;
+import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Repository
 public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao {
 
     @Override
