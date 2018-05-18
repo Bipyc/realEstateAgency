@@ -5,59 +5,60 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form method="post">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th></th>
-                <th>Photo</th>
-                <th>Name</th>
-                <th>City</th>
-                <th>Price</th>
-            </tr>
-            </thead>
-            <c:forEach var="immobilities" items="${pagedList.list}" varStatus="i">
+        <div class="information-text">Immobility list</div>
+        <div class="table-custom">
+            <table class="table">
+                <thead>
                 <tr>
-                    <td>
-                        <input name="checkedList[${i.index}].checked" type="checkbox" value="true"/>
-                        <input type="hidden" name="checkedList[${i.index}].id"
-                               value="<c:out value="${immobilities.id}"/>"/>
-                    </td>
-                    <td>
-                        <a href="<c:url value="/immobilities/${immobilities.id}"/>">
+                    <th class="right-border"></th>
+                    <th class="right-border">Photo</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <c:forEach var="immobilities" items="${pagedList.list}" varStatus="i">
+                    <tr>
+                        <td class="right-border">
+                            <input name="checkedList[${i.index}].checked" type="checkbox" value="true"/>
+                            <input type="hidden" name="checkedList[${i.index}].id"
+                                   value="<c:out value="${immobilities.id}"/>"/>
+                        </td>
+                        <td class="right-border">
                             <c:choose>
                                 <c:when test="${empty immobilities.photos || empty immobilities.photos[0]}">
-                                    <img src="<c:url value="/resources/img/default.png"/>" width="100" height="100"/>
+                                    <img src="<c:url value="/resources/img/default.png"/>" width="auto" height="100"/>
                                 </c:when>
                                 <c:otherwise>
                                     <img src="<c:url value="/images"/>/<c:out value="${immobilities.photos[0].path}"/>"
-                                         width="100" height="100"/>
+                                         width="auto" height="100"/>
                                 </c:otherwise>
                             </c:choose>
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="<c:url value="/immobilities/${immobilities.id}"/>"><c:out
-                                value="${immobilities.name}"/></a>
-                    </td>
-                    <td>
-                        <c:out value="${immobilities.city.name}"/>
-                    </td>
-                    <td>
-                        <c:out value="${immobilities.price}"/>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-        <sec:authorize access="hasRole('CLIENT')">
-            <a href="<c:url value="/immobilities/new"/>" class="btn btn-success">
-                Create
-            </a>
-        </sec:authorize>
-        <button type="submit" name="remove" class="btn btn-danger">
-            Remove
-        </button>
-        <sec:csrfInput/>
+                        </td>
+                        <td>
+                            <a href="<c:url value="/immobilities/${immobilities.id}"/>"><c:out
+                                    value="${immobilities.name}"/></a>
+                        </td>
+                        <td>
+                            <c:out value="${immobilities.city.name}"/>
+                        </td>
+                        <td>
+                            <c:out value="${immobilities.price}"/>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+            <hr />
+            <sec:authorize access="hasRole('CLIENT')">
+                <a href="<c:url value="/immobilities/new"/>" class="btn btn-success control-button">
+                    Create
+                </a>
+            </sec:authorize>
+            <button type="submit" name="remove" class="btn btn-danger control-button">
+                Remove
+            </button>
+            <sec:csrfInput/>
+        </div>
     </form>
     <template:pagination targetPage="immobilities" pagination="${pagedList.pagination}"/>
 </template:page>

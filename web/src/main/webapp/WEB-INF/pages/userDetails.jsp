@@ -16,16 +16,19 @@
                             <form:hidden path="typeUser"/>
                         </c:when>
                         <c:when test="${not empty createUser}">
-                            <select id="typeUser" name="typeUser">
+                            <div class="form-group">
+                            <span>User type: </span>
+                            <select id="typeUser" name="typeUser" class="select-style">
                                 <option ${typeUser eq "CLIENT" ? 'selected' : ''} value="CLIENT">Client</option>
                                 <option ${typeUser eq "REALTOR" ? 'selected' : ''} value="REALTOR">Realtor</option>
                                 <option ${typeUser eq "ADMIN" ? 'selected' : ''} value="ADMIN">Admin</option>
                             </select>
+                            </div>
                         </c:when>
                         <c:otherwise>
                             <form:hidden path="typeUser"/>
                             <div class="form-group">
-                                <span>TypeUser:</span>
+                                <span>User type: </span>
                                 <span>${userDto.typeUser}</span>
                             </div>
                         </c:otherwise>
@@ -57,20 +60,19 @@
                     </c:otherwise>
                 </c:choose>
             </div>
+            <br />
             <div class="form-group">
-                <button type="submit" name="save" class="btn btn-success login-button">
-                    Save
+                <button type="submit" name="save" class="btn btn-success ">
+                     Save
                 </button>
                 <c:if test="${empty createUser && empty registration}">
-                    <button type="submit" name="remove" class="btn btn-danger login-button">
+                    <button type="submit" name="remove" class="btn btn-danger ">
                         Remove
                     </button>
                 </c:if>
             </div>
             <sec:csrfInput/>
         </div>
-
-
     </form:form>
     <script>
         $(function () {
