@@ -1,6 +1,7 @@
 package by.bsuir.realEstateAgency.core.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "Inspections")
@@ -18,6 +19,14 @@ public class Inspection {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Immobility immobility;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
+    @Column
+    @Temporal(TemporalType.TIME)
+    private Date time;
 
     @Lob
     @Column
@@ -53,6 +62,22 @@ public class Inspection {
 
     public void setImmobility(Immobility immobility) {
         this.immobility = immobility;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public String getComment() {

@@ -71,7 +71,7 @@ public class ApplicationFacadeImpl implements ApplicationFacade {
         application.setStatus(applicationDto.getStatus());
         User realtor = userService.getByLoginOrEmail(applicationDto.getRealtorName());
         if(realtor == null || !(realtor instanceof Realtor)){
-            bindingResult.addError(new FieldError("applicationDto", "realtorName", null, false,
+            bindingResult.addError(new FieldError("applicationDto", "realtorName", applicationDto.getRealtorName(), false,
                     new String[]{"NotFound.applicationDto.realtorName"}, null, "realtor not found"));
 
         }
@@ -81,7 +81,7 @@ public class ApplicationFacadeImpl implements ApplicationFacade {
 
         Immobility immobility = immobilityService.get(applicationDto.getImmobilityId());
         if(immobility == null){
-            bindingResult.addError(new FieldError("applicationDto", "immobilityId", null, false,
+            bindingResult.addError(new FieldError("applicationDto", "immobilityId", applicationDto.getImmobilityId(), false,
                     new String[]{"NotFound.applicationDto.immobilityId"}, null, "immobility not found"));
 
         }
