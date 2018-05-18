@@ -63,12 +63,12 @@ public class ApplicationController {
     }
 
     @PostMapping(params = "remove")
-    private String removeImmobilities(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
+    private String removeApplications(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
                                       CheckedList checkedList, BindingResult bindingResult,
                                       Authentication authentication, Model model) throws Exception {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (bindingResult.hasErrors()) {
-            log.error("Bad request params for deleting Users. HTTP400");
+            log.error("Bad request params for deleting Application. HTTP400");
             throw new BadRequestException();
         }
         if (checkedList.getCheckedList() != null) {
@@ -93,7 +93,7 @@ public class ApplicationController {
     }
 
     @PostMapping("/new")
-    public String createImmobility(@Valid ApplicationDto applicationDto, BindingResult bindingResult,
+    public String createApplication(@Valid ApplicationDto applicationDto, BindingResult bindingResult,
                                    Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (bindingResult.hasErrors()
@@ -106,7 +106,7 @@ public class ApplicationController {
     }
 
     @GetMapping("/{id}")
-    public String getImmobility(@PathVariable("id") long id, Model model) {
+    public String getApplication(@PathVariable("id") long id, Model model) {
         ApplicationDto applicationDto = applicationFacade.getApplication(id);
         if (applicationDto == null) {
             log.error("Application not found. HTTP404");
@@ -118,13 +118,12 @@ public class ApplicationController {
     }
 
     @PostMapping(value = "/{id}", params = "save")
-    public String updateImmobility(@PathVariable("id") long id,
+    public String updateApplication(@PathVariable("id") long id,
                                    @Valid ApplicationDto applicationDto, BindingResult bindingResult,
                                    Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (bindingResult.hasErrors()
                 || applicationFacade.saveOrUpdate(applicationDto, userDetails.getUser(), bindingResult)) {
-            model.addAttribute(CREATE_ATTRIBUTE, true);
             model.addAttribute(TYPE_APPLICATIONS_ATTRIBUTE, typeApplicationService.getAll());
             return "applicationDetails";
         }
@@ -132,7 +131,7 @@ public class ApplicationController {
     }
 
     @PostMapping(value = "/{id}", params = "remove")
-    public String removeImmobility(@PathVariable("id") long id, Authentication authentication, Model model) {
+    public String removeApplication(@PathVariable("id") long id, Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         applicationService.remove(id, userDetails.getUser());
         return "redirect:/applications";

@@ -9,12 +9,14 @@ import by.bsuir.realEstateAgency.web.bean.DealDto;
 import by.bsuir.realEstateAgency.web.bean.InspectionDto;
 import by.bsuir.realEstateAgency.web.facade.InspectionFacade;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import javax.annotation.Resource;
 import java.util.Date;
 
+@Service
 public class InspectionFacadeImpl implements InspectionFacade {
 
     static Logger log = Logger.getLogger(DealFacadeImpl.class.getName());

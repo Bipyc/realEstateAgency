@@ -8,5 +8,5 @@ import org.springframework.validation.BindingResult;
 public interface DealFacade {
     DealDto getDeal(Long key);
 
-    public boolean saveOrUpdate(DealDto dealDto, BindingResult bindingResult);
+    public boolean saveOrUpdate(DealDto dealDto, User user, BindingResult bindingResult);
 }

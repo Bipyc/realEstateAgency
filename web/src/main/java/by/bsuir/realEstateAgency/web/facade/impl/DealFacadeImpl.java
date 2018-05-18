@@ -7,12 +7,14 @@ import by.bsuir.realEstateAgency.core.service.UserService;
 import by.bsuir.realEstateAgency.web.bean.DealDto;
 import by.bsuir.realEstateAgency.web.facade.DealFacade;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import javax.annotation.Resource;
 import java.util.Date;
 
+@Service
 public class DealFacadeImpl implements DealFacade {
 
     static Logger log = Logger.getLogger(DealFacadeImpl.class.getName());
@@ -43,13 +45,18 @@ public class DealFacadeImpl implements DealFacade {
     }
 
     @Override
-    public boolean saveOrUpdate(DealDto dealDto, BindingResult bindingResult) {
+    public boolean saveOrUpdate(DealDto dealDto, User user, BindingResult bindingResult) {
         Deal deal = null;
         if (dealDto.getId() != null) {
             deal = dealService.get(dealDto.getId());
             if (deal == null) {
                 RuntimeException e = new IllegalStateException();
                 log.error("Trying update a nonexistent object", e);
+                throw e;
+            }
+            if (!user.equals(deal.getApplication().getRealtor()) && !(user instanceof Admin)) {
+                RuntimeException e = new IllegalStateException();
+                log.error("Trying update immobility by not the owner or admin", e);
                 throw e;
             }
         } else {
