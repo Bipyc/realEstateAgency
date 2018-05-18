@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ImmobilityServiceImpl implements ImmobilityService {
+public class ImmobilityServiceImpl extends AbstractService implements ImmobilityService {
 
     static Logger log = Logger.getLogger(ImmobilityServiceImpl.class.getName());
 
@@ -53,13 +53,7 @@ public class ImmobilityServiceImpl implements ImmobilityService {
 
     @Override
     public void removeList(List<Long> keys, User user) {
-        if (!(user instanceof Admin)) {
-            if (!immobilityDao.checkUser(keys, user.getId())) {
-                RuntimeException e = new IllegalStateException();
-                log.error("Trying remove immobility by not the owner or admin", e);
-                throw e;
-            }
-        }
+        checkUser(keys, user, immobilityDao);
         photoService.removeByImmobilityList(keys);
         immobilityDao.removeList(keys);
     }

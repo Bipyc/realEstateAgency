@@ -1,4 +1,12 @@
 package by.bsuir.realEstateAgency.web.facade;
 
-public class ApplicationFacade {
+import by.bsuir.realEstateAgency.core.model.User;
+import by.bsuir.realEstateAgency.web.bean.application.ApplicationDto;
+import by.bsuir.realEstateAgency.web.bean.immobility.ImmobilityDto;
+import org.springframework.validation.BindingResult;
+
+public interface ApplicationFacade {
+    ApplicationDto getApplication(Long key);
+
+    public boolean saveOrUpdate(ApplicationDto applicationDto, User user, BindingResult bindingResult);
 }

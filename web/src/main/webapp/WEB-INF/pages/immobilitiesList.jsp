@@ -52,5 +52,5 @@
         </button>
         <sec:csrfInput/>
     </form>
-    <template:pagination targetPage="users" pagination="${pagedList.pagination}"/>
+    <template:pagination targetPage="immobilities" pagination="${pagedList.pagination}"/>
 </template:page>

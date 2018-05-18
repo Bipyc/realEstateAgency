@@ -1,10 +1,11 @@
 package by.bsuir.realEstateAgency.core.dao;
 
+import by.bsuir.realEstateAgency.core.dao.common.CheckUserInterface;
 import by.bsuir.realEstateAgency.core.model.Immobility;
 
 import java.util.List;
 
-public interface ImmobilityDao {
+public interface ImmobilityDao extends CheckUserInterface {
     void save(Immobility immobility);
 
     Immobility get(Long key);

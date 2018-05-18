@@ -1,4 +1,7 @@
 package by.bsuir.realEstateAgency.core.dao.common;
 
-public class CheckUserInterface {
+import java.util.List;
+
+public interface CheckUserInterface {
+    boolean checkUser(List<Long> keys, Long userId);
 }
