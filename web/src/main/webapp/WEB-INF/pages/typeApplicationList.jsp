@@ -29,5 +29,5 @@
         </a>
         <sec:csrfInput/>
     </form>
-    <template:pagination targetPage="users" pagination="${pagedList.pagination}"/>
+    <template:pagination targetPage="typeApplications" pagination="${pagedList.pagination}"/>
 </template:page>

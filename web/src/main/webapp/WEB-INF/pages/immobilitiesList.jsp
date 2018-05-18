@@ -25,11 +25,15 @@
                                    value="<c:out value="${immobilities.id}"/>"/>
                         </td>
                         <td class="right-border">
-                            <a href="<c:url value="/immobilities/${immobilities.id}"/>">
-                                <img src="<c:url value="/images"/>/<c:out value="${empty immobilities.photos ||
-                            empty immobilities.photos[0] ? 'default.png' : immobilities.photos[0].path}"/>"
-                                     width="auto" height="100"/>
-                            </a>
+                            <c:choose>
+                                <c:when test="${empty immobilities.photos || empty immobilities.photos[0]}">
+                                    <img src="<c:url value="/resources/img/default.png"/>" width="auto" height="100"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="<c:url value="/images"/>/<c:out value="${immobilities.photos[0].path}"/>"
+                                         width="auto" height="100"/>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                         <td>
                             <a href="<c:url value="/immobilities/${immobilities.id}"/>"><c:out
@@ -56,5 +60,5 @@
             <sec:csrfInput/>
         </div>
     </form>
-    <template:pagination targetPage="users" pagination="${pagedList.pagination}"/>
+    <template:pagination targetPage="immobilities" pagination="${pagedList.pagination}"/>
 </template:page>

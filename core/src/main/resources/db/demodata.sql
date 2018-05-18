@@ -16,3 +16,8 @@ VALUES (3, '1998-03-11', '+375291234567', 'vr3c2@mail.ru', 'Davidovich', 'Ilya',
            '$2a$11$xQrbmnS4RQC3qlblZC.5NutDy2BQSwAZbJz9pUDDgHzpzzqs4ANQC', 'Igorevich', NULL, NULL, 'Client');
 INSERT INTO Passports (id, authority, dateOfIssue, identNumber, number, user_id)
 VALUES (3, 'Первомайский РОВД', '2017-01-01', '3333333333EEE', 'BM5555555', 3);
+
+INSERT INTO TypeApplications (id , commission, name) VALUES (1, 5.0, 'Buy');
+INSERT INTO TypeApplications (id , commission, name) VALUES (2, 5.0, 'Sell');
+INSERT INTO TypeApplications (id , commission, name) VALUES (3, 100.0, 'Rent');
+INSERT INTO TypeApplications (id , commission, name) VALUES (4, 100.0, 'Rent out');

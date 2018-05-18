@@ -38,6 +38,7 @@
                 <template:form_elem label="First name*" path="firstName"/>
                 <template:form_elem label="Last name*" path="lastName"/>
                 <template:form_elem label="Patronymic*" path="patronymic"/>
+                <template:form_elem label="Email*" path="email"/>
                 <template:form_elem label="Password*" path="password" type="password"/>
                 <fmt:formatDate value="${userDto.dateOfBirth}" var="dateOfBirth" pattern="yyyy-MM-dd"/>
                 <template:form_elem label="Date of Birth*" path="dateOfBirth" value="${dateOfBirth}" type="date"/>

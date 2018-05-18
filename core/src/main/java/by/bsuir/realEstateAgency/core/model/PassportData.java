@@ -24,7 +24,7 @@ public class PassportData {
     @Column
     private String authority;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User user;
 
     public Long getId() {
