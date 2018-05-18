@@ -423,3 +423,34 @@ img{
     transform: rotate(-45deg);
 }
 
+.about-img img{
+    width: 100%;
+    border-radius: 50%;
+    border-width: 5px;
+    height: auto;
+}
+
+.about-img img:hover{
+    transform: scale(1.05);
+}
+
+.about-column{
+    height: 100%;
+    width: 32%;
+    display: inline-block;
+    padding: 1%;
+    font-size: 18px;
+    color: var(--main-font-color);
+    font-family: Consolas;
+    font-style: italic;
+    vertical-align: top;
+}
+
+.about-context .right-border{
+    border-right: groove 3px white;
+}
+
+.about-text{
+    text-align: center;
+}
+
