@@ -33,24 +33,12 @@ public class ImmobilityDaoImpl  extends AbstractDaoImpl<Immobility> implements I
 
     @Override
     public boolean checkUser(List<Long> keys, Long userId) {
-        if (keys.size() > 0) {
-            Long count = (Long) sessionFactory.getCurrentSession()
-                    .createQuery("select count(i) from Immobility i Where i.id in (:list) and i.owner.id=:userId")
-                    .setParameterList("list", keys)
-                    .setParameter("userId", userId)
-                    .getSingleResult();
-            return count == keys.size();
-        }
-        return true;
+        return super.checkUser(keys, userId, "select count(i) from Immobility i Where i.id in (:list) and i.owner.id=:userId");
     }
 
     @Override
     public void removeList(List<Long> keys) {
-        if (keys.size() > 0) {
-            Query query = sessionFactory.getCurrentSession().createQuery("DELETE FROM Immobility i WHERE i.id IN (:list)");
-            query.setParameterList("list", keys);
-            query.executeUpdate();
-        }
+        super.removeList(keys, "DELETE FROM Immobility i WHERE i.id IN (:list)");
     }
 
     @Override

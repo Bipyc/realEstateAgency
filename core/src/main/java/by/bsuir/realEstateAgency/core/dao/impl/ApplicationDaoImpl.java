@@ -33,23 +33,11 @@ public class ApplicationDaoImpl extends AbstractDaoImpl<Application> implements 
 
     @Override
     public void removeList(List<Long> keys) {
-        if (keys.size() > 0) {
-            Query query = sessionFactory.getCurrentSession().createQuery("DELETE FROM Application a WHERE a.id IN (:list)");
-            query.setParameterList("list", keys);
-            query.executeUpdate();
-        }
+        super.removeList(keys, "DELETE FROM Application a WHERE a.id IN (:list)");
     }
 
     @Override
     public boolean checkUser(List<Long> keys, Long userId) {
-        if (keys.size() > 0) {
-            Long count = (Long) sessionFactory.getCurrentSession()
-                    .createQuery("select count(a) from Application a Where a.id in (:list) and a.realtor.id=:userId")
-                    .setParameterList("list", keys)
-                    .setParameter("userId", userId)
-                    .getSingleResult();
-            return count == keys.size();
-        }
-        return true;
+        return super.checkUser(keys, userId, "select count(a) from Application a Where a.id in (:list) and a.realtor.id=:userId");
     }
 }
