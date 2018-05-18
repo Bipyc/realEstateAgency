@@ -3,7 +3,7 @@
 <%@ attribute name="pagination" type="by.bsuir.realEstateAgency.web.bean.pagedList.Pagination" required="true" %>
 <%@ attribute name="targetPage" type="java.lang.String" required="true" %>
 <div class="center">
-    <ul class="pagination justify-content-end">
+    <ul class="pagination">
         <li class="page-item ${pagination.pageNumber eq pagination.startPaginationNumber ? 'disabled' : ''}">
             <a class="page-link"
                href="${pageContext.request.contextPath}/${targetPage}?page=${pagination.pageNumber-1}"

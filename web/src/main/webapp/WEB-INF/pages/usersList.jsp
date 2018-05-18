@@ -5,21 +5,22 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form method="post">
-        <div class="users-table">
+        <div class="information-text">Users list</div>
+        <div class="table-custom">
             <table class="table">
                 <thead>
                 <tr>
-                    <th></th>
+                    <th class="right-border"></th>
                     <th>Login</th>
                     <th>First name</th>
                     <th>Last name</th>
-                    <th>Patronymic</th>
+                    <th class="right-border">Patronymic</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <c:forEach var="user" items="${pagedList.list}" varStatus="i">
                     <tr>
-                        <td>
+                        <td class="right-border">
                             <input name="checkedList[${i.index}].checked" type="checkbox" value="true"/>
                             <input type="hidden" name="checkedList[${i.index}].id" value="<c:out value="${user.id}"/>"/>
                         </td>
@@ -32,7 +33,7 @@
                         <td>
                             <c:out value="${user.lastName}"/>
                         </td>
-                        <td>
+                        <td class="right-border">
                             <c:out value="${user.patronymic}"/>
                         </td>
                         <td>

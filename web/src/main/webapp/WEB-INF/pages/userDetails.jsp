@@ -7,7 +7,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form:form method="post" modelAttribute="userDto">
-        <p class="information-text outlined-text">Registration</p>
+        <p class="information-text">Registration</p>
         <div class="auth-block">
             <div class="auth-record">
                 <div class="choise">
@@ -59,20 +59,19 @@
                     </c:otherwise>
                 </c:choose>
             </div>
+            <br />
             <div class="form-group">
-                <button type="submit" name="save" class="btn btn-success login-button">
-                    Save
+                <button type="submit" name="save" class="btn btn-success ">
+                     Save
                 </button>
                 <c:if test="${empty createUser && empty registration}">
-                    <button type="submit" name="remove" class="btn btn-danger login-button">
+                    <button type="submit" name="remove" class="btn btn-danger ">
                         Remove
                     </button>
                 </c:if>
             </div>
             <sec:csrfInput/>
         </div>
-
-
     </form:form>
     <script>
         $(function () {
