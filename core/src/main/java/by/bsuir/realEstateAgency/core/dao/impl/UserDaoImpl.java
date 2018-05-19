@@ -38,7 +38,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
 
     @Override
     public List<User> findAll(int offset, int limit) {
-        return super.findAll(offset,limit, "Select u from User u");
+        return super.findAll(offset, limit, "Select u from User u");
     }
 
     @Override

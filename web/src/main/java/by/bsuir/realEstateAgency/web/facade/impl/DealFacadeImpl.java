@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 @Service
@@ -31,7 +33,7 @@ public class DealFacadeImpl implements DealFacade {
     @Override
     public DealDto getDeal(Long key) {
         Deal deal = dealService.get(key);
-        if(deal == null){
+        if (deal == null) {
             return null;
         }
         DealDto dealDto = new DealDto();
@@ -66,30 +68,36 @@ public class DealFacadeImpl implements DealFacade {
 
         deal.setId(dealDto.getId());
         deal.setPrice(dealDto.getPrice());
-        deal.setCommission(dealDto.getCommission());
 
         User client = userService.getByLoginOrEmail(dealDto.getClientName());
-        if(client == null || !(client instanceof Client)){
+        if (client == null || !(client instanceof Client)) {
             bindingResult.addError(new FieldError("dealDto", "clientName", dealDto.getClientName(), false,
                     new String[]{"NotFound.dealDto.clientName"}, null, "client not found"));
 
-        }
-        else{
+        } else {
             deal.setClient((Client) client);
         }
 
         Application application = applicationService.get(dealDto.getApplicationId());
-        if(application == null){
-            bindingResult.addError(new FieldError("applicationDto", "immobilityId", dealDto.getApplicationId(), false,
-                    new String[]{"NotFound.applicationDto.immobilityId"}, null, "immobility not found"));
+        if (application == null) {
+            bindingResult.addError(new FieldError("dealDto", "applicationId", dealDto.getApplicationId(), false,
+                    new String[]{"NotFound.dealDto.applicationId"}, null, "immobility not found"));
 
-        }
-        else {
+        } else {
             deal.setApplication(application);
+            if (dealDto.getCommission() == null) {
+                BigDecimal comission = deal.getApplication().getType().getCommission().multiply(dealDto.getPrice());
+                comission = comission.divide(new BigDecimal(100)).setScale(2, RoundingMode.UP);
+                deal.setCommission(comission);
+            } else {
+                deal.setCommission(dealDto.getCommission());
+            }
         }
 
-        if(!bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors()) {
             dealService.save(deal);
+            deal.getApplication().setStatus(ApplicationStatus.CLOSE);
+            applicationService.save(deal.getApplication());
             dealDto.setId(deal.getId());
         }
         return bindingResult.hasErrors();

@@ -13,11 +13,6 @@
 
     <bean id="conversionService"
           class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-        <property name="formatters">
-            <set>
-                <bean class="by.bsuir.realEstateAgency.web.formatter.DateConverter"/>
-            </set>
-        </property>
     </bean>
 
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">

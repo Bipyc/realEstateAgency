@@ -1,6 +1,5 @@
 package by.bsuir.realEstateAgency.core.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -8,10 +7,10 @@ import java.util.List;
 @Entity
 public class Realtor extends Employee {
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Immobility> immobilities;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Inspection> inspections;
 
     public List<Immobility> getImmobilities() {

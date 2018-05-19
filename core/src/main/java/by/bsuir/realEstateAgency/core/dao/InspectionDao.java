@@ -1,7 +1,6 @@
 package by.bsuir.realEstateAgency.core.dao;
 
 import by.bsuir.realEstateAgency.core.dao.common.CheckUserInterface;
-import by.bsuir.realEstateAgency.core.model.Deal;
 import by.bsuir.realEstateAgency.core.model.Inspection;
 
 import java.util.List;

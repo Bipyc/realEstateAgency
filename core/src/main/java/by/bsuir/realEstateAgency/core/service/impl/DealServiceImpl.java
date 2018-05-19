@@ -11,7 +11,7 @@ import java.util.List;
 
 @Transactional
 @Service
-public class DealServiceImpl extends AbstractService<Deal> implements DealService{
+public class DealServiceImpl extends AbstractService<Deal> implements DealService {
 
     @Resource
     private DealDao dealDao;

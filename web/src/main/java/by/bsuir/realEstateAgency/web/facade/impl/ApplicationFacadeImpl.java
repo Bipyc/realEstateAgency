@@ -6,7 +6,6 @@ import by.bsuir.realEstateAgency.core.service.ImmobilityService;
 import by.bsuir.realEstateAgency.core.service.TypeApplicationService;
 import by.bsuir.realEstateAgency.core.service.UserService;
 import by.bsuir.realEstateAgency.web.bean.application.ApplicationDto;
-import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
 import by.bsuir.realEstateAgency.web.facade.ApplicationFacade;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -36,14 +35,14 @@ public class ApplicationFacadeImpl implements ApplicationFacade {
     @Override
     public ApplicationDto getApplication(Long key) {
         Application application = applicationService.get(key);
-        if(application == null){
+        if (application == null) {
             return null;
         }
 
         ApplicationDto applicationDto = new ApplicationDto();
         applicationDto.setId(application.getId());
         applicationDto.setDate(application.getDate());
-        if(application.getRealtor() != null){
+        if (application.getRealtor() != null) {
             applicationDto.setRealtorName(application.getRealtor().getLogin());
         }
         applicationDto.setImmobilityId(application.getImmobility().getId());
@@ -70,35 +69,32 @@ public class ApplicationFacadeImpl implements ApplicationFacade {
         application.setId(applicationDto.getId());
         application.setStatus(applicationDto.getStatus());
         User realtor = userService.getByLoginOrEmail(applicationDto.getRealtorName());
-        if(realtor == null || !(realtor instanceof Realtor)){
+        if (realtor == null || !(realtor instanceof Realtor)) {
             bindingResult.addError(new FieldError("applicationDto", "realtorName", applicationDto.getRealtorName(), false,
                     new String[]{"NotFound.applicationDto.realtorName"}, null, "realtor not found"));
 
-        }
-        else{
+        } else {
             application.setRealtor((Realtor) realtor);
         }
 
         Immobility immobility = immobilityService.get(applicationDto.getImmobilityId());
-        if(immobility == null){
+        if (immobility == null) {
             bindingResult.addError(new FieldError("applicationDto", "immobilityId", applicationDto.getImmobilityId(), false,
                     new String[]{"NotFound.applicationDto.immobilityId"}, null, "immobility not found"));
 
-        }
-        else {
+        } else {
             application.setImmobility(immobility);
         }
 
         TypeApplication typeApplication = typeApplicationService.get(applicationDto.getTypeId());
-        if(typeApplication == null){
+        if (typeApplication == null) {
             bindingResult.addError(new FieldError("typeId", "typeId", null, false,
                     new String[]{"NotFound.applicationDto.immobilityId"}, null, "type not found"));
 
-        }
-        else {
+        } else {
             application.setType(typeApplication);
         }
-        if(!bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors()) {
             applicationService.save(application);
             applicationDto.setId(application.getId());
         }

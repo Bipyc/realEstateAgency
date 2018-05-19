@@ -2,14 +2,13 @@ package by.bsuir.realEstateAgency.core.dao.impl;
 
 import by.bsuir.realEstateAgency.core.dao.ImmobilityDao;
 import by.bsuir.realEstateAgency.core.model.Immobility;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class ImmobilityDaoImpl  extends AbstractDaoImpl<Immobility> implements ImmobilityDao {
+public class ImmobilityDaoImpl extends AbstractDaoImpl<Immobility> implements ImmobilityDao {
 
     @Override
     public Immobility get(Long key) {

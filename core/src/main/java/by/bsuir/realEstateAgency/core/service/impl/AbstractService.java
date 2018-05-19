@@ -11,7 +11,7 @@ public class AbstractService<T> {
 
     static Logger log = Logger.getLogger(AbstractService.class.getName());
 
-    protected void checkUser(List<Long> keys, User user, CheckUserInterface checkUserInterface){
+    protected void checkUser(List<Long> keys, User user, CheckUserInterface checkUserInterface) {
         if (!(user instanceof Admin)) {
             if (!checkUserInterface.checkUser(keys, user.getId())) {
                 RuntimeException e = new IllegalStateException();

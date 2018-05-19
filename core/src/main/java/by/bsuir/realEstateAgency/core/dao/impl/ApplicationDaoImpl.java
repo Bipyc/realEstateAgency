@@ -2,10 +2,8 @@ package by.bsuir.realEstateAgency.core.dao.impl;
 
 import by.bsuir.realEstateAgency.core.dao.ApplicationDao;
 import by.bsuir.realEstateAgency.core.model.Application;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 

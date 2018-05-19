@@ -3,9 +3,7 @@ package by.bsuir.realEstateAgency.web.facade.impl;
 import by.bsuir.realEstateAgency.core.model.*;
 import by.bsuir.realEstateAgency.core.service.ImmobilityService;
 import by.bsuir.realEstateAgency.core.service.InspectionService;
-import by.bsuir.realEstateAgency.core.service.TypeApplicationService;
 import by.bsuir.realEstateAgency.core.service.UserService;
-import by.bsuir.realEstateAgency.web.bean.DealDto;
 import by.bsuir.realEstateAgency.web.bean.InspectionDto;
 import by.bsuir.realEstateAgency.web.facade.InspectionFacade;
 import org.apache.log4j.Logger;
@@ -14,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 @Service
 public class InspectionFacadeImpl implements InspectionFacade {
@@ -33,7 +30,7 @@ public class InspectionFacadeImpl implements InspectionFacade {
     @Override
     public InspectionDto getInspection(Long key) {
         Inspection inspection = inspectionService.get(key);
-        if(inspection == null){
+        if (inspection == null) {
             return null;
         }
         InspectionDto inspectionDto = new InspectionDto();
@@ -67,37 +64,34 @@ public class InspectionFacadeImpl implements InspectionFacade {
         inspection.setTime(inspectionDto.getTime());
 
         Immobility immobility = immobilityService.get(inspectionDto.getImmobilityId());
-        if(immobility == null){
+        if (immobility == null) {
             bindingResult.addError(new FieldError("inspectionDto", "immobilityId", inspectionDto.getImmobilityId(), false,
                     new String[]{"NotFound.inspectionDto.immobilityId"}, null, "immobility not found"));
 
-        }
-        else {
+        } else {
             inspection.setImmobility(immobility);
         }
 
         User client = userService.getByLoginOrEmail(inspectionDto.getClientName());
-        if(client == null || !(client instanceof Client)){
+        if (client == null || !(client instanceof Client)) {
             bindingResult.addError(new FieldError("inspectionDto", "clientName", inspectionDto.getClientName(), false,
                     new String[]{"NotFound.inspectionDto.clientName"}, null, "client not found"));
 
-        }
-        else{
+        } else {
             inspection.setClient((Client) client);
         }
 
         User realtor = userService.getByLoginOrEmail(inspectionDto.getRealtorName());
-        if(client == null || !(client instanceof Realtor)){
+        if (realtor == null || !(realtor instanceof Realtor)) {
             bindingResult.addError(new FieldError("inspectionDto", "realtorName", inspectionDto.getRealtorName(), false,
-                    new String[]{"NotFound.inspectionDto.realtorName"}, null, "client not found"));
+                    new String[]{"NotFound.inspectionDto.realtorName"}, null, "realtor not found"));
 
-        }
-        else{
+        } else {
             inspection.setRealtor((Realtor) realtor);
         }
 
-        if(!bindingResult.hasErrors()) {
-            inspectionService.save(inspection, user);
+        if (!bindingResult.hasErrors()) {
+            inspectionService.save(inspection, null);
             inspectionDto.setId(inspection.getId());
         }
         return bindingResult.hasErrors();

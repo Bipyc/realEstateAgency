@@ -28,7 +28,8 @@
                             <a href="<c:url value="/immobilities/${immobilities.id}"/>">
                                 <c:choose>
                                     <c:when test="${empty immobilities.photos || empty immobilities.photos[0]}">
-                                        <img src="<c:url value="/resources/img/default.png"/>" width="auto" height="100"/>
+                                        <img src="<c:url value="/resources/img/default.png"/>" width="auto"
+                                             height="100"/>
                                     </c:when>
                                     <c:otherwise>
                                         <img src="<c:url value="/images"/>/<c:out value="${immobilities.photos[0].path}"/>"
@@ -50,7 +51,7 @@
                     </tr>
                 </c:forEach>
             </table>
-            <hr />
+            <hr/>
             <sec:authorize access="hasRole('CLIENT')">
                 <a href="<c:url value="/immobilities/new"/>" class="btn btn-success control-button">
                     Create

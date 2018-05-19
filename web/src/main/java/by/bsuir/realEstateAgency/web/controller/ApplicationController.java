@@ -1,19 +1,14 @@
 package by.bsuir.realEstateAgency.web.controller;
 
-import by.bsuir.realEstateAgency.core.model.Application;
 import by.bsuir.realEstateAgency.core.model.Realtor;
-import by.bsuir.realEstateAgency.core.model.TypeApplication;
 import by.bsuir.realEstateAgency.core.service.ApplicationService;
-import by.bsuir.realEstateAgency.core.service.ImmobilityService;
 import by.bsuir.realEstateAgency.core.service.TypeApplicationService;
 import by.bsuir.realEstateAgency.web.bean.application.ApplicationDto;
-import by.bsuir.realEstateAgency.web.bean.immobility.ImmobilityDto;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedList;
 import by.bsuir.realEstateAgency.web.exceptions.BadRequestException;
 import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
 import by.bsuir.realEstateAgency.web.facade.ApplicationFacade;
-import by.bsuir.realEstateAgency.web.facade.ImmobilityFacade;
 import by.bsuir.realEstateAgency.web.security.AuthUserDetails;
 import by.bsuir.realEstateAgency.web.service.page.PageService;
 import org.apache.log4j.Logger;
@@ -80,10 +75,10 @@ public class ApplicationController {
     }
 
     @GetMapping("/new")
-    public String getNewForm(Authentication authentication,Model model) {
+    public String getNewForm(Authentication authentication, Model model) {
         ApplicationDto applicationDto = new ApplicationDto();
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
-        if(userDetails.getUser() instanceof Realtor){
+        if (userDetails.getUser() instanceof Realtor) {
             applicationDto.setRealtorName(userDetails.getUser().getLogin());
         }
         model.addAttribute(CREATE_ATTRIBUTE, true);
@@ -94,7 +89,7 @@ public class ApplicationController {
 
     @PostMapping("/new")
     public String createApplication(@Valid ApplicationDto applicationDto, BindingResult bindingResult,
-                                   Authentication authentication, Model model) {
+                                    Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (bindingResult.hasErrors()
                 || applicationFacade.saveOrUpdate(applicationDto, userDetails.getUser(), bindingResult)) {
@@ -119,8 +114,8 @@ public class ApplicationController {
 
     @PostMapping(value = "/{id}", params = "save")
     public String updateApplication(@PathVariable("id") long id,
-                                   @Valid ApplicationDto applicationDto, BindingResult bindingResult,
-                                   Authentication authentication, Model model) {
+                                    @Valid ApplicationDto applicationDto, BindingResult bindingResult,
+                                    Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (bindingResult.hasErrors()
                 || applicationFacade.saveOrUpdate(applicationDto, userDetails.getUser(), bindingResult)) {

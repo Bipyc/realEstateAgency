@@ -4,7 +4,6 @@ import by.bsuir.realEstateAgency.core.dao.InspectionDao;
 import by.bsuir.realEstateAgency.core.model.Inspection;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Arrays;
 import java.util.List;
 

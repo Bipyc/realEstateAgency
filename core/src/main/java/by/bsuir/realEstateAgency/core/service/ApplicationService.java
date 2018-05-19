@@ -1,7 +1,6 @@
 package by.bsuir.realEstateAgency.core.service;
 
 import by.bsuir.realEstateAgency.core.model.Application;
-import by.bsuir.realEstateAgency.core.model.Immobility;
 import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.common.FindAllInterface;
 

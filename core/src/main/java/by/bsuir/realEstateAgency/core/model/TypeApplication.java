@@ -17,7 +17,7 @@ public class TypeApplication {
     @Column
     private BigDecimal commission;
 
-    public Long getId()  {
+    public Long getId() {
         return id;
     }
 

@@ -24,7 +24,8 @@
                         <span>Type:</span>
                         <select name="typeId">
                             <c:forEach var="type" items="${typeApplications}">
-                                <option ${applicationDto.typeId eq type.id ? 'selected' : ''} value="${type.id}"><c:out value="${type.name}"/></option>
+                                <option ${applicationDto.typeId eq type.id ? 'selected' : ''} value="${type.id}"><c:out
+                                        value="${type.name}"/></option>
                             </c:forEach>
                         </select>
                     </div>
@@ -34,8 +35,10 @@
                         <span>Status:</span>
                         <select name="status">
                             <option ${applicationDto.status eq "OPEN" ? 'selected' : ''} value="OPEN">Open</option>
-                            <option ${applicationDto.status eq "CANCELED" ? 'selected' : ''} value="CANCELED">Canceled</option>
-                            <option ${applicationDto.status eq "ACTIVE" ? 'selected' : ''} value="ACTIVE">Active</option>
+                            <option ${applicationDto.status eq "CANCELED" ? 'selected' : ''} value="CANCELED">Canceled
+                            </option>
+                            <option ${applicationDto.status eq "ACTIVE" ? 'selected' : ''} value="ACTIVE">Active
+                            </option>
                             <option ${applicationDto.status eq "CLOSE" ? 'selected' : ''} value="CLOSE">Close</option>
                         </select>
                     </div>

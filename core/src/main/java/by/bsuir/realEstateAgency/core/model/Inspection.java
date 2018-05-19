@@ -11,13 +11,13 @@ public class Inspection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Client client;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Realtor realtor;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Immobility immobility;
 
     @Column

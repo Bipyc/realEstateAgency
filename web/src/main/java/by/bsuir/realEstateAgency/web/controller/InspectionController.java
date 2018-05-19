@@ -1,18 +1,13 @@
 package by.bsuir.realEstateAgency.web.controller;
 
-import by.bsuir.realEstateAgency.core.model.Admin;
 import by.bsuir.realEstateAgency.core.model.Client;
 import by.bsuir.realEstateAgency.core.model.Realtor;
-import by.bsuir.realEstateAgency.core.service.DealService;
 import by.bsuir.realEstateAgency.core.service.InspectionService;
-import by.bsuir.realEstateAgency.web.bean.DealDto;
 import by.bsuir.realEstateAgency.web.bean.InspectionDto;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedList;
-import by.bsuir.realEstateAgency.web.exceptions.AccessDeniedException;
 import by.bsuir.realEstateAgency.web.exceptions.BadRequestException;
 import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
-import by.bsuir.realEstateAgency.web.facade.DealFacade;
 import by.bsuir.realEstateAgency.web.facade.InspectionFacade;
 import by.bsuir.realEstateAgency.web.security.AuthUserDetails;
 import by.bsuir.realEstateAgency.web.service.page.PageService;
@@ -38,7 +33,7 @@ public class InspectionController {
 
     private static final String CREATE_ATTRIBUTE = "create";
 
-    private static final String INSPECTION_DTO_ATTRIBUTE = "inspectionDro";
+    private static final String INSPECTION_DTO_ATTRIBUTE = "inspectionDto";
 
     @Resource
     private InspectionFacade inspectionFacade;
@@ -51,15 +46,15 @@ public class InspectionController {
 
     @GetMapping
     private String getInspections(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
-                                   Model model) {
+                                  Model model) {
         model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, inspectionService));
         return "inspectionsList";
     }
 
     @PostMapping(params = "remove")
     private String removeInspections(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
-                              CheckedList checkedList, BindingResult bindingResult,
-                              Authentication authentication, Model model) throws Exception {
+                                     CheckedList checkedList, BindingResult bindingResult,
+                                     Authentication authentication, Model model) throws Exception {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (bindingResult.hasErrors()) {
             log.error("Bad request params for deleting Inspections. HTTP400");
@@ -74,13 +69,13 @@ public class InspectionController {
     }
 
     @GetMapping("/new")
-    public String getNewForm(Authentication authentication,Model model) {
+    public String getNewForm(Authentication authentication, Model model) {
         InspectionDto inspectionDto = new InspectionDto();
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
-        if(userDetails.getUser() instanceof Client){
+        if (userDetails.getUser() instanceof Client) {
             inspectionDto.setClientName(userDetails.getUser().getLogin());
         }
-        if(userDetails.getUser() instanceof Realtor){
+        if (userDetails.getUser() instanceof Realtor) {
             inspectionDto.setRealtorName(userDetails.getUser().getLogin());
         }
         model.addAttribute(CREATE_ATTRIBUTE, true);

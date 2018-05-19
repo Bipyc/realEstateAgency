@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class InspectionServiceImpl extends AbstractService<Inspection> implement
 
     @Override
     public void save(Inspection inspection, User user) {
-        if(inspection.getId() != null){
-            checkUser(Collections.singletonList(inspection.getId()),user, inspectionDao);
+        if (inspection.getId() != null) {
+            checkUser(Collections.singletonList(inspection.getId()), user, inspectionDao);
         }
         inspectionDao.save(inspection);
     }
@@ -34,12 +33,12 @@ public class InspectionServiceImpl extends AbstractService<Inspection> implement
 
     @Override
     public void remove(Long key, User user) {
-        removeList(Collections.singletonList(key),user);
+        removeList(Collections.singletonList(key), user);
     }
 
     @Override
     public void removeList(List<Long> keys, User user) {
-        checkUser(keys,user, inspectionDao);
+        checkUser(keys, user, inspectionDao);
         inspectionDao.removeList(keys);
     }
 

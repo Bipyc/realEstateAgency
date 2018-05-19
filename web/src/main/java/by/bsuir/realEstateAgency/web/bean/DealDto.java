@@ -1,9 +1,5 @@
 package by.bsuir.realEstateAgency.web.bean;
 
-import by.bsuir.realEstateAgency.core.model.Application;
-import by.bsuir.realEstateAgency.core.model.Client;
-
-import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -17,13 +13,12 @@ public class DealDto {
     private Long applicationId;
 
     @NotNull
-    private String  clientName;
+    private String clientName;
 
     @NotNull
     @Min(1L)
     private BigDecimal price;
 
-    @NotNull
     @Min(0L)
     private BigDecimal commission;
 

@@ -1,19 +1,13 @@
 package by.bsuir.realEstateAgency.web.controller;
 
 import by.bsuir.realEstateAgency.core.model.Admin;
-import by.bsuir.realEstateAgency.core.model.Client;
-import by.bsuir.realEstateAgency.core.model.Realtor;
-import by.bsuir.realEstateAgency.core.service.ApplicationService;
 import by.bsuir.realEstateAgency.core.service.DealService;
-import by.bsuir.realEstateAgency.core.service.TypeApplicationService;
 import by.bsuir.realEstateAgency.web.bean.DealDto;
-import by.bsuir.realEstateAgency.web.bean.application.ApplicationDto;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedList;
 import by.bsuir.realEstateAgency.web.exceptions.AccessDeniedException;
 import by.bsuir.realEstateAgency.web.exceptions.BadRequestException;
 import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
-import by.bsuir.realEstateAgency.web.facade.ApplicationFacade;
 import by.bsuir.realEstateAgency.web.facade.DealFacade;
 import by.bsuir.realEstateAgency.web.security.AuthUserDetails;
 import by.bsuir.realEstateAgency.web.service.page.PageService;
@@ -59,10 +53,10 @@ public class DealController {
 
     @PostMapping(params = "remove")
     private String removeDeal(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
-                                      CheckedList checkedList, BindingResult bindingResult,
-                                      Authentication authentication, Model model) throws Exception {
+                              CheckedList checkedList, BindingResult bindingResult,
+                              Authentication authentication, Model model) throws Exception {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
-        if(!(userDetails.getUser() instanceof Admin)){
+        if (!(userDetails.getUser() instanceof Admin)) {
             log.error("Trying delete deal not by admin");
             throw new AccessDeniedException();
         }
@@ -79,7 +73,7 @@ public class DealController {
     }
 
     @GetMapping("/new")
-    public String getNewForm(Authentication authentication,Model model) {
+    public String getNewForm(Authentication authentication, Model model) {
         model.addAttribute(CREATE_ATTRIBUTE, true);
         model.addAttribute(DEAL_DTO_ATTRIBUTE, new DealDto());
         return "dealDetails";
@@ -123,7 +117,7 @@ public class DealController {
     @PostMapping(value = "/{id}", params = "remove")
     public String removeImmobility(@PathVariable("id") long id, Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
-        if(!(userDetails.getUser() instanceof Admin)){
+        if (!(userDetails.getUser() instanceof Admin)) {
             log.error("Trying delete deal not by admin");
             throw new AccessDeniedException();
         }

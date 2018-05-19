@@ -1,10 +1,7 @@
 package by.bsuir.realEstateAgency.web.bean;
 
-import by.bsuir.realEstateAgency.core.model.Client;
-import by.bsuir.realEstateAgency.core.model.Immobility;
-import by.bsuir.realEstateAgency.core.model.Realtor;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -18,19 +15,19 @@ public class InspectionDto {
     private String clientName;
 
     @NotNull
-    private String  realtorName;
+    private String realtorName;
 
     @NotNull
     @Min(1L)
     private Long immobilityId;
 
     @Future
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
-    @Future
+    @DateTimeFormat(pattern = "HH:mm")
     private Date time;
 
-    @NotNull
     @Size(max = 2048)
     private String comment;
 
