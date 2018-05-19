@@ -124,7 +124,7 @@
                         <c:out value="${immobilities.type}"/>
                     </td>
                     <td>
-                        <c:out value="${immobilities.price}"/>
+                        $<c:out value="${immobilities.price}"/>
                     </td>
                 </tr>
             </c:forEach>

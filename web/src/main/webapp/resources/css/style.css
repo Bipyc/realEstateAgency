@@ -490,11 +490,41 @@ img {
 }
 
 .search-form{
-    border: 4px solid black;
+    border: 4px solid var(--footer-background-color);
     background-color: var(--footer-background-color);
     border-radius: 30px;
 }
 
 .search .information-text{
     font-size: 30px;
+}
+
+.immobility-information{
+    font-size: 25px;
+    color: var(--main-font-color);
+}
+
+.immobility-information img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: #0cd5ff;
+    width: 40%;
+    margin-bottom: 20px;
+}
+
+.immobility-information img:hover{
+    transform: scale(1.3);
+}
+
+.immobility-information .btn{
+    width: 100%;
+}
+
+.information-description-block{
+    margin-left: 50px;
+}
+
+.information-description-block label{
+    color: #0cd5ff;
 }
