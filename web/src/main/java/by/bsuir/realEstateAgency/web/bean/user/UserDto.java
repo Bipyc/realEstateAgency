@@ -50,6 +50,7 @@ public class UserDto {
     private String number;
 
     @Past
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfIssue;
 
     @NotEmpty
