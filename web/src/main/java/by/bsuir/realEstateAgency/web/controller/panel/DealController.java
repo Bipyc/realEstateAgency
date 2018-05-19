@@ -1,4 +1,4 @@
-package by.bsuir.realEstateAgency.web.controller;
+package by.bsuir.realEstateAgency.web.controller.panel;
 
 import by.bsuir.realEstateAgency.core.model.Admin;
 import by.bsuir.realEstateAgency.core.service.DealService;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @Component
-@RequestMapping("/deals")
+@RequestMapping("/panel/deals")
 public class DealController {
     static Logger log = Logger.getLogger(DealController.class.getName());
 

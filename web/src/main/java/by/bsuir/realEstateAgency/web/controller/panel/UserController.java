@@ -1,4 +1,4 @@
-package by.bsuir.realEstateAgency.web.controller;
+package by.bsuir.realEstateAgency.web.controller.panel;
 
 import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
 import by.bsuir.realEstateAgency.core.service.UserService;
@@ -22,7 +22,7 @@ import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/panel/users")
 public class UserController {
 
     static Logger log = Logger.getLogger(UserController.class.getName());

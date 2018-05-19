@@ -10,6 +10,9 @@
         <c:when test="${empty create}">
             <div class="information-text outlined-text">Create inspection</div>
         </c:when>
+        <c:when test="${empty createByUser}">
+            <div class="information-text outlined-text">Add inspection</div>
+        </c:when>
         <c:otherwise>
             <div class="information-text outlined-text">Edit inspection</div>
         </c:otherwise>
@@ -19,9 +22,18 @@
         <sec:csrfInput/>
         <div class="auth-block">
             <div class="auth-record">
-                <template:form_elem label="Immobility ID*" path="immobilityId"/>
-                <template:form_elem label="Realtor*" path="realtorName"/>
-                <template:form_elem label="Client*" path="clientName"/>
+                <c:choose>
+                    <c:when test="${empty createByUser}">
+                        <template:form_elem label="Immobility ID*" path="immobilityId"/>
+                        <template:form_elem label="Realtor*" path="realtorName"/>
+                        <template:form_elem label="Client*" path="clientName"/>
+                    </c:when>
+                    <c:otherwise>
+                        <form:hidden path="immobilityId" value="1"/>
+                        <form:hidden path="realtorName" value="1"/>
+                        <form:hidden path="clientName" value="1"/>
+                    </c:otherwise>
+                </c:choose>
                 <fmt:formatDate value="${inspectionDto.date}" var="date" pattern="yyyy-MM-dd"/>
                 <template:form_elem label="Date*" path="date" value="${date}" type="date"/>
                 <fmt:formatDate value="${inspectionDto.time}" var="time" pattern="HH:mm:ss"/>

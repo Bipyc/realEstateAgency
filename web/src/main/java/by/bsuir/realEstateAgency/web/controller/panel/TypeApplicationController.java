@@ -1,4 +1,4 @@
-package by.bsuir.realEstateAgency.web.controller;
+package by.bsuir.realEstateAgency.web.controller.panel;
 
 import by.bsuir.realEstateAgency.core.exception.LinkedObjectDeletingException;
 import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/typeApplications")
+@RequestMapping("/panel/typeApplications")
 public class TypeApplicationController {
     static Logger log = Logger.getLogger(ImmobilityController.class.getName());
 

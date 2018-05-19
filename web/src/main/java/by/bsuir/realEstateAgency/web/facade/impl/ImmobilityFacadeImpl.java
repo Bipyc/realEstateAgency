@@ -4,12 +4,15 @@ import by.bsuir.realEstateAgency.core.model.*;
 import by.bsuir.realEstateAgency.core.service.CityService;
 import by.bsuir.realEstateAgency.core.service.ImmobilityService;
 import by.bsuir.realEstateAgency.core.service.PhotoService;
+import by.bsuir.realEstateAgency.core.service.UserService;
 import by.bsuir.realEstateAgency.web.bean.immobility.ImmobilityDto;
 import by.bsuir.realEstateAgency.web.bean.immobility.PhotoDto;
 import by.bsuir.realEstateAgency.web.facade.ImmobilityFacade;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -41,6 +44,9 @@ public class ImmobilityFacadeImpl implements ImmobilityFacade {
     @Resource
     private ServletContext servletContext;
 
+    @Resource
+    private UserService userService;
+
     @Transactional
     @Override
     public ImmobilityDto getImmobility(Long key) {
@@ -67,32 +73,42 @@ public class ImmobilityFacadeImpl implements ImmobilityFacade {
     }
 
     @Override
-    public void saveOrUpdate(ImmobilityDto immobilityDto, User user) {
+    public boolean saveOrUpdate(ImmobilityDto immobilityDto, User user, BindingResult bindingResult) {
         Immobility immobility = getImmobilityWithCheck(immobilityDto, user);
-        updatePhotos(immobility, immobilityDto);
 
-        immobility.setId(immobilityDto.getId());
-        immobility.setName(immobilityDto.getName());
-        immobility.setDescription(immobilityDto.getDescription());
-        immobility.setPrice(immobilityDto.getPrice());
-        immobility.setNumberOfRooms(immobilityDto.getNumberOfRooms());
-        immobility.setSquare(immobilityDto.getSquare());
-        immobility.setAddress(immobilityDto.getAddress());
-        immobility.setType(immobilityDto.getTypeImmobility());
+        User client = userService.getByLoginOrEmail(immobilityDto.getOwnerLogin());
+        if (client == null || !(client instanceof Client)) {
+            bindingResult.addError(new FieldError("immobilityDto", "ownerLogin", immobilityDto.getOwnerLogin(), false,
+                    new String[]{"NotFound.immobilityDto.ownerLogin"}, null, "client not found"));
 
-        String cityName = immobilityDto.getCityName();
+        } else {
+            immobility.setOwner((Client) client);
+            updatePhotos(immobility, immobilityDto);
 
-        City city = cityService.get(cityName);
-        if (city == null) {
-            city = new City();
-            city.setName(cityName);
-            cityService.save(city);
+            immobility.setId(immobilityDto.getId());
+            immobility.setName(immobilityDto.getName());
+            immobility.setDescription(immobilityDto.getDescription());
+            immobility.setPrice(immobilityDto.getPrice());
+            immobility.setNumberOfRooms(immobilityDto.getNumberOfRooms());
+            immobility.setSquare(immobilityDto.getSquare());
+            immobility.setAddress(immobilityDto.getAddress());
+            immobility.setType(immobilityDto.getTypeImmobility());
+
+            String cityName = immobilityDto.getCityName();
+
+            City city = cityService.get(cityName);
+            if (city == null) {
+                city = new City();
+                city.setName(cityName);
+                cityService.save(city);
+            }
+            immobility.setCity(city);
+
+            immobilityService.save(immobility);
+            immobilityDto.setId(immobility.getId());
+            saveFiles(immobility, immobilityDto);
         }
-        immobility.setCity(city);
-
-        immobilityService.save(immobility);
-        immobilityDto.setId(immobility.getId());
-        saveFiles(immobility, immobilityDto);
+        return bindingResult.hasErrors();
     }
 
     private static final String ALPHA_NUMERIC_STRING = "abcdefghijklmnopqrstuvwxyzZ0123456789";
@@ -116,19 +132,13 @@ public class ImmobilityFacadeImpl implements ImmobilityFacade {
                 log.error("Trying update a nonexistent object", e);
                 throw e;
             }
-            if (!user.equals(immobility.getOwner()) && !(user instanceof Admin)) {
+            if (!user.equals(immobility.getOwner()) && !(user instanceof Admin) && !(user instanceof Client)) {
                 RuntimeException e = new IllegalStateException();
                 log.error("Trying update immobility by not the owner or admin", e);
                 throw e;
             }
         } else {
             immobility = new Immobility();
-            if (!(user instanceof Client)) {
-                RuntimeException e = new IllegalStateException();
-                log.error("Creating immobility with by not a client", e);
-                throw e;
-            }
-            immobility.setOwner((Client) user);
         }
         return immobility;
     }

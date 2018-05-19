@@ -62,4 +62,9 @@ public class ApplicationServiceImpl extends AbstractService implements Applicati
     public long countBySearch(SearchForm searchForm) {
         return applicationDao.countBySearch(searchForm);
     }
+
+    @Override
+    public Application findLastApplicationByImmobility(Long key) {
+        return applicationDao.findLastApplicationByImmobility(key);
+    }
 }

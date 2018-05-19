@@ -18,4 +18,6 @@ public interface ApplicationService extends FindAllInterface<Application>, FindA
      * @param keys - id list
      */
     void removeList(List<Long> keys, User user);
+
+    Application findLastApplicationByImmobility(Long key);
 }

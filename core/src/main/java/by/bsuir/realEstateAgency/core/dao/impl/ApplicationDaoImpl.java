@@ -57,6 +57,14 @@ public class ApplicationDaoImpl extends AbstractDaoImpl<Application> implements 
                 .getResultList();
     }
 
+    @Override
+    public Application findLastApplicationByImmobility(Long key) {
+        return (Application) sessionFactory.getCurrentSession().createQuery("select a from Application a where a.status = 2 " +
+                "and a.immobility.id = :id ORDER BY a.id DESC")
+                .setParameter("id", key)
+                .uniqueResult();
+    }
+
     private Query getQueryBySearch(String start, SearchForm searchForm){
         StringBuilder sb = new StringBuilder(start);
         if(searchForm.getCityName() != null){

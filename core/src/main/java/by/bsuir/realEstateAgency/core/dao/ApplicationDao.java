@@ -26,4 +26,6 @@ public interface ApplicationDao extends CheckUserInterface {
     List<Application> findAllBySearch(int offset, int limit, SearchForm searchForm);
 
     long countBySearch(SearchForm searchForm);
+
+    Application findLastApplicationByImmobility(Long key);
 }
