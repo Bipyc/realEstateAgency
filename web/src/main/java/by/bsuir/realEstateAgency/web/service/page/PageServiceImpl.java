@@ -1,5 +1,7 @@
 package by.bsuir.realEstateAgency.web.service.page;
 
+import by.bsuir.realEstateAgency.core.bean.SearchForm;
+import by.bsuir.realEstateAgency.core.service.common.FindAllBySearchInterface;
 import by.bsuir.realEstateAgency.core.service.common.FindAllInterface;
 import by.bsuir.realEstateAgency.web.bean.pagedList.PagedListPage;
 import by.bsuir.realEstateAgency.web.bean.pagedList.Pagination;
@@ -21,6 +23,16 @@ public class PageServiceImpl implements PageService {
         int finishPaginationNumber = Math.min(normalizedPageNumber + AROUND_PAGES_COUNT, pagesCount);
 
         return new Pagination(normalizedPageNumber, startPaginationNumber, finishPaginationNumber);
+    }
+
+    @Override
+    public PagedListPage getPagedList(int pageNumber, FindAllBySearchInterface objectService, SearchForm searchForm) {
+        int itemsCount = (int) objectService.countBySearch(searchForm);
+        int normalizedPageNumber = normalizePageNumber(pageNumber, itemsCount);
+        int offset = ((normalizedPageNumber - 1) * AMOUNT_PHONES_ON_PAGE);
+        int limit = AMOUNT_PHONES_ON_PAGE;
+
+        return new PagedListPage(objectService.findAllBySearch(offset, limit,searchForm), getPagination(normalizedPageNumber, itemsCount));
     }
 
     @Override
