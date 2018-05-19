@@ -38,6 +38,6 @@ public class InspectionDaoImpl extends AbstractDaoImpl<Inspection> implements In
     @Override
     public boolean checkUser(List<Long> keys, Long userId) {
         return super.checkUser(keys, userId,
-                "select count(i) from Inspection i Where i.id in (:list) and (i.realtor.id=:userId or i.client.id=:userId");
+                "select count(i) from Inspection i Where i.id in (:list) and (i.realtor.id=:userId or i.client.id=:userId)");
     }
 }

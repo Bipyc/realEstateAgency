@@ -19,12 +19,7 @@
         <sec:csrfInput/>
         <div class="auth-block">
             <div class="auth-record">
-                <c:if test="${empty create}">
-                    <div class="form-group">
-                        <label for="ownerLogin">Owner: </label>
-                        <span id="ownerLogin"><c:out value="${immobilityDto.ownerLogin}"/></span>
-                    </div>
-                </c:if>
+                <template:form_elem label="Owner*" path="ownerLogin"/>
                 <template:form_elem label="Name*" path="name"/>
                 <template:form_elem label="Description*" path="description" type="textarea"/>
                 <template:form_elem label="Price*" path="price"/>

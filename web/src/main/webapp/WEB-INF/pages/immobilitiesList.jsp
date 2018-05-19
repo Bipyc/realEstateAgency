@@ -57,11 +57,9 @@
                 </c:forEach>
             </table>
             <hr/>
-            <sec:authorize access="hasRole('CLIENT')">
-                <a href="<c:url value="/immobilities/new"/>" class="btn btn-success control-button">
-                    Create
-                </a>
-            </sec:authorize>
+            <a href="<c:url value="/immobilities/new"/>" class="btn btn-success control-button">
+                Create
+            </a>
             <button type="submit" name="remove" class="btn btn-danger control-button">
                 Remove
             </button>

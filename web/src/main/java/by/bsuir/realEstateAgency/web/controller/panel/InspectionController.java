@@ -1,4 +1,4 @@
-package by.bsuir.realEstateAgency.web.controller;
+package by.bsuir.realEstateAgency.web.controller.panel;
 
 import by.bsuir.realEstateAgency.core.model.Client;
 import by.bsuir.realEstateAgency.core.model.Realtor;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @Component
-@RequestMapping("/inspections")
+@RequestMapping("/panel/inspections")
 public class InspectionController {
     static Logger log = Logger.getLogger(InspectionController.class.getName());
 

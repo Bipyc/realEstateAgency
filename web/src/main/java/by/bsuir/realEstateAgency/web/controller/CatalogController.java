@@ -50,6 +50,9 @@ public class CatalogController {
     @GetMapping
     public String getCatalog(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
                             @ModelAttribute("sf") SearchForm searchForm, Model model){
+        if(searchForm.getCityName() != null && searchForm.getCityName().isEmpty()){
+            searchForm.setCityName(null);
+        }
         model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, immobilityService, searchForm));
         model.addAttribute(TYPE_APPLICATIONS_ATTRIBUTE, typeApplicationService.getAll());
         model.addAttribute(PAGINATION_PARAMS_ATTRIBUTE, getPaginationString(searchForm));
@@ -65,16 +68,6 @@ public class CatalogController {
         }
         model.addAttribute(IMMOBILITY_DTO_ATTRIBUTE, immobilityDto);
         return "catalogDetails";
-    }
-
-    @GetMapping(value = "/{id}", params = "inspection")
-    public void getInspectionForm(){
-
-    }
-
-    @PostMapping(value = "/inspection/{id}")
-    public void saveInspectionForm(){
-
     }
 
     private String getPaginationString(SearchForm searchForm){

@@ -17,6 +17,7 @@ public class ImmobilityDto {
     @Size(max = 255)
     private String name;
 
+    @NotEmpty
     private String ownerLogin;
 
     @NotEmpty

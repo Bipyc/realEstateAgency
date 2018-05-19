@@ -1,4 +1,4 @@
-package by.bsuir.realEstateAgency.web.controller;
+package by.bsuir.realEstateAgency.web.controller.panel;
 
 import by.bsuir.realEstateAgency.core.model.Realtor;
 import by.bsuir.realEstateAgency.core.service.ApplicationService;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @Component
-@RequestMapping("/applications")
+@RequestMapping("/panel/applications")
 public class ApplicationController {
 
     static Logger log = Logger.getLogger(ApplicationController.class.getName());

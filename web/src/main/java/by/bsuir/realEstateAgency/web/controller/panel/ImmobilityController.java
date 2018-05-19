@@ -1,4 +1,4 @@
-package by.bsuir.realEstateAgency.web.controller;
+package by.bsuir.realEstateAgency.web.controller.panel;
 
 import by.bsuir.realEstateAgency.core.service.ImmobilityService;
 import by.bsuir.realEstateAgency.web.bean.immobility.ImmobilityDto;
@@ -21,7 +21,7 @@ import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/immobilities")
+@RequestMapping("/panel/immobilities")
 public class ImmobilityController {
 
     static Logger log = Logger.getLogger(ImmobilityController.class.getName());
@@ -78,14 +78,14 @@ public class ImmobilityController {
     public String createImmobility(@Valid ImmobilityDto immobilityDto, BindingResult bindingResult,
                                    Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
-        if (bindingResult.hasErrors()) {
-            model.addAttribute(CREATE_USER_ATTRIBUTE, true);
-            return "immobilityDetails";
-        }
         if (immobilityDto.getUploadedFiles() != null && immobilityDto.getUploadedFiles().size() > 0) {
             immobilityDto.getUploadedFiles().remove(0);
         }
-        immobilityFacade.saveOrUpdate(immobilityDto, userDetails.getUser());
+        if (bindingResult.hasErrors()
+                ||immobilityFacade.saveOrUpdate(immobilityDto, userDetails.getUser(), bindingResult)) {
+            model.addAttribute(CREATE_USER_ATTRIBUTE, true);
+            return "immobilityDetails";
+        }
         return "redirect:/immobilities";
     }
 
@@ -105,13 +105,13 @@ public class ImmobilityController {
                                    @Valid ImmobilityDto immobilityDto, BindingResult bindingResult,
                                    Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
-        if (bindingResult.hasErrors()) {
-            return "immobilityDetails";
-        }
         if (immobilityDto.getUploadedFiles() != null && immobilityDto.getUploadedFiles().size() > 0) {
             immobilityDto.getUploadedFiles().remove(0);
         }
-        immobilityFacade.saveOrUpdate(immobilityDto, userDetails.getUser());
+        if (bindingResult.hasErrors()
+                ||immobilityFacade.saveOrUpdate(immobilityDto, userDetails.getUser(), bindingResult)) {
+            return "immobilityDetails";
+        }
         return "redirect:/immobilities";
     }
 
