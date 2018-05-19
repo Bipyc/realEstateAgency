@@ -1,32 +1,28 @@
-package by.bsuir.realEstateAgency.core.model;
+package by.bsuir.realEstateAgency.web.bean;
 
-import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Entity
-@Table(name = "Deals")
-public class Deal {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class DealDto {
     private Long id;
 
-    @ManyToOne
-    private Application application;
+    @NotNull
+    @Min(1L)
+    private Long applicationId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Client client;
+    @NotNull
+    private String clientName;
 
-    @Column
+    @NotNull
+    @Min(1L)
     private BigDecimal price;
 
-    @Column
-    @Temporal(TemporalType.DATE)
-    private Date date;
-
-    @Column
+    @Min(0L)
     private BigDecimal commission;
+
+    private Date date;
 
     public Long getId() {
         return id;
@@ -36,20 +32,20 @@ public class Deal {
         this.id = id;
     }
 
-    public Application getApplication() {
-        return application;
+    public Long getApplicationId() {
+        return applicationId;
     }
 
-    public void setApplication(Application application) {
-        this.application = application;
+    public void setApplicationId(Long applicationId) {
+        this.applicationId = applicationId;
     }
 
-    public Client getClient() {
-        return client;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
     public BigDecimal getPrice() {

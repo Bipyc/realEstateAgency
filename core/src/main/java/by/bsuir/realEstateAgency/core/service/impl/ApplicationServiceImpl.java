@@ -1,9 +1,7 @@
 package by.bsuir.realEstateAgency.core.service.impl;
 
 import by.bsuir.realEstateAgency.core.dao.ApplicationDao;
-import by.bsuir.realEstateAgency.core.model.Admin;
 import by.bsuir.realEstateAgency.core.model.Application;
-import by.bsuir.realEstateAgency.core.model.Immobility;
 import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.ApplicationService;
 import org.apache.log4j.Logger;

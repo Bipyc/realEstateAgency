@@ -56,7 +56,7 @@ public class ImmobilityController {
                                       Authentication authentication, Model model) throws Exception {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (bindingResult.hasErrors()) {
-            log.error("Bad request params for deleting Users. HTTP400");
+            log.error("Bad request params for deleting Immobility. HTTP400");
             throw new BadRequestException();
         }
         if (checkedList.getCheckedList() != null) {
@@ -93,7 +93,7 @@ public class ImmobilityController {
     public String getImmobility(@PathVariable("id") long id, Model model) {
         ImmobilityDto immobilityDto = immobilityFacade.getImmobility(id);
         if (immobilityDto == null) {
-            log.error("User not found. HTTP404");
+            log.error("Immobility not found. HTTP404");
             throw new NotFoundException();
         }
         model.addAttribute(IMMOBILITY_DTO_ATTRIBUTE, immobilityDto);

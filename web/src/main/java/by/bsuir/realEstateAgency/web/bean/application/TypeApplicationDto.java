@@ -2,7 +2,6 @@ package by.bsuir.realEstateAgency.web.bean.application;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

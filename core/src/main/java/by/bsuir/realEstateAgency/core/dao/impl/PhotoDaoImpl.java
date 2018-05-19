@@ -21,10 +21,6 @@ public class PhotoDaoImpl extends AbstractDaoImpl<Photo> implements PhotoDao {
 
     @Override
     public void removeByImmobilityList(List<Long> ids) {
-        if (ids.size() > 0) {
-            Query q = sessionFactory.getCurrentSession().createQuery("DELETE FROM Photo p WHERE p.immobility.id IN (:list)");
-            q.setParameterList("list", ids);
-            q.executeUpdate();
-        }
+        super.removeList(ids, "DELETE FROM Immobility i WHERE i.id IN (:list)");
     }
 }

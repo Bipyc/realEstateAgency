@@ -2,7 +2,6 @@ package by.bsuir.realEstateAgency.core.dao;
 
 import by.bsuir.realEstateAgency.core.dao.common.CheckUserInterface;
 import by.bsuir.realEstateAgency.core.model.Application;
-import by.bsuir.realEstateAgency.core.model.Immobility;
 
 import java.util.List;
 

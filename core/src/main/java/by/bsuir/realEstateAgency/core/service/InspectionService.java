@@ -1,15 +1,15 @@
 package by.bsuir.realEstateAgency.core.service;
 
-import by.bsuir.realEstateAgency.core.model.Application;
+import by.bsuir.realEstateAgency.core.model.Inspection;
 import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.common.FindAllInterface;
 
 import java.util.List;
 
-public interface ApplicationService extends FindAllInterface<Application> {
-    void save(Application application);
+public interface InspectionService extends FindAllInterface<Inspection> {
+    void save(Inspection inspection, User user);
 
-    Application get(Long key);
+    Inspection get(Long key);
 
     void remove(Long key, User user);
 

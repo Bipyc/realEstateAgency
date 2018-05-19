@@ -31,7 +31,7 @@
                 <a class="auth-link" href="<c:url value="/login"/>">Login</a>
             </sec:authorize>
             <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
-                <form  action="<c:url value="/logout"/>" method="post">
+                <form action="<c:url value="/logout"/>" method="post">
                     <sec:csrfInput/>
                     <span class="username noselect"><sec:authentication property="principal.username"/></span>
                     <button class="auth-link" type="submit">Logout</button>

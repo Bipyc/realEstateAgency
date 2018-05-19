@@ -47,7 +47,7 @@ public class TypeApplicationDaoImpl extends AbstractDaoImpl<TypeApplication> imp
             Query q = sessionFactory.getCurrentSession().createQuery("DELETE FROM TypeApplication t WHERE t.id=:id");
             q.setParameter("id", key);
             q.executeUpdate();
-        }catch (ConstraintViolationException e){
+        } catch (ConstraintViolationException e) {
             log.error("Trying delete linked object");
             throw new LinkedObjectDeletingException(e);
         }

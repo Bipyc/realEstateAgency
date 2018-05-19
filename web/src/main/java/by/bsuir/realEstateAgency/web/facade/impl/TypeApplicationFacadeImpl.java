@@ -1,9 +1,8 @@
 package by.bsuir.realEstateAgency.web.facade.impl;
 
-import by.bsuir.realEstateAgency.core.model.*;
+import by.bsuir.realEstateAgency.core.model.TypeApplication;
 import by.bsuir.realEstateAgency.core.service.TypeApplicationService;
 import by.bsuir.realEstateAgency.web.bean.application.TypeApplicationDto;
-import by.bsuir.realEstateAgency.web.bean.immobility.ImmobilityDto;
 import by.bsuir.realEstateAgency.web.facade.TypeApplicationFacade;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class TypeApplicationFacadeImpl implements TypeApplicationFacade {
     @Override
     public TypeApplicationDto getTypeApplication(Long key) {
         TypeApplication typeApplication = typeApplicationService.get(key);
-        if(typeApplication == null){
+        if (typeApplication == null) {
             return null;
         }
         TypeApplicationDto typeApplicationDto = new TypeApplicationDto();

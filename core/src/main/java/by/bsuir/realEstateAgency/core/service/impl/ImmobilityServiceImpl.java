@@ -1,7 +1,6 @@
 package by.bsuir.realEstateAgency.core.service.impl;
 
 import by.bsuir.realEstateAgency.core.dao.ImmobilityDao;
-import by.bsuir.realEstateAgency.core.model.Admin;
 import by.bsuir.realEstateAgency.core.model.Immobility;
 import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.ImmobilityService;

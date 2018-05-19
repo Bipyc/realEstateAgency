@@ -17,12 +17,12 @@
                         </c:when>
                         <c:when test="${not empty createUser}">
                             <div class="form-group">
-                            <span>User type: </span>
-                            <select id="typeUser" name="typeUser" class="select-style">
-                                <option ${typeUser eq "CLIENT" ? 'selected' : ''} value="CLIENT">Client</option>
-                                <option ${typeUser eq "REALTOR" ? 'selected' : ''} value="REALTOR">Realtor</option>
-                                <option ${typeUser eq "ADMIN" ? 'selected' : ''} value="ADMIN">Admin</option>
-                            </select>
+                                <span>User type: </span>
+                                <select id="typeUser" name="typeUser" class="select-style">
+                                    <option ${typeUser eq "CLIENT" ? 'selected' : ''} value="CLIENT">Client</option>
+                                    <option ${typeUser eq "REALTOR" ? 'selected' : ''} value="REALTOR">Realtor</option>
+                                    <option ${typeUser eq "ADMIN" ? 'selected' : ''} value="ADMIN">Admin</option>
+                                </select>
                             </div>
                         </c:when>
                         <c:otherwise>
@@ -51,7 +51,8 @@
                 <c:choose>
                     <c:when test="${userDto.typeUser ne \"CLIENT\" && typeUser ne \"CLIENT\"}">
                         <fmt:formatDate value="${userDto.dateOfIssue}" var="employmentDate" pattern="yyyy-MM-dd"/>
-                        <template:form_elem label="Employment Date*" path="employmentDate" value="${employmentDate}" type="date"/>
+                        <template:form_elem label="Employment Date*" path="employmentDate" value="${employmentDate}"
+                                            type="date"/>
                         <template:form_elem label="Salary*" path="salary"/>
                     </c:when>
                     <c:otherwise>
@@ -60,10 +61,10 @@
                     </c:otherwise>
                 </c:choose>
             </div>
-            <br />
+            <br/>
             <div class="form-group">
                 <button type="submit" name="save" class="btn btn-success ">
-                     Save
+                    Save
                 </button>
                 <c:if test="${empty createUser && empty registration}">
                     <button type="submit" name="remove" class="btn btn-danger ">
