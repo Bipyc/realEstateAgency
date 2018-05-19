@@ -1,5 +1,6 @@
 package by.bsuir.realEstateAgency.core.service.impl;
 
+import by.bsuir.realEstateAgency.core.bean.SearchForm;
 import by.bsuir.realEstateAgency.core.dao.ApplicationDao;
 import by.bsuir.realEstateAgency.core.model.Application;
 import by.bsuir.realEstateAgency.core.model.User;
@@ -50,5 +51,15 @@ public class ApplicationServiceImpl extends AbstractService implements Applicati
     @Override
     public long count() {
         return applicationDao.count();
+    }
+
+    @Override
+    public List<Application> findAllBySearch(int offset, int limit, SearchForm searchForm) {
+        return applicationDao.findAllBySearch(offset, limit, searchForm);
+    }
+
+    @Override
+    public long countBySearch(SearchForm searchForm) {
+        return applicationDao.countBySearch(searchForm);
     }
 }
