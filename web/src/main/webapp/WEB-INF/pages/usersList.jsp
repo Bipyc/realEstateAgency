@@ -6,6 +6,7 @@
 <template:page>
     <form method="post">
         <div class="information-text">Users list</div>
+        <br />
         <div class="table-custom">
             <table class="table">
                 <thead>

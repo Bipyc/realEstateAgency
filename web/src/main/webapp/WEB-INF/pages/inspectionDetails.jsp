@@ -8,12 +8,13 @@
 <template:page>
     <c:choose>
         <c:when test="${empty create}">
-            <div class="information-text outlined-text">Create immobility</div>
+            <div class="information-text outlined-text">Create inspection</div>
         </c:when>
         <c:otherwise>
-            <div class="information-text outlined-text">Edit immobility</div>
+            <div class="information-text outlined-text">Edit inspection</div>
         </c:otherwise>
     </c:choose>
+    <br/>
     <form:form method="post" enctype="multipart/form-data" modelAttribute="inspectionDto">
         <sec:csrfInput/>
         <div class="auth-block">

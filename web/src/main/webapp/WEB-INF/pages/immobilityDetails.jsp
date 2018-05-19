@@ -14,6 +14,7 @@
             <div class="information-text outlined-text">Edit immobility</div>
         </c:otherwise>
     </c:choose>
+    <br/>
     <form:form method="post" enctype="multipart/form-data" modelAttribute="immobilityDto">
         <sec:csrfInput/>
         <div class="auth-block">
@@ -43,7 +44,7 @@
                         </select>
                     </div>
                 </div>
-                <br />
+                <br/>
             </div>
             <div class="form-group">
                 <label for="inputFile" class="information-text">Images/Photos</label>
@@ -58,7 +59,7 @@
                     </div>
                 </c:forEach>
                 <div class="previewImageTemplate">
-                    <%--<a href="#" class="deleteImage">Delete</a>--%>
+                        <%--<a href="#" class="deleteImage">Delete</a>--%>
                     <a class="close deleteImage"></a>
                     <img class="previewImage"/>
                 </div>

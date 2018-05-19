@@ -5,6 +5,7 @@
 <template:page>
     <div class="pt-3">
         <p class="information-text">Log in</p>
+        <br/>
         <form method="post">
             <c:if test="${param.error != null}">
                 <div class="error-message">

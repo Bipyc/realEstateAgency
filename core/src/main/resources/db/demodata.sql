@@ -1,23 +1,57 @@
-INSERT INTO Users (id, dateOfBirth, phone, email, firstName, lastName, login, password, patronymic, employmentDate, salary, DTYPE)
-VALUES (1, '1998-03-11', '+375291234567', 'de32z@mail.ru', 'Dmitry', 'Koshelev', 'admin',
-           '$2a$11$kmrxD70ZsG5q0gSgsEqK6O7y.dmkLW0eXnQCzVEUOuOnTnLZ5rIvS', 'Michailovic', '2018-04-10', 500, 'Admin');
-INSERT INTO Passports (id, authority, dateOfIssue, identNumber, number, user_id)
-VALUES (1, 'Первомайский РОВД', '2017-01-01', '3110111111EEE', 'BM3333333', 1);
+INSERT INTO "USERS" (DTYPE,ID,DATEOFBIRTH,EMAIL,FIRSTNAME,LASTNAME,LOGIN,PASSWORD,PATRONYMIC,PHONE,EMPLOYMENTDATE,SALARY) VALUES ('Admin',1,{d '1998-03-11'},'de32z@mail.ru','Dmitry','Koshelev','admin','$2a$11$kmrxD70ZsG5q0gSgsEqK6O7y.dmkLW0eXnQCzVEUOuOnTnLZ5rIvS','Michailovic','+375291234567',{d '2018-04-10'},500.00);
+INSERT INTO "USERS" (DTYPE,ID,DATEOFBIRTH,EMAIL,FIRSTNAME,LASTNAME,LOGIN,PASSWORD,PATRONYMIC,PHONE,EMPLOYMENTDATE,SALARY) VALUES ('Client',3,{d '1998-03-11'},'vr3c2@mail.ru','Ilya','Davidovich','client','$2a$11$T2rwCK9ylCYWYIqai4nfL.0q5yvQnMdnFMzEhsXWNfHVQWUnxVF/W','Igorevich','+375291234567',null,null);
+INSERT INTO "USERS" (DTYPE,ID,DATEOFBIRTH,EMAIL,FIRSTNAME,LASTNAME,LOGIN,PASSWORD,PATRONYMIC,PHONE,EMPLOYMENTDATE,SALARY) VALUES ('Client',4,{d '2014-01-01'},'w5bx6@mail.ru','Ku ','Tas','Kutas','$2a$11$q8N5xcEn9iUFgq.H3MQxNOU72.6YXCPHb9DD..yLd1Mu9eDZWdFAy','Virusovich','+375441846589',null,null);
+INSERT INTO "USERS" (DTYPE,ID,DATEOFBIRTH,EMAIL,FIRSTNAME,LASTNAME,LOGIN,PASSWORD,PATRONYMIC,PHONE,EMPLOYMENTDATE,SALARY) VALUES ('Client',5,{d '1992-05-21'},'mowx5@mail.ru ','Vladislav','Aleynikov','client1','$2a$11$iFP92xlxzIkCkbmb4H0PwOn8V6k52EJySWYmSPQvmd1M4fbXnFIQ6','Sergeevich','+375445913018',null,null);
+INSERT INTO "USERS" (DTYPE,ID,DATEOFBIRTH,EMAIL,FIRSTNAME,LASTNAME,LOGIN,PASSWORD,PATRONYMIC,PHONE,EMPLOYMENTDATE,SALARY) VALUES ('Realtor',2,{d '1998-03-11'},'3cx2b@mail.ru','Alexander','Kirillov','realtor','$2a$11$2Fty1HDpdUmC1mmoL67xjuVqBQYCnLFnkFZdzU3EzirxgjIF5srKO','Olegovich','+375291234567',{d '2017-01-01'},500.00);
+INSERT INTO "USERS" (DTYPE,ID,DATEOFBIRTH,EMAIL,FIRSTNAME,LASTNAME,LOGIN,PASSWORD,PATRONYMIC,PHONE,EMPLOYMENTDATE,SALARY) VALUES ('Realtor',6,{d '2011-01-01'},'cuwv6@mail.ru ','Efim','Dzhakinidze','secondRealtor','$2a$11$U3G8qo8.kPDiMCcgx6yTWuGIpBLt36B/bbzWMzgRHvKWtGMbJWp9q','non','+375254356689',{d '2011-11-27'},5000.00);
 
-INSERT INTO Users (id, dateOfBirth, phone, email, firstName, lastName, login, password, patronymic, employmentDate, salary, DTYPE)
-VALUES (2, '1998-03-11', '+375291234567', '3cx2b@mail.ru', 'Kirillov', 'Alexander', 'realtor',
-           '$2a$11$fjRMze4xfp6.1rD1nAy9kOrriGltAfgObtRqt5kgZ/iYaMw2E6GPm', 'Olegovich', '2018-04-10',
-           500, 'Realtor');
-INSERT INTO Passports (id, authority, dateOfIssue, identNumber, number, user_id)
-VALUES (2, 'Первомайский РОВД', '2017-01-01', '3222222222EEE', 'BM4444444', 2);
+INSERT INTO "PASSPORTS" (ID,AUTHORITY,DATEOFISSUE,IDENTNUMBER,NUMBER,USER_ID) VALUES (1,'Первомайский РОВД',{d '2017-01-01'},'3110111111EEE','BM3333333',1);
+INSERT INTO "PASSPORTS" (ID,AUTHORITY,DATEOFISSUE,IDENTNUMBER,NUMBER,USER_ID) VALUES (2,'Первомайский РОВД',{d '2017-01-01'},'3222222222EEE','BM4444444',2);
+INSERT INTO "PASSPORTS" (ID,AUTHORITY,DATEOFISSUE,IDENTNUMBER,NUMBER,USER_ID) VALUES (3,'Первомайский РОВД',{d '2017-01-01'},'3333333333EEE','BM5555555',3);
+INSERT INTO "PASSPORTS" (ID,AUTHORITY,DATEOFISSUE,IDENTNUMBER,NUMBER,USER_ID) VALUES (4,'Sam Kutas',{d '2007-02-01'},'1234567890','12345678',4);
+INSERT INTO "PASSPORTS" (ID,AUTHORITY,DATEOFISSUE,IDENTNUMBER,NUMBER,USER_ID) VALUES (5,'ROVD',{d '2012-01-01'},'93208752702','12345321',5);
+INSERT INTO "PASSPORTS" (ID,AUTHORITY,DATEOFISSUE,IDENTNUMBER,NUMBER,USER_ID) VALUES (6,'DOdqa',{d '2018-02-03'},'2345643213456','1882457',6);
 
-INSERT INTO Users (id, dateOfBirth, phone, email, firstName, lastName, login, password, patronymic, employmentDate, salary, DTYPE)
-VALUES (3, '1998-03-11', '+375291234567', 'vr3c2@mail.ru', 'Davidovich', 'Ilya', 'client',
-           '$2a$11$xQrbmnS4RQC3qlblZC.5NutDy2BQSwAZbJz9pUDDgHzpzzqs4ANQC', 'Igorevich', NULL, NULL, 'Client');
-INSERT INTO Passports (id, authority, dateOfIssue, identNumber, number, user_id)
-VALUES (3, 'Первомайский РОВД', '2017-01-01', '3333333333EEE', 'BM5555555', 3);
+INSERT INTO "CITIES" (ID,NAME) VALUES (1,'Minsk');
+INSERT INTO "CITIES" (ID,NAME) VALUES (2,'Vitebsk');
+INSERT INTO "CITIES" (ID,NAME) VALUES (3,'Минск');
+INSERT INTO "CITIES" (ID,NAME) VALUES (4,'Гродно');
+INSERT INTO "CITIES" (ID,NAME) VALUES (5,'Гомель');
 
-INSERT INTO TypeApplications (id, commission, name) VALUES (1, 5.0, 'Buy');
-INSERT INTO TypeApplications (id, commission, name) VALUES (2, 5.0, 'Sell');
-INSERT INTO TypeApplications (id, commission, name) VALUES (3, 100.0, 'Rent');
-INSERT INTO TypeApplications (id, commission, name) VALUES (4, 100.0, 'Rent out');
+INSERT INTO "IMMOBILITY" (ID,ADDRESS,DESCRIPTION,NAME,NUMBEROFROOMS,PRICE,SQUARE,TYPE,CITY_ID,OWNER_ID) VALUES (1,'Minsk, Bedy, 4','Funny and nice koala','Koala',1,500.00,1.0,0,1,5);
+INSERT INTO "IMMOBILITY" (ID,ADDRESS,DESCRIPTION,NAME,NUMBEROFROOMS,PRICE,SQUARE,TYPE,CITY_ID,OWNER_ID) VALUES (2,'Vitebsk, Kolotushkina house','мы друзья','МЕДУЗААА',3,200.00,400.0,0,2,5);
+INSERT INTO "IMMOBILITY" (ID,ADDRESS,DESCRIPTION,NAME,NUMBEROFROOMS,PRICE,SQUARE,TYPE,CITY_ID,OWNER_ID) VALUES (3,'Советский район, Ломоносова ул., 4','малоэтажный и малоквартирный домnвысота потолков - 3 метраnремонт в квартире в стиле «модерн»nвстроенная кухня массив со встроенной ','Пятиэтажный особняк',2,50000.00,130.0,1,3,5);
+INSERT INTO "IMMOBILITY" (ID,ADDRESS,DESCRIPTION,NAME,NUMBEROFROOMS,PRICE,SQUARE,TYPE,CITY_ID,OWNER_ID) VALUES (4,'ул. Сторожовская 6','Продажа квартир в одном из самых престижных домов г.Минскаnn«Дом у Троицкого» (Сторожовская 6)nnКвартиры с отделкой и без отделки от 160м до 230м.nnСамые красивые видовые квартиры, ','Квартиры по ул. Сторожовская 6',4,30000.00,130.0,1,1,3);
+INSERT INTO "IMMOBILITY" (ID,ADDRESS,DESCRIPTION,NAME,NUMBEROFROOMS,PRICE,SQUARE,TYPE,CITY_ID,OWNER_ID) VALUES (5,' Фрунзенский район, Чичурина ул., 12','площадь 39,80/17,80/9, лоджия застекленная, телефон: нет, год постройки 2011, Квартира с ремонтом возле метро . Стеклопакеты ПВХ. Линолеум. Душевая кабина. Прямая продажа.','Купитеее',1,20000.00,40.0,0,4,3);
+INSERT INTO "IMMOBILITY" (ID,ADDRESS,DESCRIPTION,NAME,NUMBEROFROOMS,PRICE,SQUARE,TYPE,CITY_ID,OWNER_ID) VALUES (6,'ул. Первая, 42','Минская область, г. МинскnЖК КАСКАД - прекрасное место для жизни .n5 минут до метро, магазины , детский сад , отличные площадки для отдыха и детей .nОгороженная территория.nnВ деловой части: офисы , кафе , образовательные ','ЖК Каскад',3,23500.00,200.0,1,4,3);
+INSERT INTO "IMMOBILITY" (ID,ADDRESS,DESCRIPTION,NAME,NUMBEROFROOMS,PRICE,SQUARE,TYPE,CITY_ID,OWNER_ID) VALUES (7,' Московский район, Железнодорожная ул., 126-А','1/5 силикатные блоки, площадь 44,90/30,30/6,30, телефон: есть, год постройки 1963, Двухкомнатная квартира с отличным ремонтом: заезжай и живи! В шаговой доступности станция метро Михалово','Продается 2 комнатная квартира',3,63450.00,200.0,1,3,3);
+INSERT INTO "IMMOBILITY" (ID,ADDRESS,DESCRIPTION,NAME,NUMBEROFROOMS,PRICE,SQUARE,TYPE,CITY_ID,OWNER_ID) VALUES (8,'ул Нормальная','*Оплата производится в белорусских рублях по курсу, установленному Национальным Банком Республики Беларусь на дату проведения платежа/nn*Эту квартиру, как и все наши предложения, можно купить с привлечением кредита.Минская область, г. МинскnnУзнать подробнее>>>nПентхаус в Маяке Минска.','2-х комнатная квартира с современным ремонтом',5,140000.00,230.0,1,5,3);
+
+INSERT INTO "PHOTOS" (ID,PATH,IMMOBILITY_ID) VALUES (1,'4001bedky675ur9.jpg',1);
+INSERT INTO "PHOTOS" (ID,PATH,IMMOBILITY_ID) VALUES (2,'tkp80t1l8fmdeck.jpg',2);
+INSERT INTO "PHOTOS" (ID,PATH,IMMOBILITY_ID) VALUES (3,'n32t9f04yvgZc02.jpg',3);
+INSERT INTO "PHOTOS" (ID,PATH,IMMOBILITY_ID) VALUES (4,'8z8ze2aZv9n4axr.jpg',4);
+INSERT INTO "PHOTOS" (ID,PATH,IMMOBILITY_ID) VALUES (5,'hqZ0p82h1x7ipZy.jpg',4);
+INSERT INTO "PHOTOS" (ID,PATH,IMMOBILITY_ID) VALUES (6,'fcws3hjssxap21b.jpg',5);
+INSERT INTO "PHOTOS" (ID,PATH,IMMOBILITY_ID) VALUES (7,'vejbxd464tngiqn.jpg',6);
+INSERT INTO "PHOTOS" (ID,PATH,IMMOBILITY_ID) VALUES (8,'8agyn7itis33kxj.jpg',7);
+INSERT INTO "PHOTOS" (ID,PATH,IMMOBILITY_ID) VALUES (9,'okxhZ7nx3zbla77.jpg',8);
+
+INSERT INTO "TYPEAPPLICATIONS" (ID,COMMISSION,NAME) VALUES (1,5.00,'Buy');
+INSERT INTO "TYPEAPPLICATIONS" (ID,COMMISSION,NAME) VALUES (2,5.00,'Sell');
+INSERT INTO "TYPEAPPLICATIONS" (ID,COMMISSION,NAME) VALUES (3,100.00,'Rent');
+INSERT INTO "TYPEAPPLICATIONS" (ID,COMMISSION,NAME) VALUES (4,100.00,'Rent out');
+
+INSERT INTO "APPLICATIONS" (ID,DATE,STATUS,IMMOBILITY_ID,REALTOR_ID,TYPE_ID) VALUES (1,{d '2018-05-19'},3,1,6,1);
+INSERT INTO "APPLICATIONS" (ID,DATE,STATUS,IMMOBILITY_ID,REALTOR_ID,TYPE_ID) VALUES (2,{d '2018-05-19'},3,3,2,3);
+INSERT INTO "APPLICATIONS" (ID,DATE,STATUS,IMMOBILITY_ID,REALTOR_ID,TYPE_ID) VALUES (3,{d '2018-05-19'},3,6,6,4);
+INSERT INTO "APPLICATIONS" (ID,DATE,STATUS,IMMOBILITY_ID,REALTOR_ID,TYPE_ID) VALUES (5,{d '2018-05-19'},0,4,2,1);
+
+INSERT INTO "DEALS" (ID,COMMISSION,DATE,PRICE,APPLICATION_ID,CLIENT_ID) VALUES (1,50000.00,{d '2018-05-19'},50000.00,3,5);
+INSERT INTO "DEALS" (ID,COMMISSION,DATE,PRICE,APPLICATION_ID,CLIENT_ID) VALUES (2,99.00,{d '2018-05-19'},1000000000.00,1,4);
+INSERT INTO "DEALS" (ID,COMMISSION,DATE,PRICE,APPLICATION_ID,CLIENT_ID) VALUES (3,0.00,{d '2018-05-19'},100.00,2,3);
+
+INSERT INTO "INSPECTIONS" (ID,COMMENT,DATE,TIME,CLIENT_ID,IMMOBILITY_ID,REALTOR_ID) VALUES (1,'Приходити',{d '2035-05-13'},{t '00:00:00'},5,3,6);
+INSERT INTO "INSPECTIONS" (ID,COMMENT,DATE,TIME,CLIENT_ID,IMMOBILITY_ID,REALTOR_ID) VALUES (2,'Я Кутас',{d '2018-05-21'},{t '14:51:00'},4,1,2);
+INSERT INTO "INSPECTIONS" (ID,COMMENT,DATE,TIME,CLIENT_ID,IMMOBILITY_ID,REALTOR_ID) VALUES (3,'I''m GROOT',{d '3018-01-01'},{t '08:00:00'},3,4,6);
+INSERT INTO "INSPECTIONS" (ID,COMMENT,DATE,TIME,CLIENT_ID,IMMOBILITY_ID,REALTOR_ID) VALUES (4,'Я не Кутас',{d '2018-09-30'},{t '11:29:00'},5,8,6);

@@ -7,7 +7,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form:form method="post" modelAttribute="dealDto">
-        <p class="information-text">Registration</p>
+        <p class="information-text">Deal</p>
+        <br/>
         <div class="auth-block">
             <div class="auth-record">
                 <c:if test="${empty create}">
@@ -20,15 +21,15 @@
                 <template:form_elem label="Client*" path="clientName"/>
                 <template:form_elem label="Application ID*" path="applicationId"/>
                 <template:form_elem label="Price*" path="price"/>
-                <template:form_elem label="Commission*" path="commission"/>
+                <template:form_elem label="Commission" path="commission"/>
             </div>
             <div class="form-group">
-                <button type="submit" name="save" class="btn btn-success login-button">
+                <button type="submit" name="save" class="btn btn-success">
                     Save
                 </button>
                 <sec:authorize access="hasRole('ADMIN')">
                     <c:if test="${empty create}">
-                        <button type="submit" name="remove" class="btn btn-danger login-button">
+                        <button type="submit" name="remove" class="btn btn-danger">
                             Remove
                         </button>
                     </c:if>

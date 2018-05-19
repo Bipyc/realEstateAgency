@@ -7,7 +7,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form:form method="post" modelAttribute="typeApplicationDto">
-        <p class="information-text">Registration</p>
+        <p class="information-text">Application details</p>
+        <br/>
         <div class="auth-block">
             <div class="auth-record">
                 <template:form_elem label="Name*" path="name"/>
