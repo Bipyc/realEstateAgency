@@ -4,29 +4,87 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
-    <form:form method="get"  modelAttribute="sf">
-        <form:input path="cityName"/>
-        <select id="typeImmobility" name="typeImmobility" class="select-style">
-            <option ${sf.typeImmobility eq "HOUSE" ? 'selected' : ''} value="HOUSE">House
-            </option>
-            <option ${sf.typeImmobility eq "APARTMENT" ? 'selected' : ''} value="APARTMENT">
-                Apartment
-            </option>
-        </select>
-        <select name="typeApplication" class="select-style">
-            <c:forEach var="type" items="${typeApplications}">
-                <option ${sf.typeApplication eq type.id ? 'selected' : ''} value="${type.id}"><c:out
-                        value="${type.name}"/></option>
-            </c:forEach>
-        </select>
-        <form:input type="numeric" path="minPrice"/>
-        <form:input type="numeric" path="maxPrice"/>
-        <button type="submit" class="btn btn-success control-button">
-            Create
-        </button>
+    <form:form method="get" modelAttribute="sf" class="search-form">
+        <div class="container-fluid">
+            <div class="search">
+                <div class="information-text">Search</div>
+                <br/>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <label class="outlined-text align-middle">City: </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <form:input class="input-field" path="cityName"/>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <label class="outlined-text">Immobility type: </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <select id="typeImmobility" name="typeImmobility" class="select-style">
+                                <option ${sf.typeImmobility eq "HOUSE" ? 'selected' : ''} value="HOUSE">House
+                                </option>
+                                <option ${sf.typeImmobility eq "APARTMENT" ? 'selected' : ''} value="APARTMENT">
+                                    Apartment
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <label class="outlined-text">Order type</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <select name="typeApplication" class="select-style">
+                                <c:forEach var="type" items="${typeApplications}">
+                                    <option ${sf.typeApplication eq type.id ? 'selected' : ''} value="${type.id}"><c:out
+                                            value="${type.name}"/></option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <label class="outlined-text">min price</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <form:input class="input-field" type="number" step="50" min="0" path="minPrice"/>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <label class="outlined-text">max price</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <form:input class="input-field" type="number" step="50" min="0" path="maxPrice"/>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+
+            </div>
+        </div>
         <sec:csrfInput/>
     </form:form>
-    <div class="information-text">Immobility list</div>
+    <div class="information-text">Catalog</div>
     <br/>
     <div class="table-custom">
         <table class="table">
