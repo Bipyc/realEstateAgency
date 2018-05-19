@@ -1,6 +1,7 @@
 package by.bsuir.realEstateAgency.web.bean.user;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -26,6 +27,7 @@ public class UserDto {
     private String patronymic;
 
     @Past
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
     @NotEmpty
@@ -60,6 +62,7 @@ public class UserDto {
 
     @Past
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date employmentDate;
 
     @Min(0L)

@@ -2,6 +2,7 @@ package by.bsuir.realEstateAgency.web.bean.application;
 
 import by.bsuir.realEstateAgency.core.model.ApplicationStatus;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import java.util.Date;
 public class ApplicationDto {
     private Long id;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @NotEmpty
