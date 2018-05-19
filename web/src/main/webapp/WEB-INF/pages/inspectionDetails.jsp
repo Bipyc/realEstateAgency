@@ -14,6 +14,7 @@
             <div class="information-text outlined-text">Edit immobility</div>
         </c:otherwise>
     </c:choose>
+    <br/>
     <form:form method="post" enctype="multipart/form-data" modelAttribute="inspectionDto">
         <sec:csrfInput/>
         <div class="auth-block">
