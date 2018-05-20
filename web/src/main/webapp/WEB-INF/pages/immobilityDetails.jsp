@@ -19,7 +19,12 @@
         <sec:csrfInput/>
         <div class="auth-block">
             <div class="auth-record">
-                <template:form_elem label="Owner*" path="ownerLogin"/>
+                <sec:authorize access="hasAnyRole('ADMIN', 'REALTOR')">
+                    <template:form_elem label="Owner*" path="ownerLogin"/>
+                </sec:authorize>
+                <sec:authorize access="hasRole('CLIENT')">
+                    <form:hidden path="ownerLogin" value="null"/>
+                </sec:authorize>
                 <template:form_elem label="Name*" path="name"/>
                 <template:form_elem label="Description*" path="description" type="textarea"/>
                 <template:form_elem label="Price*" path="price"/>

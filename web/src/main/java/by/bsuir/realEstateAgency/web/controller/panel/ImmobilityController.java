@@ -1,6 +1,7 @@
 package by.bsuir.realEstateAgency.web.controller.panel;
 
 import by.bsuir.realEstateAgency.core.model.Admin;
+import by.bsuir.realEstateAgency.core.model.Client;
 import by.bsuir.realEstateAgency.core.service.ImmobilityService;
 import by.bsuir.realEstateAgency.web.bean.immobility.ImmobilityDto;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
@@ -88,6 +89,9 @@ public class ImmobilityController {
     public String createImmobility(@Valid ImmobilityDto immobilityDto, BindingResult bindingResult,
                                    Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
+        if(userDetails.getUser() instanceof Client) {
+            immobilityDto.setOwnerLogin(userDetails.getUsername());
+        }
         if (immobilityDto.getUploadedFiles() != null && immobilityDto.getUploadedFiles().size() > 0) {
             immobilityDto.getUploadedFiles().remove(0);
         }
@@ -115,6 +119,9 @@ public class ImmobilityController {
                                    @Valid ImmobilityDto immobilityDto, BindingResult bindingResult,
                                    Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
+        if(userDetails.getUser() instanceof Client) {
+            immobilityDto.setOwnerLogin(userDetails.getUsername());
+        }
         if (immobilityDto.getUploadedFiles() != null && immobilityDto.getUploadedFiles().size() > 0) {
             immobilityDto.getUploadedFiles().remove(0);
         }
