@@ -79,7 +79,7 @@
                         <fmt:formatDate value="${userDto.dateOfIssue}" var="employmentDate" pattern="yyyy-MM-dd"/>
                         <template:form_elem label="Employment Date*" path="employmentDate" value="${employmentDate}"
                                             type="date"/>
-                        <template:form_elem label="Salary*" path="salary"/>
+                        <template:form_elem label="Salary*" type="number" path="salary"/>
                     </c:when>
                     <c:otherwise>
                         <form:hidden path="employmentDate" value="1970-01-01"/>
@@ -89,11 +89,11 @@
             </div>
             <br/>
             <div class="form-group">
-                <button type="submit" name="save" class="btn btn-success ">
+                <button type="submit" name="save" class="btn btn-success login-button">
                     Save
                 </button>
                 <c:if test="${empty createUser && empty registration && empty showUserProfile}">
-                    <button type="submit" name="remove" class="btn btn-danger ">
+                    <button type="submit" name="remove" class="btn btn-danger login-button">
                         Remove
                     </button>
                 </c:if>

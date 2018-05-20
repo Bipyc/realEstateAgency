@@ -275,7 +275,8 @@ body, html {
 }
 
 .login-button:hover {
-    color: var(--main-hover-font-color);
+    color: var(--main-font-color);
+    transform: scale(1.03);
 }
 
 .auth-block {

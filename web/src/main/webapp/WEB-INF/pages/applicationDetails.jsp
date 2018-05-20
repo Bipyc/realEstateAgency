@@ -18,7 +18,7 @@
                     </div>
                 </c:if>
                 <template:form_elem label="Realtor*" path="realtorName"/>
-                <template:form_elem label="Immobility ID*" path="immobilityId"/>
+                <template:form_elem label="Immobility ID*" type="number" path="immobilityId"/>
                 <div class="choise">
                     <div class="form-group">
                         <span>Type:</span>
@@ -45,11 +45,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" name="save" class="btn btn-success">
+                <button type="submit" name="save" class="btn btn-success login-button">
                     Save
                 </button>
                 <c:if test="${empty create}">
-                    <button type="submit" name="remove" class="btn btn-danger">
+                    <button type="submit" name="remove" class="btn btn-danger login-button">
                         Remove
                     </button>
                 </c:if>
