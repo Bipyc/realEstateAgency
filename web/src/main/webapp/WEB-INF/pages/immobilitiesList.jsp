@@ -27,7 +27,7 @@
                                    value="<c:out value="${immobilities.id}"/>"/>
                         </td>
                         <td class="right-border">
-                            <a href="<c:url value="/immobilities/${immobilities.id}"/>">
+                            <a href="<c:url value="/panel/immobilities/${immobilities.id}"/>">
                                 <c:choose>
                                     <c:when test="${empty immobilities.photos || empty immobilities.photos[0]}">
                                         <img src="<c:url value="/resources/img/default.png"/>" width="auto"
@@ -41,7 +41,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="<c:url value="/immobilities/${immobilities.id}"/>"><c:out
+                            <a href="<c:url value="/panel/immobilities/${immobilities.id}"/>"><c:out
                                     value="${immobilities.name}"/></a>
                         </td>
                         <td>
@@ -57,7 +57,7 @@
                 </c:forEach>
             </table>
             <hr/>
-            <a href="<c:url value="/immobilities/new"/>" class="btn btn-success control-button">
+            <a href="<c:url value="/panel/immobilities/new"/>" class="btn btn-success control-button">
                 Create
             </a>
             <button type="submit" name="remove" class="btn btn-danger control-button">
@@ -66,5 +66,5 @@
             <sec:csrfInput/>
         </div>
     </form>
-    <template:pagination targetPage="immobilities" pagination="${pagedList.pagination}"/>
+    <template:pagination targetPage="panel/immobilities" pagination="${pagedList.pagination}"/>
 </template:page>

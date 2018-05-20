@@ -102,7 +102,7 @@ public class UserController {
             } else {
                 try {
                     userFacade.saveOrUpdate(user);
-                    return "redirect:/users/" + user.getId();
+                    return "redirect:/panel/users/" + user.getId();
                 } catch (ValueNotUniqueException e) {
                     model.addAttribute(ERROR_MESSAGE_ATTRIBUTE, "some values are not unique");
                 }
@@ -117,7 +117,7 @@ public class UserController {
     private String removeUser(@PathVariable("id") long id,
                               Model model) {
         userService.remove(id);
-        return "redirect:/users";
+        return "redirect:/panel/users";
     }
 
     @PostMapping(params = "remove")
@@ -132,7 +132,7 @@ public class UserController {
                     .stream().filter(CheckedItem::isChecked)
                     .map(CheckedItem::getId).collect(Collectors.toList()));
         }
-        return "redirect:/users?page=" + pageNumber;
+        return "redirect:/panel/users?page=" + pageNumber;
     }
 
     @ExceptionHandler({IllegalArgumentException.class})

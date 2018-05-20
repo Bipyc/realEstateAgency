@@ -1,5 +1,8 @@
 package by.bsuir.realEstateAgency.core.dao.impl;
 
+import by.bsuir.realEstateAgency.core.dao.DealDao;
+import by.bsuir.realEstateAgency.core.dao.ImmobilityDao;
+import by.bsuir.realEstateAgency.core.dao.InspectionDao;
 import by.bsuir.realEstateAgency.core.dao.UserDao;
 import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
 import by.bsuir.realEstateAgency.core.model.User;
@@ -9,6 +12,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,6 +20,15 @@ import java.util.List;
 public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
 
     static Logger log = Logger.getLogger(UserDaoImpl.class.getName());
+
+    @Resource
+    private InspectionDao inspectionDao;
+
+    @Resource
+    private DealDao dealDao;
+
+    @Resource
+    private ImmobilityDao immobilityDao;
 
     @Override
     public void save(User user) {
@@ -53,6 +66,8 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
 
     @Override
     public void removeList(List<Long> keys) {
+        inspectionDao.removegByUser(keys);
+        dealDao.deletingUser(keys);
         if (keys.size() > 0) {
             Query qPassort = sessionFactory.getCurrentSession().createQuery("DELETE FROM PassportData p WHERE p.user.id IN (:list)");
             qPassort.setParameterList("list", keys);

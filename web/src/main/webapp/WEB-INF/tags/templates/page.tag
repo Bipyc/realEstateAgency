@@ -39,6 +39,28 @@
             </sec:authorize>
         </div>
         <nav class="navbar navbar-default">
+            <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
+                <a href="<c:url value="/profile"/>">Profile</a>
+            </sec:authorize>
+            <sec:authorize access="hasRole('CLIENT')">
+                <a href="<c:url value="/panel/immobilities"/>">My Immobilities</a>
+                <a href="<c:url value="/panel/inspections"/>">My Inspections</a>
+                <a href="<c:url value="/panel/deals"/>">My Deals</a>
+            </sec:authorize>
+            <sec:authorize access="hasRole('REALTOR')">
+
+                <a href="<c:url value="/panel/applications"/>">My Applications</a>
+                <a href="<c:url value="/panel/inspections"/>">My Inspections</a>
+                <a href="<c:url value="/panel/deals"/>">My Deals</a>
+            </sec:authorize>
+            <sec:authorize access="hasRole('ADMIN')">
+                <a href="<c:url value="/panel/users"/>">Users</a>
+                <a href="<c:url value="/panel/immobilities"/>">Immobilities</a>
+                <a href="<c:url value="/panel/applications"/>">Applications</a>
+                <a href="<c:url value="/panel/inspections"/>">Inspections</a>
+                <a href="<c:url value="/panel/deals"/>">Deals</a>
+                <a href="<c:url value="/panel/typeApplications"/>">Application Types</a>
+            </sec:authorize>
             <div class="container">
                 <a class="navbar-brand" href="<c:url value="/"/>">REALT</a>
                 <div class="navbar-header">

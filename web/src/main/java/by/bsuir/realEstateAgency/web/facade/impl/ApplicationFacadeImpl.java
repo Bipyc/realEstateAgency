@@ -45,7 +45,9 @@ public class ApplicationFacadeImpl implements ApplicationFacade {
         if (application.getRealtor() != null) {
             applicationDto.setRealtorName(application.getRealtor().getLogin());
         }
-        applicationDto.setImmobilityId(application.getImmobility().getId());
+        if(application.getImmobility() != null) {
+            applicationDto.setImmobilityId(application.getImmobility().getId());
+        }
         applicationDto.setTypeId(application.getType().getId());
         applicationDto.setStatus(application.getStatus());
         return applicationDto;

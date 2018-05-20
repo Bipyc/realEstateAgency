@@ -17,7 +17,7 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao {
 
     @Override
     public List<Deal> findAll(int offset, int limit) {
-        return super.findAll(offset, limit, "Select d from Deal d");
+        return super.findAll(offset, limit, "Select d from Deal d ORDER BY d.id DESC");
     }
 
     @Override
@@ -33,5 +33,36 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao {
     @Override
     public void removeList(List<Long> keys) {
         super.removeList(keys, "DELETE FROM Deal d WHERE d.id IN (:list)");
+    }
+
+    @Override
+    public void deletingApplications(List<Long> keys) {
+        sessionFactory.getCurrentSession().createQuery("update Deal d set d.application = null" +
+                " where d.application.id in (:list)")
+                .setParameterList("list", keys)
+                .executeUpdate();
+    }
+
+    @Override
+    public void deletingUser(List<Long> keys) {
+        sessionFactory.getCurrentSession().createQuery("update Deal d set d.client = null" +
+                " where d.client.id in (:list)")
+                .setParameterList("list", keys)
+                .executeUpdate();
+    }
+
+    @Override
+    public List<Deal> findAllByUser(int offset, int limit, Long userId) {
+        return findAll(offset, limit, "select d from Deal d Where d.application.realtor.id=:userId or d.client.id=:userId ORDER BY d.id DESC", userId);
+    }
+
+    @Override
+    public long countByUser(Long userId) {
+        return count("select count(d) from Deal d Where d.application.realtor.id=:userId or d.client.id=:userId ", userId);
+    }
+
+    @Override
+    public boolean checkUser(List<Long> keys, Long userId) {
+        return checkUser(keys, userId, "select count(d) from Deal d Where d.id in (:list) and d.application.realtor.id=:userId");
     }
 }

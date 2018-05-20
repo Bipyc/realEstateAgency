@@ -42,7 +42,7 @@ public class InspectionFacadeImpl implements InspectionFacade {
         inspectionDto.setId(inspection.getId());
         inspectionDto.setComment(inspection.getComment());
         inspectionDto.setDate(inspection.getDate());
-        inspectionDto.setTime(inspectionDto.getTime());
+        inspectionDto.setTime(inspection.getTime());
         inspectionDto.setImmobilityId(inspection.getImmobility().getId());
         inspectionDto.setClientName(inspection.getClient().getLogin());
         inspectionDto.setRealtorName(inspection.getRealtor().getLogin());

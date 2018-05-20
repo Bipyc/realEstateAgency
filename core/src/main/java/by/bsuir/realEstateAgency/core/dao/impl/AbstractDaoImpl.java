@@ -24,6 +24,21 @@ public class AbstractDaoImpl<T> {
         }
     }
 
+    protected List<T> findAll(int offset, int limit, String query, Long userId) {
+        return sessionFactory.getCurrentSession().createQuery(query)
+                .setParameter("userId", userId)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
+    protected long count(String query, Long userId) {
+        return (Long) sessionFactory.getCurrentSession()
+                .createQuery(query)
+                .setParameter("userId", userId)
+                .getSingleResult();
+    }
+
     protected List<T> findAll(int offset, int limit, String query) {
         return sessionFactory.getCurrentSession().createQuery(query)
                 .setFirstResult(offset)

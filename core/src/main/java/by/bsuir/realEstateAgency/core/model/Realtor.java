@@ -8,17 +8,17 @@ import java.util.List;
 public class Realtor extends Employee {
 
     @OneToMany
-    private List<Immobility> immobilities;
+    private List<Application> applications;
 
     @OneToMany
     private List<Inspection> inspections;
 
-    public List<Immobility> getImmobilities() {
-        return immobilities;
+    public List<Application> getApplications() {
+        return applications;
     }
 
-    public void setImmobilities(List<Immobility> immobilities) {
-        this.immobilities = immobilities;
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
     }
 
     public List<Inspection> getInspections() {

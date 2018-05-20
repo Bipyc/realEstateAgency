@@ -1,11 +1,13 @@
 package by.bsuir.realEstateAgency.web.controller.panel;
 
+import by.bsuir.realEstateAgency.core.model.Admin;
 import by.bsuir.realEstateAgency.core.model.Client;
 import by.bsuir.realEstateAgency.core.model.Realtor;
 import by.bsuir.realEstateAgency.core.service.InspectionService;
 import by.bsuir.realEstateAgency.web.bean.InspectionDto;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedList;
+import by.bsuir.realEstateAgency.web.bean.pagedList.PagedListPage;
 import by.bsuir.realEstateAgency.web.exceptions.BadRequestException;
 import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
 import by.bsuir.realEstateAgency.web.facade.InspectionFacade;
@@ -46,8 +48,16 @@ public class InspectionController {
 
     @GetMapping
     private String getInspections(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
-                                  Model model) {
-        model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, inspectionService));
+                                  Authentication authentication, Model model) {
+        PagedListPage pagedListPage =  null;
+        AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
+        if (userDetails.getUser() instanceof Admin) {
+            pagedListPage = pageService.getPagedList(pageNumber, inspectionService);
+        }
+        else {
+            pagedListPage = pageService.getPagedList(pageNumber, inspectionService, userDetails.getUser());
+        }
+        model.addAttribute(PAGED_LIST_ATTRIBUTE, pagedListPage);
         return "inspectionsList";
     }
 
@@ -65,7 +75,7 @@ public class InspectionController {
                     .stream().filter(CheckedItem::isChecked)
                     .map(CheckedItem::getId).collect(Collectors.toList()), userDetails.getUser());
         }
-        return "redirect:/inspections?page=" + pageNumber;
+        return "redirect:/panel/inspections?page=" + pageNumber;
     }
 
     @GetMapping("/new")
@@ -92,7 +102,7 @@ public class InspectionController {
             model.addAttribute(CREATE_ATTRIBUTE, true);
             return "inspectionDetails";
         }
-        return "redirect:/inspections";
+        return "redirect:/panel/inspections";
     }
 
     @GetMapping("/{id}")
@@ -115,13 +125,13 @@ public class InspectionController {
                 || inspectionFacade.saveOrUpdate(inspectionDto, userDetails.getUser(), bindingResult)) {
             return "inspectionDetails";
         }
-        return "redirect:/inspections";
+        return "redirect:/panel/inspections";
     }
 
     @PostMapping(value = "/{id}", params = "remove")
     public String removeImmobility(@PathVariable("id") long id, Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         inspectionService.remove(id, userDetails.getUser());
-        return "redirect:/inspections";
+        return "redirect:/panel/inspections";
     }
 }

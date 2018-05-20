@@ -1,7 +1,9 @@
 package by.bsuir.realEstateAgency.core.service.impl;
 
+import by.bsuir.realEstateAgency.core.dao.InspectionDao;
 import by.bsuir.realEstateAgency.core.dao.UserDao;
 import by.bsuir.realEstateAgency.core.model.User;
+import by.bsuir.realEstateAgency.core.service.ImmobilityService;
 import by.bsuir.realEstateAgency.core.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -19,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private PasswordEncoder passwordEncoder;
+
+    @Resource
+    private ImmobilityService immobilityService;
 
     @Resource
     private UserDao userDao;
@@ -46,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void encryptPassword(User user) {
-        if (!user.getPassword().isEmpty()) {
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
     }
@@ -68,11 +75,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void remove(Long key) {
-        userDao.remove(key);
+        removeList(Collections.singletonList(key));
     }
 
     @Override
     public void removeList(List<Long> keys) {
+        immobilityService.removeList(immobilityService.getAllIdByUser(keys));
         userDao.removeList(keys);
     }
 

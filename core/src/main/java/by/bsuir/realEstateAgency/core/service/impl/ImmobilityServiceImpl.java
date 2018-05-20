@@ -1,7 +1,9 @@
 package by.bsuir.realEstateAgency.core.service.impl;
 
 import by.bsuir.realEstateAgency.core.bean.SearchForm;
+import by.bsuir.realEstateAgency.core.dao.ApplicationDao;
 import by.bsuir.realEstateAgency.core.dao.ImmobilityDao;
+import by.bsuir.realEstateAgency.core.dao.InspectionDao;
 import by.bsuir.realEstateAgency.core.model.Application;
 import by.bsuir.realEstateAgency.core.model.Immobility;
 import by.bsuir.realEstateAgency.core.model.User;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +38,12 @@ public class ImmobilityServiceImpl extends AbstractService implements Immobility
     @Override
     public void save(Immobility immobility) {
         immobilityDao.save(immobility);
+    }
+
+    @Override
+    public void save(Immobility object, User user) {
+        checkUser(Collections.singletonList(object), user, immobilityDao);
+        save(object);
     }
 
     @Override
@@ -60,6 +69,11 @@ public class ImmobilityServiceImpl extends AbstractService implements Immobility
     @Override
     public void removeList(List<Long> keys, User user) {
         checkUser(keys, user, immobilityDao);
+        removeList(keys);
+    }
+
+    @Override
+    public void removeList(List<Long> keys) {
         photoService.removeByImmobilityList(keys);
         immobilityDao.removeList(keys);
     }
@@ -74,5 +88,20 @@ public class ImmobilityServiceImpl extends AbstractService implements Immobility
     @Override
     public long countBySearch(SearchForm searchForm) {
         return applicationService.countBySearch(searchForm);
+    }
+
+    @Override
+    public List<Immobility> findAllByUser(int offset, int limit, User user) {
+        return immobilityDao.findAllByUser(offset, limit, user.getId());
+    }
+
+    @Override
+    public long countByUser(User user) {
+        return immobilityDao.countByUser(user.getId());
+    }
+
+    @Override
+    public List<Long> getAllIdByUser(List<Long> keys) {
+        return immobilityDao.getAllIdByUser(keys);
     }
 }

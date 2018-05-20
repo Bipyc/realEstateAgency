@@ -1,11 +1,13 @@
 package by.bsuir.realEstateAgency.web.controller.panel;
 
+import by.bsuir.realEstateAgency.core.model.Admin;
 import by.bsuir.realEstateAgency.core.model.Realtor;
 import by.bsuir.realEstateAgency.core.service.ApplicationService;
 import by.bsuir.realEstateAgency.core.service.TypeApplicationService;
 import by.bsuir.realEstateAgency.web.bean.application.ApplicationDto;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedList;
+import by.bsuir.realEstateAgency.web.bean.pagedList.PagedListPage;
 import by.bsuir.realEstateAgency.web.exceptions.BadRequestException;
 import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
 import by.bsuir.realEstateAgency.web.facade.ApplicationFacade;
@@ -52,8 +54,16 @@ public class ApplicationController {
 
     @GetMapping
     private String getApplications(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
-                                   Model model) {
-        model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, applicationService));
+                                   Authentication authentication, Model model) {
+        PagedListPage pagedListPage =  null;
+        AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
+        if (userDetails.getUser() instanceof Admin) {
+            pagedListPage = pageService.getPagedList(pageNumber, applicationService);
+        }
+        else {
+            pagedListPage = pageService.getPagedList(pageNumber, applicationService, userDetails.getUser());
+        }
+        model.addAttribute(PAGED_LIST_ATTRIBUTE, pagedListPage);
         return "applicationsList";
     }
 
@@ -71,7 +81,7 @@ public class ApplicationController {
                     .stream().filter(CheckedItem::isChecked)
                     .map(CheckedItem::getId).collect(Collectors.toList()), userDetails.getUser());
         }
-        return "redirect:/applications?page=" + pageNumber;
+        return "redirect:/panel/applications?page=" + pageNumber;
     }
 
     @GetMapping("/new")
@@ -97,7 +107,7 @@ public class ApplicationController {
             model.addAttribute(TYPE_APPLICATIONS_ATTRIBUTE, typeApplicationService.getAll());
             return "applicationDetails";
         }
-        return "redirect:/applications";
+        return "redirect:/panel/applications";
     }
 
     @GetMapping("/{id}")
@@ -122,13 +132,13 @@ public class ApplicationController {
             model.addAttribute(TYPE_APPLICATIONS_ATTRIBUTE, typeApplicationService.getAll());
             return "applicationDetails";
         }
-        return "redirect:/applications";
+        return "redirect:/panel/applications";
     }
 
     @PostMapping(value = "/{id}", params = "remove")
     public String removeApplication(@PathVariable("id") long id, Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         applicationService.remove(id, userDetails.getUser());
-        return "redirect:/applications";
+        return "redirect:/panel/applications";
     }
 }

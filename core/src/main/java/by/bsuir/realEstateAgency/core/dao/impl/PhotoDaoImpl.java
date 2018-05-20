@@ -21,6 +21,6 @@ public class PhotoDaoImpl extends AbstractDaoImpl<Photo> implements PhotoDao {
 
     @Override
     public void removeByImmobilityList(List<Long> ids) {
-        super.removeList(ids, "DELETE FROM Immobility i WHERE i.id IN (:list)");
+        super.removeList(ids, "DELETE FROM Photo p WHERE p.immobility.id IN (:list)");
     }
 }

@@ -1,6 +1,7 @@
 package by.bsuir.realEstateAgency.core.service.impl;
 
 import by.bsuir.realEstateAgency.core.dao.InspectionDao;
+import by.bsuir.realEstateAgency.core.model.Immobility;
 import by.bsuir.realEstateAgency.core.model.Inspection;
 import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.InspectionService;
@@ -50,5 +51,15 @@ public class InspectionServiceImpl extends AbstractService<Inspection> implement
     @Override
     public long count() {
         return inspectionDao.count();
+    }
+
+    @Override
+    public List<Inspection> findAllByUser(int offset, int limit, User user) {
+        return inspectionDao.findAllByUser(offset, limit, user.getId());
+    }
+
+    @Override
+    public long countByUser(User user) {
+        return inspectionDao.countByUser(user.getId());
     }
 }
