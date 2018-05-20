@@ -32,8 +32,14 @@
                             </a>
                         </td>
                         <td>
-                            <a href="<c:url value="/panel/immobilities/${inspection.immobility.id}"/>"><c:out
-                                    value="${inspection.immobility.name}"/></a>
+                            <sec:authorize access="hasAnyRole('ADMIN', 'REALTOR')">
+                                <a href="<c:url value="/panel/immobilities/${inspection.immobility.id}"/>"><c:out
+                                        value="${inspection.immobility.name}"/></a>
+                            </sec:authorize>
+                            <sec:authorize access="hasRole('CLIENT')">
+                                <a href="<c:url value="/catalog/${inspection.immobility.id}"/>"><c:out
+                                        value="${inspection.immobility.name}"/></a>
+                            </sec:authorize>
                         </td>
                         <td>
                             <fmt:formatDate value="${inspection.date}" var="date" pattern="yyyy-MM-dd"/>
