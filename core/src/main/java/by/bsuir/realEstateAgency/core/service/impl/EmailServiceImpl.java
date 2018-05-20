@@ -1,6 +1,7 @@
 package by.bsuir.realEstateAgency.core.service.impl;
 
 import by.bsuir.realEstateAgency.core.service.EmailService;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -15,10 +16,11 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+@Service
 public class EmailServiceImpl implements EmailService {
-    final String fromEmail = "dimakutas17@mail.ru";
-    final String password = "";
-    final String host = "smtp.yandex.ru";
+    final String fromEmail = "Real_Estate_Agency_info@mail.ru";
+    final String password = "RealEstateAgency";
+    final String host = "smtp.mail.ru"; // smtp.yandex.ru smtp.mail.ru smtp.gmail.com
     final String port = "465";
 
     Session session;
@@ -42,7 +44,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public boolean sendEmail(ArrayList<String> recipients, String subject, String body){
+    public boolean sendEmail(List<String> recipients, String subject, String body){
         try
         {
             if(recipients.size() == 0)
@@ -52,7 +54,7 @@ public class EmailServiceImpl implements EmailService {
             msg.addHeader("format", "flowed");
             msg.addHeader("Content-Transfer-Encoding", "8bit");
 
-            msg.setFrom(new InternetAddress(fromEmail, "Car sharing service"));
+            msg.setFrom(new InternetAddress(fromEmail, "Real estate agency service"));
             for (String recipient: recipients) {
                 msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
             }
