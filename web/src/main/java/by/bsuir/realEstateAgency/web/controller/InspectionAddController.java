@@ -1,5 +1,6 @@
 package by.bsuir.realEstateAgency.web.controller;
 
+import by.bsuir.realEstateAgency.core.service.EmailService;
 import by.bsuir.realEstateAgency.web.bean.InspectionDto;
 import by.bsuir.realEstateAgency.web.bean.immobility.ImmobilityDto;
 import by.bsuir.realEstateAgency.web.facade.InspectionFacade;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Collections;
 
 @Component
 @RequestMapping("/inspection")
@@ -27,6 +30,9 @@ public class InspectionAddController {
     @Resource
     private InspectionFacade inspectionFacade;
 
+    @Resource
+    private EmailService emailService;
+
     @GetMapping(value = "/{id}")
     public String getInspectionForm(@PathVariable("id") long id, Model model){
         model.addAttribute(CREATE_BY_USER_ATTRIBUTE, true);
@@ -37,9 +43,9 @@ public class InspectionAddController {
     @PostMapping(value = "/{id}")
     public String saveInspectionForm(@PathVariable("id") long id, @Valid InspectionDto inspectionDto, BindingResult bindingResult,
                                    Authentication authentication, Model model){
+        AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         inspectionDto.setId(null);
         inspectionDto.setImmobilityId(id);
-        AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (bindingResult.hasErrors()
                 || inspectionFacade.addByUser(inspectionDto, userDetails.getUser(), bindingResult)) {
             model.addAttribute(CREATE_BY_USER_ATTRIBUTE, true);

@@ -1,6 +1,7 @@
 package by.bsuir.realEstateAgency.web.controller.profile;
 
 import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
+import by.bsuir.realEstateAgency.core.service.impl.EmailServiceImpl;
 import by.bsuir.realEstateAgency.web.bean.user.UserDto;
 import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
 import by.bsuir.realEstateAgency.web.facade.UserFacade;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Collections;
 
 @Controller
 @RequestMapping("/profile")
@@ -26,6 +28,9 @@ public class ProfileController {
     private static final String SHOW_USER_PROFILE_ATTRIBUTE = "showUserProfile";
 
     private static final String ERROR_MESSAGE_ATTRIBUTE = "errorMessage";
+
+    @Resource
+    private EmailServiceImpl emailService;
 
     @Resource
     private UserFacade userFacade;
@@ -45,9 +50,13 @@ public class ProfileController {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         user.setId(userDetails.getUser().getId());
         user.setLogin(userDetails.getUser().getLogin());
+        String theEmail = userDetails.getUser().getEmail();
         if (!bindingResult.hasErrors()) {
             try {
                 userFacade.saveOrUpdate(user);
+                boolean resultOfSending = emailService.sendEmail(Collections.singletonList(theEmail)
+                        , "Change settings"
+                        , "Your settings have been successfully saved. \nIf it was not you, immediately inform us by email!!!!");
                 return "redirect:/profile";
             } catch (ValueNotUniqueException e) {
                 model.addAttribute(ERROR_MESSAGE_ATTRIBUTE, "some values are not unique");
