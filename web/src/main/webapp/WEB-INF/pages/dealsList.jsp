@@ -9,7 +9,7 @@
         <div class="information-text">Deals list</div>
         <br/>
         <div class="table-custom">
-            <table class="table table-hover">
+            <table class="table">
                 <thead>
                 <tr>
                     <sec:authorize access="hasRole('ADMIN')">

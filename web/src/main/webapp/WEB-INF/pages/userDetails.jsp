@@ -7,7 +7,22 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form:form method="post" modelAttribute="userDto">
-        <p class="information-text">Registration</p>
+
+        <c:choose>
+            <c:when test="${not empty registration}">
+                <p class="information-text">Registration</p>
+            </c:when>
+            <c:when test="${not empty createUser}">
+                <p class="information-text">Create user</p>
+            </c:when>
+            <c:when test="${not empty showUserProfile}">
+                <p class="information-text">Profile</p>
+            </c:when>
+            <c:otherwise>
+                <p class="information-text">Edit user</p>
+            </c:otherwise>
+        </c:choose>
+        <br/>
         <div class="auth-block">
             <div class="auth-record">
                 <div class="choise">
