@@ -19,19 +19,19 @@
                     </div>
                 </c:if>
                 <template:form_elem label="Client*" path="clientName"/>
-                <template:form_elem label="Application ID*" path="applicationId"/>
-                <template:form_elem label="Price*" path="price"/>
-                <template:form_elem label="Commission" path="commission"/>
+                <template:form_elem label="Application ID*" type="number" path="applicationId"/>
+                <template:form_elem label="Price*" type="number" path="price"/>
+                <template:form_elem label="Commission" type="number" path="commission"/>
             </div>
             <div class="form-group">
                 <sec:authorize access="hasAnyRole('ADMIN', 'REALTOR')">
-                    <button type="submit" name="save" class="btn btn-success">
+                    <button type="submit" name="save" class="btn btn-success login-button">
                         Save
                     </button>
                 </sec:authorize>
                 <sec:authorize access="hasRole('ADMIN')">
                     <c:if test="${empty create}">
-                        <button type="submit" name="remove" class="btn btn-danger">
+                        <button type="submit" name="remove" class="btn btn-danger login-button">
                             Remove
                         </button>
                     </c:if>

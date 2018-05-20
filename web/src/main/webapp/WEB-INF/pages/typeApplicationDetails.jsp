@@ -12,7 +12,7 @@
         <div class="auth-block">
             <div class="auth-record">
                 <template:form_elem label="Name*" path="name"/>
-                <template:form_elem label="Commission(in persent)*" path="commission"/>
+                <template:form_elem label="Commission(in persent)*" type="number" path="commission"/>
             </div>
             <div class="form-group">
                 <button type="submit" name="save" class="btn btn-success login-button">
