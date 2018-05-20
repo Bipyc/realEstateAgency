@@ -1,9 +1,11 @@
 package by.bsuir.realEstateAgency.web.controller.panel;
 
+import by.bsuir.realEstateAgency.core.model.Admin;
 import by.bsuir.realEstateAgency.core.service.ImmobilityService;
 import by.bsuir.realEstateAgency.web.bean.immobility.ImmobilityDto;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedList;
+import by.bsuir.realEstateAgency.web.bean.pagedList.PagedListPage;
 import by.bsuir.realEstateAgency.web.exceptions.BadRequestException;
 import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
 import by.bsuir.realEstateAgency.web.facade.ImmobilityFacade;
@@ -45,8 +47,16 @@ public class ImmobilityController {
 
     @GetMapping
     private String getImmobilities(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
-                                   Model model) {
-        model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, immobilityService));
+                                   Authentication authentication, Model model) {
+        PagedListPage pagedListPage =  null;
+        AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
+        if (userDetails.getUser() instanceof Admin) {
+            pagedListPage = pageService.getPagedList(pageNumber, immobilityService);
+        }
+        else {
+            pagedListPage = pageService.getPagedList(pageNumber, immobilityService, userDetails.getUser());
+        }
+        model.addAttribute(PAGED_LIST_ATTRIBUTE, pagedListPage);
         return "immobilitiesList";
     }
 

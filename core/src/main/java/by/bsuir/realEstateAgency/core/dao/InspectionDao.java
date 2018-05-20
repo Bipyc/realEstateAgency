@@ -18,4 +18,8 @@ public interface InspectionDao extends FindAllByUserDao<Inspection>, CheckUserIn
     void remove(Long key);
 
     void removeList(List<Long> keys);
+
+    void removeByImmobilities(List<Long> keys);
+
+    void removegByUser(List<Long> keys);
 }

@@ -41,7 +41,9 @@ public class DealFacadeImpl implements DealFacade {
         dealDto.setPrice(deal.getPrice());
         dealDto.setCommission(deal.getCommission());
         dealDto.setClientName(deal.getClient().getLogin());
-        dealDto.setApplicationId(deal.getApplication().getId());
+        if(deal.getApplication() != null) {
+            dealDto.setApplicationId(deal.getApplication().getId());
+        }
         dealDto.setDate(deal.getDate());
         return dealDto;
     }
@@ -95,7 +97,7 @@ public class DealFacadeImpl implements DealFacade {
         }
 
         if (!bindingResult.hasErrors()) {
-            dealService.save(deal);
+            dealService.save(deal, user);
             deal.getApplication().setStatus(ApplicationStatus.CLOSE);
             applicationService.save(deal.getApplication());
             dealDto.setId(deal.getId());

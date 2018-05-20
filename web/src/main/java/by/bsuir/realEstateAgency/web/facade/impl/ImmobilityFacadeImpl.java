@@ -132,7 +132,7 @@ public class ImmobilityFacadeImpl implements ImmobilityFacade {
                 log.error("Trying update a nonexistent object", e);
                 throw e;
             }
-            if (!user.equals(immobility.getOwner()) && !(user instanceof Admin) && !(user instanceof Client)) {
+            if (!user.equals(immobility.getOwner()) && !(user instanceof Admin) && !(user instanceof Realtor)) {
                 RuntimeException e = new IllegalStateException();
                 log.error("Trying update immobility by not the owner or admin", e);
                 throw e;

@@ -23,4 +23,6 @@ public interface ImmobilityDao extends FindAllByUserDao<Immobility>, CheckUserIn
     void removeList(List<Long> keys);
 
     boolean checkUser(List<Long> keys, Long userId);
+
+    List<Long> getAllIdByUser(List<Long> keys);
 }

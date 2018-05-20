@@ -12,10 +12,5 @@ public interface FindAllByUserService<T> {
 
     long countByUser(User user);
 
-    void remove(Long key, User user);
 
-    /**
-     * @param keys - id list
-     */
-    void removeList(List<Long> keys, User user);
 }

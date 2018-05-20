@@ -1,14 +1,23 @@
 package by.bsuir.realEstateAgency.core.dao.impl;
 
+import by.bsuir.realEstateAgency.core.dao.ApplicationDao;
 import by.bsuir.realEstateAgency.core.dao.ImmobilityDao;
+import by.bsuir.realEstateAgency.core.dao.InspectionDao;
 import by.bsuir.realEstateAgency.core.model.Immobility;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
 @Repository
 public class ImmobilityDaoImpl extends AbstractDaoImpl<Immobility> implements ImmobilityDao {
+
+    @Resource
+    private InspectionDao inspectionDao;
+
+    @Resource
+    private ApplicationDao applicationDao;
 
     @Override
     public Immobility get(Long key) {
@@ -17,7 +26,7 @@ public class ImmobilityDaoImpl extends AbstractDaoImpl<Immobility> implements Im
 
     @Override
     public List<Immobility> findAll(int offset, int limit) {
-        return super.findAll(offset, limit, "Select i from Immobility i");
+        return super.findAll(offset, limit, "Select i from Immobility i ORDER BY i.id DESC");
     }
 
     @Override
@@ -37,12 +46,14 @@ public class ImmobilityDaoImpl extends AbstractDaoImpl<Immobility> implements Im
 
     @Override
     public void removeList(List<Long> keys) {
+        inspectionDao.removeByImmobilities(keys);
+        applicationDao.canceledApplicationByImmobilities(keys);
         super.removeList(keys, "DELETE FROM Immobility i WHERE i.id IN (:list)");
     }
 
     @Override
     public List<Immobility> findAllByUser(int offset, int limit, Long userId) {
-        return findAll(offset, limit, "select i from Immobility i Where i.owner.id=:userId", userId);
+        return findAll(offset, limit, "select i from Immobility i Where i.owner.id=:userId ORDER BY i.id DESC", userId);
     }
 
     @Override
@@ -50,5 +61,10 @@ public class ImmobilityDaoImpl extends AbstractDaoImpl<Immobility> implements Im
         return count("select count(i) from Immobility i Where i.owner.id=:userId", userId);
     }
 
-
+    @Override
+    public List<Long> getAllIdByUser(List<Long> keys) {
+        return sessionFactory.getCurrentSession().createQuery( "select i.id from Immobility i Where i.owner.id in (:list)")
+                .setParameterList("list", keys)
+                .getResultList();
+    }
 }

@@ -24,9 +24,11 @@
                 <template:form_elem label="Commission" path="commission"/>
             </div>
             <div class="form-group">
-                <button type="submit" name="save" class="btn btn-success">
-                    Save
-                </button>
+                <sec:authorize access="hasAnyRole('ADMIN', 'REALTOR')">
+                    <button type="submit" name="save" class="btn btn-success">
+                        Save
+                    </button>
+                </sec:authorize>
                 <sec:authorize access="hasRole('ADMIN')">
                     <c:if test="${empty create}">
                         <button type="submit" name="remove" class="btn btn-danger">

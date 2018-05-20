@@ -15,6 +15,7 @@
                     <sec:authorize access="hasRole('ADMIN')">
                         <th class="right-border"></th>
                     </sec:authorize>
+                    <th>ID</th>
                     <th>Application ID</th>
                     <th>Creation date</th>
                     <th>Price</th>
@@ -30,9 +31,13 @@
                                        value="<c:out value="${deal.id}"/>"/>
                             </td>
                         </sec:authorize>
-
                         <td>
                             <a href="<c:url value="/panel/deals/${deal.id}"/>">
+                                <c:out value="${deal.id}"/>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="<c:url value="/panel/applications/${deal.application.id}"/>">
                                 <c:out value="${deal.application.id}"/>
                             </a>
                         </td>
@@ -50,9 +55,11 @@
                 </c:forEach>
             </table>
             <hr/>
-            <a href="<c:url value="/panel/deals/new"/>" class="btn btn-success control-button">
-                Create
-            </a>
+            <sec:authorize access="hasAnyRole('ADMIN', 'REALTOR')">
+                <a href="<c:url value="/panel/deals/new"/>" class="btn btn-success control-button">
+                    Create
+                </a>
+            </sec:authorize>
             <sec:authorize access="hasRole('ADMIN')">
                 <button type="submit" name="remove" class="btn btn-danger control-button">
                     Remove

@@ -40,6 +40,10 @@
                     </c:when>
                     <c:otherwise>
                         <form:hidden path="login"/>
+                        <div class="form-group">
+                            <span>Login: </span>
+                            <span>${userDto.login}</span>
+                        </div>
                     </c:otherwise>
                 </c:choose>
                 <template:form_elem label="First name*" path="firstName"/>
@@ -56,7 +60,7 @@
                 <template:form_elem label="Issuing authority*" path="authority"/>
                 <template:form_elem label="Phone*" path="phone"/>
                 <c:choose>
-                    <c:when test="${userDto.typeUser ne \"CLIENT\" && typeUser ne \"CLIENT\"}">
+                    <c:when test="${userDto.typeUser ne \"CLIENT\" && typeUser ne \"CLIENT\" && empty showUserProfile}">
                         <fmt:formatDate value="${userDto.dateOfIssue}" var="employmentDate" pattern="yyyy-MM-dd"/>
                         <template:form_elem label="Employment Date*" path="employmentDate" value="${employmentDate}"
                                             type="date"/>

@@ -1,7 +1,9 @@
 package by.bsuir.realEstateAgency.core.service.impl;
 
 import by.bsuir.realEstateAgency.core.bean.SearchForm;
+import by.bsuir.realEstateAgency.core.dao.ApplicationDao;
 import by.bsuir.realEstateAgency.core.dao.ImmobilityDao;
+import by.bsuir.realEstateAgency.core.dao.InspectionDao;
 import by.bsuir.realEstateAgency.core.model.Application;
 import by.bsuir.realEstateAgency.core.model.Immobility;
 import by.bsuir.realEstateAgency.core.model.User;
@@ -67,6 +69,11 @@ public class ImmobilityServiceImpl extends AbstractService implements Immobility
     @Override
     public void removeList(List<Long> keys, User user) {
         checkUser(keys, user, immobilityDao);
+        removeList(keys);
+    }
+
+    @Override
+    public void removeList(List<Long> keys) {
         photoService.removeByImmobilityList(keys);
         immobilityDao.removeList(keys);
     }
@@ -91,5 +98,10 @@ public class ImmobilityServiceImpl extends AbstractService implements Immobility
     @Override
     public long countByUser(User user) {
         return immobilityDao.countByUser(user.getId());
+    }
+
+    @Override
+    public List<Long> getAllIdByUser(List<Long> keys) {
+        return immobilityDao.getAllIdByUser(keys);
     }
 }

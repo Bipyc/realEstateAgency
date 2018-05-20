@@ -27,7 +27,7 @@
                                    value="<c:out value="${inspection.id}"/>"/>
                         </td>
                         <td>
-                            <a href="<c:url value="/panel/inspection/${inspection.id}"/>">
+                            <a href="<c:url value="/panel/inspections/${inspection.id}"/>">
                                 <c:out value="${inspection.id}"/>
                             </a>
                         </td>
@@ -47,9 +47,11 @@
                 </c:forEach>
             </table>
             <hr/>
-            <a href="<c:url value="/panel/inspections/new"/>" class="btn btn-success control-button">
-                Create
-            </a>
+            <sec:authorize access="hasAnyRole('ADMIN', 'REALTOR')">
+                <a href="<c:url value="/panel/inspections/new"/>" class="btn btn-success control-button">
+                    Create
+                </a>
+            </sec:authorize>
             <button type="submit" name="remove" class="btn btn-danger control-button">
                 Remove
             </button>

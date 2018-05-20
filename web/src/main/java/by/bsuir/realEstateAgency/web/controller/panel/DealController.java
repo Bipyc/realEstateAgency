@@ -5,6 +5,7 @@ import by.bsuir.realEstateAgency.core.service.DealService;
 import by.bsuir.realEstateAgency.web.bean.DealDto;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedList;
+import by.bsuir.realEstateAgency.web.bean.pagedList.PagedListPage;
 import by.bsuir.realEstateAgency.web.exceptions.AccessDeniedException;
 import by.bsuir.realEstateAgency.web.exceptions.BadRequestException;
 import by.bsuir.realEstateAgency.web.exceptions.NotFoundException;
@@ -46,7 +47,15 @@ public class DealController {
 
     @GetMapping
     private String getApplications(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
-                                   Model model) {
+                                   Authentication authentication, Model model) {
+        PagedListPage pagedListPage =  null;
+        AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
+        if (userDetails.getUser() instanceof Admin) {
+            pagedListPage = pageService.getPagedList(pageNumber, dealService);
+        }
+        else {
+            pagedListPage = pageService.getPagedList(pageNumber, dealService, userDetails.getUser());
+        }
         model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, dealService));
         return "dealsList";
     }

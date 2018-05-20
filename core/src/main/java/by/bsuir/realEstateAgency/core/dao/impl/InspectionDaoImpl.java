@@ -17,7 +17,7 @@ public class InspectionDaoImpl extends AbstractDaoImpl<Inspection> implements In
 
     @Override
     public List<Inspection> findAll(int offset, int limit) {
-        return super.findAll(offset, limit, "Select i from Inspection i");
+        return super.findAll(offset, limit, "Select i from Inspection i ORDER BY i.id DESC");
     }
 
     @Override
@@ -43,11 +43,21 @@ public class InspectionDaoImpl extends AbstractDaoImpl<Inspection> implements In
 
     @Override
     public List<Inspection> findAllByUser(int offset, int limit, Long userId) {
-        return super.findAll(offset, limit, "select i from Inspection i Where (i.realtor.id=:userId or i.client.id=:userId)", userId);
+        return super.findAll(offset, limit, "select i from Inspection i Where (i.realtor.id=:userId or i.client.id=:userId) ORDER BY i.id DESC", userId);
     }
 
     @Override
     public long countByUser(Long userId) {
         return super.count("select count(i) from Inspection i Where (i.realtor.id=:userId or i.client.id=:userId)", userId);
+    }
+
+    @Override
+    public void removeByImmobilities(List<Long> keys) {
+        super.removeList(keys, "DELETE FROM Inspection i WHERE i.immobility.id IN (:list)");
+    }
+
+    @Override
+    public void removegByUser(List<Long> keys) {
+        super.removeList(keys, "DELETE FROM Inspection i WHERE i.realtor.id IN (:list) or i.client.id IN (:list)");
     }
 }

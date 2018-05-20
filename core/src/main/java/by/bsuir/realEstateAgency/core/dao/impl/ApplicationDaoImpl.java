@@ -2,17 +2,23 @@ package by.bsuir.realEstateAgency.core.dao.impl;
 
 import by.bsuir.realEstateAgency.core.bean.SearchForm;
 import by.bsuir.realEstateAgency.core.dao.ApplicationDao;
+import by.bsuir.realEstateAgency.core.dao.DealDao;
 import by.bsuir.realEstateAgency.core.model.Application;
 import by.bsuir.realEstateAgency.core.model.Immobility;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
 @Repository
 public class ApplicationDaoImpl extends AbstractDaoImpl<Application> implements ApplicationDao {
+
+    @Resource
+    private DealDao dealDao;
+
     @Override
     public Application get(Long key) {
         return sessionFactory.getCurrentSession().get(Application.class, key);
@@ -20,7 +26,7 @@ public class ApplicationDaoImpl extends AbstractDaoImpl<Application> implements 
 
     @Override
     public List<Application> findAll(int offset, int limit) {
-        return super.findAll(offset, limit, "Select a from Application a");
+        return super.findAll(offset, limit, "Select a from Application a ORDER BY a.id DESC");
     }
 
     @Override
@@ -35,6 +41,7 @@ public class ApplicationDaoImpl extends AbstractDaoImpl<Application> implements 
 
     @Override
     public void removeList(List<Long> keys) {
+        dealDao.deletingApplications(keys);
         super.removeList(keys, "DELETE FROM Application a WHERE a.id IN (:list)");
     }
 
@@ -59,7 +66,7 @@ public class ApplicationDaoImpl extends AbstractDaoImpl<Application> implements 
 
     @Override
     public List<Application> findAllByUser(int offset, int limit, Long userId) {
-        return findAll(offset, limit, "select a from Application a where (a.realtor.id=:userId or a.immobility.owner.id=:userId)", userId);
+        return findAll(offset, limit, "select a from Application a where (a.realtor.id=:userId or a.immobility.owner.id=:userId) ORDER BY a.id DESC", userId);
     }
 
     @Override
@@ -110,5 +117,18 @@ public class ApplicationDaoImpl extends AbstractDaoImpl<Application> implements 
             query.setParameter("maxPrice", new BigDecimal(searchForm.getMaxPrice()));
         }
         return query;
+    }
+
+    @Override
+    public void canceledApplicationByImmobilities(List<Long> keys) {
+        sessionFactory.getCurrentSession().createQuery("update Application a set a.status = 1" +
+                " where a.immobility.id in (:list) and a.status in (0,2)")
+                .setParameterList("list", keys)
+                .executeUpdate();
+
+        sessionFactory.getCurrentSession().createQuery("update Application a set a.immobility = null" +
+                " where a.immobility.id in (:list) ")
+                .setParameterList("list", keys)
+                .executeUpdate();
     }
 }
