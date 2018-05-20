@@ -55,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/panel/deals/**").hasAnyRole("ADMIN", "REALTOR")
                 .antMatchers("/panel/inspections/**").hasAnyRole("ADMIN", "REALTOR")
                 .antMatchers("/inspection/**").hasAnyRole("CLIENT")
+                .antMatchers("/profile/**").hasAnyRole("ADMIN", "REALTOR", "CLIENT")
                 .anyRequest().permitAll()
                 .antMatchers("/registration").permitAll()
                 .and()

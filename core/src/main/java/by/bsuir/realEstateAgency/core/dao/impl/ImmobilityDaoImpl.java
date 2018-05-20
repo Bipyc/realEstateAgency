@@ -42,11 +42,13 @@ public class ImmobilityDaoImpl extends AbstractDaoImpl<Immobility> implements Im
 
     @Override
     public List<Immobility> findAllByUser(int offset, int limit, Long userId) {
-        return null;
+        return findAll(offset, limit, "select i from Immobility i Where i.owner.id=:userId", userId);
     }
 
     @Override
     public long countByUser(Long userId) {
-        return 0;
+        return count("select count(i) from Immobility i Where i.owner.id=:userId", userId);
     }
+
+
 }

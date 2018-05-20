@@ -69,7 +69,7 @@ public class DealController {
                     .stream().filter(CheckedItem::isChecked)
                     .map(CheckedItem::getId).collect(Collectors.toList()));
         }
-        return "redirect:/deals?page=" + pageNumber;
+        return "redirect:/panel/deals?page=" + pageNumber;
     }
 
     @GetMapping("/new")
@@ -88,7 +88,7 @@ public class DealController {
             model.addAttribute(CREATE_ATTRIBUTE, true);
             return "dealDetails";
         }
-        return "redirect:/deals";
+        return "redirect:/panel/deals";
     }
 
     @GetMapping("/{id}")
@@ -111,7 +111,7 @@ public class DealController {
                 || dealFacade.saveOrUpdate(dealDto, userDetails.getUser(), bindingResult)) {
             return "dealDetails";
         }
-        return "redirect:/deals";
+        return "redirect:/panel/deals";
     }
 
     @PostMapping(value = "/{id}", params = "remove")
@@ -122,6 +122,6 @@ public class DealController {
             throw new AccessDeniedException();
         }
         dealService.remove(id);
-        return "redirect:/deals";
+        return "redirect:/panel/deals";
     }
 }

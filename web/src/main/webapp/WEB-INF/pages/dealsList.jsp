@@ -32,7 +32,7 @@
                         </sec:authorize>
 
                         <td>
-                            <a href="<c:url value="/deals/${deal.id}"/>">
+                            <a href="<c:url value="/panel/deals/${deal.id}"/>">
                                 <c:out value="${deal.application.id}"/>
                             </a>
                         </td>
@@ -50,7 +50,7 @@
                 </c:forEach>
             </table>
             <hr/>
-            <a href="<c:url value="/deals/new"/>" class="btn btn-success control-button">
+            <a href="<c:url value="/panel/deals/new"/>" class="btn btn-success control-button">
                 Create
             </a>
             <sec:authorize access="hasRole('ADMIN')">
@@ -61,5 +61,5 @@
             <sec:csrfInput/>
         </div>
     </form>
-    <template:pagination targetPage="deals" pagination="${pagedList.pagination}"/>
+    <template:pagination targetPage="panel/deals" pagination="${pagedList.pagination}"/>
 </template:page>

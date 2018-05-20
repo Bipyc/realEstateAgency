@@ -40,4 +40,14 @@ public class InspectionDaoImpl extends AbstractDaoImpl<Inspection> implements In
         return super.checkUser(keys, userId,
                 "select count(i) from Inspection i Where i.id in (:list) and (i.realtor.id=:userId or i.client.id=:userId)");
     }
+
+    @Override
+    public List<Inspection> findAllByUser(int offset, int limit, Long userId) {
+        return super.findAll(offset, limit, "select i from Inspection i Where (i.realtor.id=:userId or i.client.id=:userId)", userId);
+    }
+
+    @Override
+    public long countByUser(Long userId) {
+        return super.count("select count(i) from Inspection i Where (i.realtor.id=:userId or i.client.id=:userId)", userId);
+    }
 }

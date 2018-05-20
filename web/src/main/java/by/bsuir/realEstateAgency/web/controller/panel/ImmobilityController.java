@@ -64,7 +64,7 @@ public class ImmobilityController {
                     .stream().filter(CheckedItem::isChecked)
                     .map(CheckedItem::getId).collect(Collectors.toList()), userDetails.getUser());
         }
-        return "redirect:/immobilities?page=" + pageNumber;
+        return "redirect:/panel/immobilities?page=" + pageNumber;
     }
 
     @GetMapping("/new")
@@ -86,7 +86,7 @@ public class ImmobilityController {
             model.addAttribute(CREATE_USER_ATTRIBUTE, true);
             return "immobilityDetails";
         }
-        return "redirect:/immobilities";
+        return "redirect:/panel/immobilities";
     }
 
     @GetMapping("/{id}")
@@ -112,13 +112,13 @@ public class ImmobilityController {
                 ||immobilityFacade.saveOrUpdate(immobilityDto, userDetails.getUser(), bindingResult)) {
             return "immobilityDetails";
         }
-        return "redirect:/immobilities";
+        return "redirect:/panel/immobilities";
     }
 
     @PostMapping(value = "/{id}", params = "remove")
     public String removeImmobility(@PathVariable("id") long id, Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         immobilityService.remove(id, userDetails.getUser());
-        return "redirect:/immobilities";
+        return "redirect:/panel/immobilities";
     }
 }

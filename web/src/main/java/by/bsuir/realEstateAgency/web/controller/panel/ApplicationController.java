@@ -71,7 +71,7 @@ public class ApplicationController {
                     .stream().filter(CheckedItem::isChecked)
                     .map(CheckedItem::getId).collect(Collectors.toList()), userDetails.getUser());
         }
-        return "redirect:/applications?page=" + pageNumber;
+        return "redirect:/panel/applications?page=" + pageNumber;
     }
 
     @GetMapping("/new")
@@ -97,7 +97,7 @@ public class ApplicationController {
             model.addAttribute(TYPE_APPLICATIONS_ATTRIBUTE, typeApplicationService.getAll());
             return "applicationDetails";
         }
-        return "redirect:/applications";
+        return "redirect:/panel/applications";
     }
 
     @GetMapping("/{id}")
@@ -122,13 +122,13 @@ public class ApplicationController {
             model.addAttribute(TYPE_APPLICATIONS_ATTRIBUTE, typeApplicationService.getAll());
             return "applicationDetails";
         }
-        return "redirect:/applications";
+        return "redirect:/panel/applications";
     }
 
     @PostMapping(value = "/{id}", params = "remove")
     public String removeApplication(@PathVariable("id") long id, Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         applicationService.remove(id, userDetails.getUser());
-        return "redirect:/applications";
+        return "redirect:/panel/applications";
     }
 }

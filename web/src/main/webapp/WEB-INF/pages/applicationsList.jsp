@@ -13,6 +13,7 @@
                 <thead>
                 <tr>
                     <th class="right-border"></th>
+                    <th>ID</th>
                     <th>Immobility ID</th>
                     <th>Creation date</th>
                     <th>Realtor</th>
@@ -27,7 +28,12 @@
                                    value="<c:out value="${application.id}"/>"/>
                         </td>
                         <td>
-                            <a href="<c:url value="/applications/${application.id}"/>">
+                            <a href="<c:url value="/panel/applications/${application.id}"/>">
+                                <c:out value="${application.id}"/>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="<c:url value="/panel/immobility/${application.immobility.id}"/>">
                                 <c:out value="${application.immobility.id}"/>
                             </a>
                         </td>
@@ -45,7 +51,7 @@
                 </c:forEach>
             </table>
             <hr/>
-            <a href="<c:url value="/applications/new"/>" class="btn btn-success control-button">
+            <a href="<c:url value="/panel/applications/new"/>" class="btn btn-success control-button">
                 Create
             </a>
             <button type="submit" name="remove" class="btn btn-danger control-button">
@@ -55,5 +61,5 @@
 
         <sec:csrfInput/>
     </form>
-    <template:pagination targetPage="applications" pagination="${pagedList.pagination}"/>
+    <template:pagination targetPage="panel/applications" pagination="${pagedList.pagination}"/>
 </template:page>

@@ -65,7 +65,7 @@ public class InspectionController {
                     .stream().filter(CheckedItem::isChecked)
                     .map(CheckedItem::getId).collect(Collectors.toList()), userDetails.getUser());
         }
-        return "redirect:/inspections?page=" + pageNumber;
+        return "redirect:/panel/inspections?page=" + pageNumber;
     }
 
     @GetMapping("/new")
@@ -92,7 +92,7 @@ public class InspectionController {
             model.addAttribute(CREATE_ATTRIBUTE, true);
             return "inspectionDetails";
         }
-        return "redirect:/inspections";
+        return "redirect:/panel/inspections";
     }
 
     @GetMapping("/{id}")
@@ -115,13 +115,13 @@ public class InspectionController {
                 || inspectionFacade.saveOrUpdate(inspectionDto, userDetails.getUser(), bindingResult)) {
             return "inspectionDetails";
         }
-        return "redirect:/inspections";
+        return "redirect:/panel/inspections";
     }
 
     @PostMapping(value = "/{id}", params = "remove")
     public String removeImmobility(@PathVariable("id") long id, Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         inspectionService.remove(id, userDetails.getUser());
-        return "redirect:/inspections";
+        return "redirect:/panel/inspections";
     }
 }

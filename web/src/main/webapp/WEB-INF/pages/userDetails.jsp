@@ -34,7 +34,14 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-                <template:form_elem label="Login*" path="login"/>
+                <c:choose>
+                    <c:when test="${empty showUserProfile}">
+                        <template:form_elem label="Login*" path="login"/>
+                    </c:when>
+                    <c:otherwise>
+                        <form:hidden path="login"/>
+                    </c:otherwise>
+                </c:choose>
                 <template:form_elem label="First name*" path="firstName"/>
                 <template:form_elem label="Last name*" path="lastName"/>
                 <template:form_elem label="Patronymic*" path="patronymic"/>
@@ -66,7 +73,7 @@
                 <button type="submit" name="save" class="btn btn-success ">
                     Save
                 </button>
-                <c:if test="${empty createUser && empty registration}">
+                <c:if test="${empty createUser && empty registration && empty showUserProfile}">
                     <button type="submit" name="remove" class="btn btn-danger ">
                         Remove
                     </button>

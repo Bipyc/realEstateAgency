@@ -27,12 +27,12 @@
                                    value="<c:out value="${inspection.id}"/>"/>
                         </td>
                         <td>
-                            <a href="<c:url value="/inspection/${inspection.id}"/>">
+                            <a href="<c:url value="/panel/inspection/${inspection.id}"/>">
                                 <c:out value="${inspection.id}"/>
                             </a>
                         </td>
                         <td>
-                            <a href="<c:url value="/immobilities/${inspection.immobility.id}"/>"><c:out
+                            <a href="<c:url value="/panel/immobilities/${inspection.immobility.id}"/>"><c:out
                                     value="${inspection.immobility.name}"/></a>
                         </td>
                         <td>
@@ -47,7 +47,7 @@
                 </c:forEach>
             </table>
             <hr/>
-            <a href="<c:url value="/inspections/new"/>" class="btn btn-success control-button">
+            <a href="<c:url value="/panel/inspections/new"/>" class="btn btn-success control-button">
                 Create
             </a>
             <button type="submit" name="remove" class="btn btn-danger control-button">
@@ -56,5 +56,5 @@
             <sec:csrfInput/>
         </div>
     </form>
-    <template:pagination targetPage="inspections" pagination="${pagedList.pagination}"/>
+    <template:pagination targetPage="panel/inspections" pagination="${pagedList.pagination}"/>
 </template:page>

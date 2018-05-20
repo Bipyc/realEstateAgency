@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Transactional
@@ -25,6 +26,12 @@ public class ApplicationServiceImpl extends AbstractService implements Applicati
     @Override
     public void save(Application application) {
         applicationDao.save(application);
+    }
+
+    @Override
+    public void save(Application object, User user) {
+        checkUser(Collections.singletonList(object), user, applicationDao);
+        save(object);
     }
 
     @Override
@@ -66,5 +73,15 @@ public class ApplicationServiceImpl extends AbstractService implements Applicati
     @Override
     public Application findLastApplicationByImmobility(Long key) {
         return applicationDao.findLastApplicationByImmobility(key);
+    }
+
+    @Override
+    public List<Application> findAllByUser(int offset, int limit, User user) {
+        return applicationDao.findAllByUser(offset, limit, user.getId());
+    }
+
+    @Override
+    public long countByUser(User user) {
+        return applicationDao.countByUser(user.getId());
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,12 @@ public class ImmobilityServiceImpl extends AbstractService implements Immobility
     @Override
     public void save(Immobility immobility) {
         immobilityDao.save(immobility);
+    }
+
+    @Override
+    public void save(Immobility object, User user) {
+        checkUser(Collections.singletonList(object), user, immobilityDao);
+        save(object);
     }
 
     @Override
@@ -74,5 +81,15 @@ public class ImmobilityServiceImpl extends AbstractService implements Immobility
     @Override
     public long countBySearch(SearchForm searchForm) {
         return applicationService.countBySearch(searchForm);
+    }
+
+    @Override
+    public List<Immobility> findAllByUser(int offset, int limit, User user) {
+        return immobilityDao.findAllByUser(offset, limit, user.getId());
+    }
+
+    @Override
+    public long countByUser(User user) {
+        return immobilityDao.countByUser(user.getId());
     }
 }

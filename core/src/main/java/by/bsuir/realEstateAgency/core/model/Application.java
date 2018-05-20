@@ -15,7 +15,7 @@ public class Application {
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Realtor realtor;
 
     @ManyToOne(cascade = CascadeType.ALL)

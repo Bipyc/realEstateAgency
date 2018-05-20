@@ -1,13 +1,15 @@
 package by.bsuir.realEstateAgency.core.service;
 
+import by.bsuir.realEstateAgency.core.model.Application;
 import by.bsuir.realEstateAgency.core.model.Immobility;
 import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.common.FindAllBySearchInterface;
+import by.bsuir.realEstateAgency.core.service.common.FindAllByUserService;
 import by.bsuir.realEstateAgency.core.service.common.FindAllInterface;
 
 import java.util.List;
 
-public interface ImmobilityService extends FindAllInterface<Immobility>, FindAllBySearchInterface<Immobility> {
+public interface ImmobilityService extends FindAllInterface<Immobility>, FindAllByUserService<Immobility>, FindAllBySearchInterface<Immobility> {
     void save(Immobility immobility);
 
     Immobility get(Long key);

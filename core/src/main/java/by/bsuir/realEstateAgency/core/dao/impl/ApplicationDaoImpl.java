@@ -58,6 +58,16 @@ public class ApplicationDaoImpl extends AbstractDaoImpl<Application> implements 
     }
 
     @Override
+    public List<Application> findAllByUser(int offset, int limit, Long userId) {
+        return findAll(offset, limit, "select a from Application a where (a.realtor.id=:userId or a.immobility.owner.id=:userId)", userId);
+    }
+
+    @Override
+    public long countByUser(Long userId) {
+        return count("select count(a) from Application a where (a.realtor.id=:userId or a.immobility.owner.id=:userId)", userId);
+    }
+
+    @Override
     public Application findLastApplicationByImmobility(Long key) {
         return (Application) sessionFactory.getCurrentSession().createQuery("select a from Application a where a.status = 2 " +
                 "and a.immobility.id = :id ORDER BY a.id DESC")

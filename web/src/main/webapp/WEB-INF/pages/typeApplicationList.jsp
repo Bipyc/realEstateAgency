@@ -18,7 +18,7 @@
                 <c:forEach var="typeApplication" items="${pagedList.list}" varStatus="i">
                     <tr>
                         <td class="right-border">
-                            <a href="<c:url value="/typeApplications/${typeApplication.id}"/>"><c:out
+                            <a href="<c:url value="/panel/typeApplications/${typeApplication.id}"/>"><c:out
                                     value="${typeApplication.name}"/></a>
                         </td>
                         <td>
@@ -28,11 +28,11 @@
                 </c:forEach>
             </table>
             <hr/>
-            <a href="<c:url value="/typeApplications/new"/>" class="btn btn-success control-button">
+            <a href="<c:url value="/panel/typeApplications/new"/>" class="btn btn-success control-button">
                 Create
             </a>
             <sec:csrfInput/>
         </div>
     </form>
-    <template:pagination targetPage="typeApplications" pagination="${pagedList.pagination}"/>
+    <template:pagination targetPage="panel/typeApplications" pagination="${pagedList.pagination}"/>
 </template:page>

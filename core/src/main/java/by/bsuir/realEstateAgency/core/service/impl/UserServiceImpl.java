@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void encryptPassword(User user) {
-        if (!user.getPassword().isEmpty()) {
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
     }

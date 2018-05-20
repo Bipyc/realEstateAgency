@@ -46,7 +46,7 @@
                 </c:forEach>
             </table>
             <hr/>
-            <a href="<c:url value="/users/new"/>" class="btn btn-success control-button">
+            <a href="<c:url value="/panel/users/new"/>" class="btn btn-success control-button">
                 Create
             </a>
             <button type="submit" name="remove" class="btn btn-danger control-button">
