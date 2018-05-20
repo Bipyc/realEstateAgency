@@ -39,65 +39,49 @@
             </sec:authorize>
         </div>
         <nav class="navbar navbar-default">
-            <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
-                <a href="<c:url value="/profile"/>">Profile</a>
-            </sec:authorize>
-            <sec:authorize access="hasRole('CLIENT')">
-                <a href="<c:url value="/panel/immobilities"/>">My Immobilities</a>
-                <a href="<c:url value="/panel/inspections"/>">My Inspections</a>
-                <a href="<c:url value="/panel/deals"/>">My Deals</a>
-            </sec:authorize>
-            <sec:authorize access="hasRole('REALTOR')">
-
-                <a href="<c:url value="/panel/applications"/>">My Applications</a>
-                <a href="<c:url value="/panel/inspections"/>">My Inspections</a>
-                <a href="<c:url value="/panel/deals"/>">My Deals</a>
-            </sec:authorize>
-            <sec:authorize access="hasRole('ADMIN')">
-                <a href="<c:url value="/panel/users"/>">Users</a>
-                <a href="<c:url value="/panel/immobilities"/>">Immobilities</a>
-                <a href="<c:url value="/panel/applications"/>">Applications</a>
-                <a href="<c:url value="/panel/inspections"/>">Inspections</a>
-                <a href="<c:url value="/panel/deals"/>">Deals</a>
-                <a href="<c:url value="/panel/typeApplications"/>">Application Types</a>
-            </sec:authorize>
             <div class="container">
                 <a class="navbar-brand" href="<c:url value="/"/>">REALT</a>
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
+
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="<c:url value="/"/>">HOME</a></li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">NEWS <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Page 1-1</a></li>
-                                <li><a href="#">Page 1-2</a></li>
-                                <li><a href="#">Page 1-3</a></li>
-                            </ul>
+
+                        <li>
+                            <a href="<c:url value="/catalog"/>">CATALOG</a>
                         </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">FEATURES <span
-                                    class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Page 1-1</a></li>
-                                <li><a href="#">Page 1-2</a></li>
-                                <li><a href="#">Page 1-3</a></li>
-                            </ul>
+                        <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">PANEL <span
+                                        class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <sec:authorize access="hasRole('CLIENT')">
+                                        <li><a href="<c:url value="/panel/immobilities"/>">My Immobilities</a></li>
+                                        <li><a href="<c:url value="/panel/inspections"/>">My Inspections</a></li>
+                                        <li><a href="<c:url value="/panel/deals"/>">My Deals</a></li>
+                                    </sec:authorize>
+                                    <sec:authorize access="hasRole('REALTOR')">
+                                        <li><a href="<c:url value="/panel/applications"/>">My Applications</a></li>
+                                        <li><a href="<c:url value="/panel/inspections"/>">My Inspections</a></li>
+                                        <li><a href="<c:url value="/panel/deals"/>">My Deals</a></li>
+                                    </sec:authorize>
+                                    <sec:authorize access="hasRole('ADMIN')">
+                                        <li><a href="<c:url value="/panel/users"/>">Users</a></li>
+                                        <li><a href="<c:url value="/panel/immobilities"/>">Immobilities</a></li>
+                                        <li><a href="<c:url value="/panel/applications"/>">Applications</a></li>
+                                        <li><a href="<c:url value="/panel/inspections"/>">Inspections</a></li>
+                                        <li><a href="<c:url value="/panel/deals"/>">Deals</a></li>
+                                        <li><a href="<c:url value="/panel/typeApplications"/>">Comission</a>
+                                        </li>
+                                    </sec:authorize>
+                                </ul>
+                            </li>
+                        </sec:authorize>
+                        <li>
+                            <sec:authorize access="hasAnyRole('ADMIN', 'CLIENT', 'REALTOR')">
+                                <a href="<c:url value="/profile"/>">PROFILE</a>
+                            </sec:authorize>
                         </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">DEMOS<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Page 1-1</a></li>
-                                <li><a href="#">Page 1-2</a></li>
-                                <li><a href="#">Page 1-3</a></li>
-                            </ul>
-                        </li>
+
                     </ul>
                 </div>
             </div>

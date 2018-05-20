@@ -26,7 +26,7 @@
                             <input type="hidden" name="checkedList[${i.index}].id" value="<c:out value="${user.id}"/>"/>
                         </td>
                         <td>
-                            <a href="<c:url value="/users/${user.id}"/>"><c:out value="${user.login}"/></a>
+                            <a href="<c:url value="/panel/users/${user.id}"/>"><c:out value="${user.login}"/></a>
                         </td>
                         <td>
                             <c:out value="${user.firstName}"/>
