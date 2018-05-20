@@ -18,10 +18,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Component
@@ -97,6 +99,11 @@ public class InspectionController {
     public String createInspection(@Valid InspectionDto inspectionDto, BindingResult bindingResult,
                                    Authentication authentication, Model model) {
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
+        if ((inspectionDto.getDate() != null) && (inspectionDto.getTime() != null)){
+            if ((inspectionDto.getDate().getTime() + inspectionDto.getTime().getTime() + TimeUnit.HOURS.toMillis(2)) < System.currentTimeMillis()){
+                bindingResult.addError(new FieldError("inspectionDto", "date", inspectionDto.getDate(), false, new String[]{""}, null, "date should be no less one hour before inspection"));
+            }
+        }
         if (bindingResult.hasErrors()
                 || inspectionFacade.saveOrUpdate(inspectionDto, userDetails.getUser(), bindingResult)) {
             model.addAttribute(CREATE_ATTRIBUTE, true);
