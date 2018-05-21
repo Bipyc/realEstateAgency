@@ -31,7 +31,7 @@ public class TimerTask {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd");
 
         System.out.println(date);
-
+        String usersWithBirthday = new String();
         for (User u : users) {
 
             System.out.println(u.getEmail());
@@ -42,10 +42,9 @@ public class TimerTask {
             if (Objects.equals(formatForDateNow.format(u.getDateOfBirth()), formatForDateNow.format(date))) {
 
                 try {
+                    usersWithBirthday += "\n" + u.getLogin() + ":" + u.getDateOfBirth();
                     List<String> recipients = new ArrayList<>();
                     recipients.add(u.getEmail());
-                    recipients.add("dimakutas17@gmail.com");
-                    recipients.add("dimon.hyip@mail.ru");
                     mailSender.sendEmail(recipients
                             ,"BirthDay"
                             ,"Hi, " + u.getFirstName() + u.getLastName()
@@ -60,6 +59,18 @@ public class TimerTask {
 
             }
         }
-
+        if (usersWithBirthday.length() > 3) {
+            try {
+                List<String> recipients = new ArrayList<>();
+                recipients.add("dimakutas17@gmail.com");
+                recipients.add("Real_Estate_Agency_info@mail.ru");
+                recipients.add("dimon.hyip@mail.ru");
+                mailSender.sendEmail(recipients
+                        , "BirthDay"
+                        , "List users with birthday: " + usersWithBirthday);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
