@@ -17,6 +17,14 @@
                         <form:hidden path="emails[${i.index}]"/>
                     </c:forEach>
                 </div>
+                <div class="form-group">
+                    <span>Template: </span>
+                    <select id="selectTemplate" class="select-style">
+                        <option value="0">None</option>
+                        <option value="1">Invitation to the office</option>
+                        <option value="2">Stock</option>
+                    </select>
+                </div>
                 <template:form_elem path="title" label="Title"/>
                 <span>
                     <template:form_elem path="text" type="textarea" label="Text"/>
@@ -29,4 +37,22 @@
             </form:form>
         </div>
     </div>
+    <script>
+        var templates = ["", "Hello {firstName} {lastName} " +
+        "\n \nWe ask you to come to our office for additional questions.\n" +
+        "\n" +
+        "You can find out more by calling +375295553535",
+            "Hello {firstName} {lastName} \n \n" +
+            "Today we have the perfect offer for you!\n" +
+            "We reduce commission 2 times!\n" +
+            "We are waiting for you in our office!"];
+        $(function () {
+            // bind change event to select
+            $("#selectTemplate").on('change', function () {
+                var value = $("#selectTemplate").val();
+                $("textarea[name=text]").val(templates[value]);
+                return false;
+            });
+        });
+    </script>
 </template:page>

@@ -70,8 +70,8 @@ function deleteImage() {
     $(this).parent().remove();
 }
 
-function addEmail() {
-    let div = document.getElementsByClassName('emailAddresses')[0];
+function setTemplate() {
+    let textarea = document.getElementsByName('text')[0];
     let count = div.getElementsByClassName("emails").length;
     let input = document.createElement('input');
     input.setAttribute("type","text");
