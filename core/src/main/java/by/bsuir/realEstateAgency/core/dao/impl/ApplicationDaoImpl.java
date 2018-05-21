@@ -119,6 +119,20 @@ public class ApplicationDaoImpl extends AbstractDaoImpl<Application> implements 
         return query;
     }
 
+
+    @Override
+    public void deleteUser(List<Long> keys) {
+        sessionFactory.getCurrentSession().createQuery("update Application a set a.status = 1" +
+                " where a.realtor.id in (:list) and a.status in (0,2)")
+                .setParameterList("list", keys)
+                .executeUpdate();
+
+        sessionFactory.getCurrentSession().createQuery("update Application a set a.realtor = null" +
+                " where a.realtor.id in (:list) ")
+                .setParameterList("list", keys)
+                .executeUpdate();
+    }
+
     @Override
     public void canceledApplicationByImmobilities(List<Long> keys) {
         sessionFactory.getCurrentSession().createQuery("update Application a set a.status = 1" +

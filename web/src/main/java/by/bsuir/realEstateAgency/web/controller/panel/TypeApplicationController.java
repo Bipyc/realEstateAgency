@@ -43,8 +43,9 @@ public class TypeApplicationController {
 
     @GetMapping
     private String getTypeApplications(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
+                                       @RequestParam(name = "count", defaultValue = "10") int countOnPage,
                                        Model model) {
-        model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, typeApplicationService));
+        model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, countOnPage, typeApplicationService));
         return "typeApplicationList";
     }
 

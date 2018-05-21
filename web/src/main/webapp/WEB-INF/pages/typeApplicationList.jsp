@@ -4,6 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
+    <span>Count on page</span>
+    <a href="<c:url value="/panel/typeApplications?count=5"/>">5</a>
+    <a href="<c:url value="/panel/typeApplications?count=10"/>">10</a>
     <form method="post">
         <div class="information-text noselect">Comission</div>
         <br/>

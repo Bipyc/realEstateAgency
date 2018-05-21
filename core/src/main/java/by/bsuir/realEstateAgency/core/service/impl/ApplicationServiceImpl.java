@@ -89,4 +89,9 @@ public class ApplicationServiceImpl extends AbstractService implements Applicati
     public Long[] applicationCountByCity(Long id) {
         return applicationDao.applicationCountByCity(id);
     }
+
+    @Override
+    public void deleteUser(List<Long> keys) {
+        applicationDao.deleteUser(keys);
+    }
 }

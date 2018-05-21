@@ -45,6 +45,7 @@ public class DocumentController {
         try {
             String filename;
             ByteArrayOutputStream outputStream = null;
+
             switch (type){
                 case 0:
                     httpServletResponse.addHeader("Content-Type", "application/pdf");
@@ -64,6 +65,7 @@ public class DocumentController {
                     httpServletResponse.addHeader("Content-Disposition", "inline; filename=" + filename);
                     outputStream = integerAbstractDocumentService.generateCSV(userDetails.getUser().getId().intValue());
             }
+
             httpServletResponse.getOutputStream().write(outputStream.toByteArray());
         } catch (IOException | DocumentException e) {
             log.error("Internat server error",e);

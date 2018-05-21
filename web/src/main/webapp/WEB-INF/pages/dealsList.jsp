@@ -5,6 +5,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <template:page>
+    <span>Count on page</span>
+    <a href="<c:url value="/panel/deals?count=5"/>">5</a>
+    <a href="<c:url value="/panel/deals?count=10"/>">10</a>
     <form method="post">
         <div class="information-text noselect">Deals list</div>
         <br/>

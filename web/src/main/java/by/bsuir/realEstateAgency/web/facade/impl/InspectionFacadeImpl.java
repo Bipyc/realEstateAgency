@@ -72,7 +72,7 @@ public class InspectionFacadeImpl implements InspectionFacade {
         }
 
         if (!bindingResult.hasErrors()) {
-            inspectionService.save(inspection, null);
+            inspectionService.save(inspection, user);
             inspectionDto.setId(inspection.getId());
         }
         return bindingResult.hasErrors();

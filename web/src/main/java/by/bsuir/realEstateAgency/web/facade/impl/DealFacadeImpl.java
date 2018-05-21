@@ -58,11 +58,11 @@ public class DealFacadeImpl implements DealFacade {
                 log.error("Trying update a nonexistent object", e);
                 throw e;
             }
-            if (!user.equals(deal.getApplication().getRealtor()) && !(user instanceof Admin)) {
+            /*if (!user.equals(deal.getApplication().getRealtor()) && !(user instanceof Admin)) {
                 RuntimeException e = new IllegalStateException();
                 log.error("Trying update immobility by not the owner or admin", e);
                 throw e;
-            }
+            }*/
         } else {
             deal = new Deal();
             deal.setDate(new Date());

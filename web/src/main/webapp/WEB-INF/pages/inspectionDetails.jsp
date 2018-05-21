@@ -24,7 +24,16 @@
             <div class="auth-record">
                 <c:choose>
                     <c:when test="${empty createByUser}">
-                        <template:form_elem label="Immobility ID*" type="number" path="immobilityId"/>
+                        <c:if test="${not empty create}">
+                            <template:form_elem label="Immobility ID*" type="number" path="immobilityId"/>
+                        </c:if>
+                        <c:if test="${empty create}">
+                            <div class="form-group">
+                                <span>Immobility ID: </span>
+                                <span>${inspectionDto.immobilityId}</span>
+                            </div>
+                            <form:hidden path="immobilityId"/>
+                        </c:if>
                         <template:form_elem label="Realtor*" path="realtorName"/>
                         <template:form_elem label="Client*" path="clientName"/>
                     </c:when>

@@ -4,6 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
+    <span>Count on page</span>
+    <a href="<c:url value="/catalog?count=5"/>">5</a>
+    <a href="<c:url value="/catalog?count=10"/>">10</a>
     <div class="information-text noselect">Catalog</div>
     <br/>
     <form:form method="get" modelAttribute="sf" class="search-form">

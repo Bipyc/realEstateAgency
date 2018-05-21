@@ -13,15 +13,15 @@ public interface PageService {
 
     int AMOUNT_PHONES_ON_PAGE = 10;
 
-    int getPagesCount(int itemsCount);
+    int getPagesCount(int itemsCount, int countOnPage);
 
-    int normalizePageNumber(int pageNumber, int itemsCount);
+    int normalizePageNumber(int pageNumber, int countOnPage, int itemsCount);
 
-    Pagination getPagination(int pageNumber, int itemsCount);
+    Pagination getPagination(int pageNumber, int countOnPage, int itemsCount);
 
-    PagedListPage getPagedList(int pageNumber, FindAllInterface objectService);
+    PagedListPage getPagedList(int pageNumber, int countOnPage, FindAllInterface objectService);
 
-    PagedListPage getPagedList(int pageNumber, FindAllBySearchInterface objectService, SearchForm searchForm);
+    PagedListPage getPagedList(int pageNumber, int countOnPage, FindAllBySearchInterface objectService, SearchForm searchForm);
 
-    PagedListPage getPagedList(int pageNumber, FindAllByUserService objectService, User user);
+    PagedListPage getPagedList(int pageNumber, int countOnPage, FindAllByUserService objectService, User user);
 }

@@ -8,13 +8,16 @@ public class Pagination {
 
     private int finishPaginationNumber;
 
+    private int countOnPage;
+
     public Pagination() {
     }
 
-    public Pagination(int pageNumber, int startPaginationNumber, int finishPaginationNumber) {
+    public Pagination(int pageNumber, int startPaginationNumber, int finishPaginationNumber, int countOnPage) {
         this.pageNumber = pageNumber;
         this.startPaginationNumber = startPaginationNumber;
         this.finishPaginationNumber = finishPaginationNumber;
+        this.countOnPage=countOnPage;
     }
 
     public int getPageNumber() {
@@ -39,5 +42,13 @@ public class Pagination {
 
     public void setFinishPaginationNumber(int finishPaginationNumber) {
         this.finishPaginationNumber = finishPaginationNumber;
+    }
+
+    public int getCountOnPage() {
+        return countOnPage;
+    }
+
+    public void setCountOnPage(int countOnPage) {
+        this.countOnPage = countOnPage;
     }
 }
