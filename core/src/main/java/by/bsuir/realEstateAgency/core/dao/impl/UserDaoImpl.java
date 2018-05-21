@@ -5,6 +5,7 @@ import by.bsuir.realEstateAgency.core.dao.ImmobilityDao;
 import by.bsuir.realEstateAgency.core.dao.InspectionDao;
 import by.bsuir.realEstateAgency.core.dao.UserDao;
 import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
+import by.bsuir.realEstateAgency.core.model.Realtor;
 import by.bsuir.realEstateAgency.core.model.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -85,5 +86,12 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
                 .setParameter("login", key)
                 .setParameter("email", key)
                 .uniqueResult();
+    }
+
+    @Override
+    public List<Realtor> findAllRealtor() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("select r from Realtor r")
+                .getResultList();
     }
 }

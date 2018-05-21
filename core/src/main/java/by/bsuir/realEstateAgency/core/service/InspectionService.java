@@ -21,4 +21,6 @@ public interface InspectionService extends FindAllInterface<Inspection>, DeleteB
      * @param keys - id list
      */
     void removeList(List<Long> keys, User user);
+
+    List<Inspection> getAllToday(Long userId);
 }

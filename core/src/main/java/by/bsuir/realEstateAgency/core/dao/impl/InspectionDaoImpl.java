@@ -5,6 +5,7 @@ import by.bsuir.realEstateAgency.core.model.Inspection;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -59,5 +60,11 @@ public class InspectionDaoImpl extends AbstractDaoImpl<Inspection> implements In
     @Override
     public void removegByUser(List<Long> keys) {
         super.removeList(keys, "DELETE FROM Inspection i WHERE i.realtor.id IN (:list) or i.client.id IN (:list)");
+    }
+
+    @Override
+    public List<Inspection> getAllToday(Long userId) {
+        return super.findAll(0, 1000,"select i from Inspection i" +
+                " Where (i.realtor.id=:userId or i.client.id=:userId) and i.date=CURRENT_DATE ORDER BY i.time", userId);
     }
 }

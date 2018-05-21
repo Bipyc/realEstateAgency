@@ -131,4 +131,20 @@ public class ApplicationDaoImpl extends AbstractDaoImpl<Application> implements 
                 .setParameterList("list", keys)
                 .executeUpdate();
     }
+
+    @Override
+    public Long[] applicationCountByCity(Long id) {
+        Long[] aLong = new Long[2];
+        aLong[0] = (Long) sessionFactory.getCurrentSession()
+                .createQuery("select count(a) from Application a where a.immobility.city.id = :id")
+                .setParameter("id", id)
+                .uniqueResult();
+
+        aLong[1] = (Long) sessionFactory.getCurrentSession()
+                .createQuery("select count(a) from Application a where a.immobility.city.id = :id and a.status = 3")
+                .setParameter("id", id)
+                .uniqueResult();
+
+        return aLong;
+    }
 }

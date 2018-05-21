@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 @Transactional
@@ -23,5 +24,10 @@ public class CityServiceImpl implements CityService {
     @Override
     public void save(City city) {
         cityDao.save(city);
+    }
+
+    @Override
+    public List<City> getAll() {
+        return cityDao.getAll();
     }
 }

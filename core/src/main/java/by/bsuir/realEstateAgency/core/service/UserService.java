@@ -1,5 +1,6 @@
 package by.bsuir.realEstateAgency.core.service;
 
+import by.bsuir.realEstateAgency.core.model.Realtor;
 import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.common.FindAllInterface;
 
@@ -20,4 +21,6 @@ public interface UserService extends FindAllInterface<User> {
      * @param keys - id list
      */
     void removeList(List<Long> keys);
+
+    List<Realtor> findAllRealtor();
 }

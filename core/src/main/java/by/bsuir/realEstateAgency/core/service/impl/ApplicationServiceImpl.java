@@ -84,4 +84,9 @@ public class ApplicationServiceImpl extends AbstractService implements Applicati
     public long countByUser(User user) {
         return applicationDao.countByUser(user.getId());
     }
+
+    @Override
+    public Long[] applicationCountByCity(Long id) {
+        return applicationDao.applicationCountByCity(id);
+    }
 }
