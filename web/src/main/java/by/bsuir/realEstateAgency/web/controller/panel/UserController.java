@@ -1,6 +1,7 @@
 package by.bsuir.realEstateAgency.web.controller.panel;
 
 import by.bsuir.realEstateAgency.core.exception.ValueNotUniqueException;
+import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.UserService;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedItem;
 import by.bsuir.realEstateAgency.web.bean.pagedList.CheckedList;
@@ -16,9 +17,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriUtils;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.net.URLEncoder;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -133,6 +137,27 @@ public class UserController {
                     .map(CheckedItem::getId).collect(Collectors.toList()));
         }
         return "redirect:/panel/users?page=" + pageNumber;
+    }
+
+    @PostMapping(params = "sendEmail")
+    private String sendEmailUsers(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
+                               CheckedList checkedList, BindingResult bindingResult, Model model) throws Exception {
+
+        if (bindingResult.hasErrors()) {
+            log.error("Bad request params for deleting Users. HTTP400");
+            throw new BadRequestException();
+        }
+        StringBuilder params = new StringBuilder();
+        if (checkedList.getCheckedList() != null) {
+            List<User> users = userService.findAll(checkedList.getCheckedList()
+                    .stream().filter(CheckedItem::isChecked)
+                    .map(CheckedItem::getId).collect(Collectors.toList()));
+            for(User user: users){
+                params.append("&em=");
+                params.append(UriUtils.encode(user.getEmail(), "UTF-8"));
+            }
+        }
+        return "redirect:/panel/email?" + params.toString();
     }
 
     @ExceptionHandler({IllegalArgumentException.class})

@@ -12,6 +12,8 @@ public interface UserDao {
 
     User get(Long key);
 
+    List<User> findAll(List<Long> keys);
+
     User getByLoginOrEmail(String key);
 
     List<User> findAll(int offset, int limit);

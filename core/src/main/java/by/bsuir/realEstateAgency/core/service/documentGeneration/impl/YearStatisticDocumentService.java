@@ -92,7 +92,7 @@ public class YearStatisticDocumentService extends AbstractDocumentService<Intege
         }
         Security.addProvider(new BouncyCastleProvider());
         writer.setEncryption(PdfUtil.USER_PASSWORD.getBytes(), PdfUtil.OWNER_PASSWORD.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
-        saveFile("yearStatistic", "pdf", outputStream);
+        //saveFile("yearStatistic", "pdf", outputStream);
 
         return outputStream;
     }
@@ -132,7 +132,7 @@ public class YearStatisticDocumentService extends AbstractDocumentService<Intege
         }
         csvWriter.flush();
         csvWriter.close();
-        saveFile("yearStatistic", "csv", outputStream);
+        //saveFile("yearStatistic", "csv", outputStream);
         return outputStream;
     }
 
@@ -176,7 +176,7 @@ public class YearStatisticDocumentService extends AbstractDocumentService<Intege
         ExcelUtil.createTable(agreementInfo, wardStat, "Year statistic", 0, 0);
         styleTable(workbook, agreementInfo);
         workbook.write(outputStream);
-        saveFile("yearStatistic", "xlsx", outputStream);
+        //saveFile("yearStatistic", "xlsx", outputStream);
 
         return outputStream;
     }

@@ -77,7 +77,7 @@ public class CityStatisticDocumentService extends AbstractDocumentService<Intege
         }
         Security.addProvider(new BouncyCastleProvider());
         writer.setEncryption(PdfUtil.USER_PASSWORD.getBytes(), PdfUtil.OWNER_PASSWORD.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
-        saveFile("cityStatistic", "pdf", outputStream);
+        //saveFile("cityStatistic", "pdf", outputStream);
 
         return outputStream;
     }
@@ -95,7 +95,7 @@ public class CityStatisticDocumentService extends AbstractDocumentService<Intege
         }
         csvWriter.flush();
         csvWriter.close();
-        saveFile("cityStatistic", "csv", outputStream);
+        //saveFile("cityStatistic", "csv", outputStream);
         return outputStream;
     }
 
@@ -116,7 +116,7 @@ public class CityStatisticDocumentService extends AbstractDocumentService<Intege
         ExcelUtil.createTable(agreementInfo, wardStat, "City Statistic", 0, 0);
         styleTable(workbook, agreementInfo);
         workbook.write(outputStream);
-        saveFile("schedule", "xlsx", outputStream);
+        //saveFile("schedule", "xlsx", outputStream);
 
         return outputStream;
     }

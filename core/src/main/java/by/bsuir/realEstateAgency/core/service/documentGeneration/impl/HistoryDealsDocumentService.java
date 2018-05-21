@@ -124,7 +124,7 @@ public class HistoryDealsDocumentService extends AbstractDocumentService<Integer
         }
         Security.addProvider(new BouncyCastleProvider());
         writer.setEncryption(PdfUtil.USER_PASSWORD.getBytes(), PdfUtil.OWNER_PASSWORD.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
-        saveFile("historyDeals", "pdf", outputStream);
+        //saveFile("historyDeals", "pdf", outputStream);
 
         return outputStream;
     }
@@ -165,7 +165,7 @@ public class HistoryDealsDocumentService extends AbstractDocumentService<Integer
         }
         csvWriter.flush();
         csvWriter.close();
-        saveFile("historyDeals", "csv", outputStream);
+        //saveFile("historyDeals", "csv", outputStream);
         return outputStream;
     }
 
@@ -211,7 +211,7 @@ public class HistoryDealsDocumentService extends AbstractDocumentService<Integer
         ExcelUtil.createTable(agreementInfo, wardStat, "History Deals for " +currentYear+ " year", 0, 0);
         styleTable(workbook, agreementInfo);
         workbook.write(outputStream);
-        saveFile("historyDeals", "xlsx", outputStream);
+        //saveFile("historyDeals", "xlsx", outputStream);
 
         return outputStream;
     }

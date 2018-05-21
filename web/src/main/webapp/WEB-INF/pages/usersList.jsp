@@ -52,9 +52,11 @@
             <button type="submit" name="remove" class="btn btn-danger control-button">
                 Remove
             </button>
+            <button type="submit" name="sendEmail" class="btn btn-info">
+                Send Email
+            </button>
             <sec:csrfInput/>
         </div>
-
     </form>
     <template:pagination targetPage="users" pagination="${pagedList.pagination}"/>
 </template:page>
