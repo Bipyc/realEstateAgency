@@ -38,9 +38,9 @@
                             <c:out value="${user.patronymic}"/>
                         </td>
                         <td>
-                            <button type="submit" name="email" class="btn btn-info">
+                            <a href="<c:url value="/panel/email?em=${user.email}"/>" class="btn btn-info">
                                 Send Email
-                            </button>
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -52,7 +52,7 @@
             <button type="submit" name="remove" class="btn btn-danger control-button">
                 Remove
             </button>
-            <button type="submit" name="sendEmail" class="btn btn-info">
+            <button type="submit" name="sendEmail" class="btn btn-info control-button">
                 Send Email
             </button>
             <sec:csrfInput/>
