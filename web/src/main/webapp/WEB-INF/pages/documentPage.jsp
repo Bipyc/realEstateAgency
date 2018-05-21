@@ -3,40 +3,86 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/templates" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
-    <table>
-        <sec:authorize access="hasRole('ADMIN')">
-            <tr>
-                <td>City Statistic</td>
-                <td><a target="_blank" href="<c:url value="/document?type=0&documentId=0"/>">pdf</a></td>
-                <td><a target="_blank" href="<c:url value="/document?type=1&documentId=0"/>">xlsx</a></td>
-                <td><a target="_blank" href="<c:url value="/document?type=2&documentId=0"/>">csv</a></td>
-            </tr>
-            <tr>
-                <td>Realtor Report</td>
-                <td><a target="_blank" href="<c:url value="/document?type=0&documentId=2"/>">pdf</a></td>
-                <td><a target="_blank" href="<c:url value="/document?type=1&documentId=2"/>">xlsx</a></td>
-                <td><a target="_blank" href="<c:url value="/document?type=2&documentId=2"/>">csv</a></td>
-            </tr>
-            <tr>
-                <td>Year Statistic</td>
-                <td><a target="_blank" href="<c:url value="/document?type=0&documentId=4"/>">pdf</a></td>
-                <td><a target="_blank" href="<c:url value="/document?type=1&documentId=4"/>">xlsx</a></td>
-                <td><a target="_blank" href="<c:url value="/document?type=2&documentId=4"/>">csv</a></td>
-            </tr>
-        </sec:authorize>
-        <sec:authorize access="hasAnyRole('REALTOR', 'CLIENT')">
-            <tr>
-                <td>History Deals</td>
-                <td><a target="_blank" href="<c:url value="/document?type=0&documentId=1"/>">pdf</a></td>
-                <td><a target="_blank" href="<c:url value="/document?type=1&documentId=1"/>">xlsx</a></td>
-                <td><a target="_blank" href="<c:url value="/document?type=2&documentId=1"/>">csv</a></td>
-            </tr>
-            <tr>
-                <td>Visiting Schedule</td>
-                <td><a target="_blank" href="<c:url value="/document?type=0&documentId=3"/>">pdf</a></td>
-                <td><a target="_blank" href="<c:url value="/document?type=1&documentId=3"/>">xlsx</a></td>
-                <td><a target="_blank" href="<c:url value="/document?type=2&documentId=3"/>">csv</a></td>
-            </tr>
-        </sec:authorize>
-    </table>
+<div class="document-page">
+    <div class="information-text noselect">Documents</div>
+    <br/>
+    <sec:authorize access="hasRole('ADMIN')">
+        <div class="table-custom">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th colspan="3">City Statistic</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td class="right-border"><a target="_blank" href="<c:url value="/document?type=0&documentId=0"/>">pdf</a></td>
+                    <td class="right-border"><a target="_blank" href="<c:url value="/document?type=1&documentId=0"/>">xlsx</a></td>
+                    <td><a target="_blank" href="<c:url value="/document?type=2&documentId=0"/>">csv</a></td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+        <div class="table-custom">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th colspan="3">Realtor Report</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td class="right-border"><a target="_blank" href="<c:url value="/document?type=0&documentId=2"/>">pdf</a></td>
+                    <td class="right-border"><a target="_blank" href="<c:url value="/document?type=1&documentId=2"/>">xlsx</a></td>
+                    <td><a target="_blank" href="<c:url value="/document?type=2&documentId=2"/>">csv</a></td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+        <div class="table-custom">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th colspan="3">Year Statistic</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td class="right-border"><a target="_blank" href="<c:url value="/document?type=0&documentId=4"/>">pdf</a></td>
+                    <td class="right-border"><a target="_blank" href="<c:url value="/document?type=1&documentId=4"/>">xlsx</a></td>
+                    <td><a target="_blank" href="<c:url value="/document?type=2&documentId=4"/>">csv</a></td>
+                </tr>
+            </table>
+        </div>
+    </sec:authorize>
+
+    <sec:authorize access="hasAnyRole('REALTOR', 'CLIENT')">
+        <div class="table-custom">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th colspan="3">History Deals</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td class="right-border"><a target="_blank" href="<c:url value="/document?type=0&documentId=1"/>">pdf</a></td>
+                    <td class="right-border"><a target="_blank"  href="<c:url value="/document?type=1&documentId=1"/>">xlsx</a></td>
+                    <td><a target="_blank" href="<c:url value="/document?type=2&documentId=1"/>">csv</a></td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+        <div class="table-custom">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th colspan="3">Visiting Schedule</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td class="right-border"><a target="_blank" href="<c:url value="/document?type=0&documentId=3"/>">pdf</a></td>
+                    <td class="right-border"><a target="_blank" href="<c:url value="/document?type=1&documentId=3"/>">xlsx</a></td>
+                    <td><a target="_blank"  href="<c:url value="/document?type=2&documentId=3"/>">csv</a></td>
+                </tr>
+            </table>
+        </div>
+    </sec:authorize>
+</div>
 </template:page>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <div class="pt-3">
-        <p class="information-text">Log in</p>
+        <p class="information-text noselect">Log in</p>
         <br/>
         <form method="post">
             <c:if test="${param.error != null}">

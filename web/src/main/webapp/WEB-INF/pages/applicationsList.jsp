@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <template:page>
-    <div class="information-text">Order list</div>
+    <div class="information-text noselect">Order list</div>
     <br/>
     <form method="post">
         <div class="table-custom">

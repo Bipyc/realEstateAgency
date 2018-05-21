@@ -8,10 +8,10 @@
 <template:page>
     <c:choose>
         <c:when test="${empty create}">
-            <div class="information-text outlined-text">Create immobility</div>
+            <div class="information-text outlined-text noselect">Create immobility</div>
         </c:when>
         <c:otherwise>
-            <div class="information-text outlined-text">Edit immobility</div>
+            <div class="information-text outlined-text noselect">Edit immobility</div>
         </c:otherwise>
     </c:choose>
     <br/>

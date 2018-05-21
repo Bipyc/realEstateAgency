@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
-    <div class="information-text">Catalog</div>
+    <div class="information-text noselect">Catalog</div>
     <br/>
     <form:form method="get" modelAttribute="sf" class="search-form">
         <div class="container-fluid">

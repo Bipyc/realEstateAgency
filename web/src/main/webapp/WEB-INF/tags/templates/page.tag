@@ -64,11 +64,13 @@
                                         <li><a href="<c:url value="/panel/immobilities"/>">My Immobilities</a></li>
                                         <li><a href="<c:url value="/panel/inspections"/>">My Inspections</a></li>
                                         <li><a href="<c:url value="/panel/deals"/>">My Deals</a></li>
+                                        <li><a href="<c:url value="/document"/>">Documents</a></li>
                                     </sec:authorize>
                                     <sec:authorize access="hasRole('REALTOR')">
                                         <li><a href="<c:url value="/panel/applications"/>">My Applications</a></li>
                                         <li><a href="<c:url value="/panel/inspections"/>">My Inspections</a></li>
                                         <li><a href="<c:url value="/panel/deals"/>">My Deals</a></li>
+                                        <li><a href="<c:url value="/document"/>">Documents</a></li>
                                     </sec:authorize>
                                     <sec:authorize access="hasRole('ADMIN')">
                                         <li><a href="<c:url value="/panel/users"/>">Users</a></li>
@@ -77,7 +79,7 @@
                                         <li><a href="<c:url value="/panel/inspections"/>">Inspections</a></li>
                                         <li><a href="<c:url value="/panel/deals"/>">Deals</a></li>
                                         <li><a href="<c:url value="/panel/typeApplications"/>">Comission</a>
-                                        </li>
+                                        <li><a href="<c:url value="/document"/>">Documents</a></li>
                                     </sec:authorize>
                                 </ul>
                             </li>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <div class="about-img">
-        <div class="information-text">Dream team</div>
+        <div class="information-text noselect">Dream team</div>
         <br/>
         <div class="about-column">
             <a href="https://github.com/DmKoshelek" target="_blank">

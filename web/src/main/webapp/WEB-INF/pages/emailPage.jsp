@@ -4,7 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <div class="pt-3">
-        <p class="information-text">Send emails</p>
+        <p class="information-text noselect">Send emails</p>
         <br/>
         <form method="post">
             <c:forEach items="${emails}" var="email">
