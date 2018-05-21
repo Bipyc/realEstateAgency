@@ -43,7 +43,7 @@ public class MyEmailController {
         if(bindingResult.hasErrors()){
             return "emailPage";
         }
-        emailService.sendEmail(emailMessage.getEmails(), emailMessage.getTitle(), emailMessage.getText());
+        emailService.sendEmailWithTemplate(emailMessage.getEmails(), emailMessage.getTitle(), emailMessage.getText());
         return "redirect:/panel/users";
     }
 
