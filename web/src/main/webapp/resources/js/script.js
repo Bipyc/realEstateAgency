@@ -70,6 +70,16 @@ function deleteImage() {
     $(this).parent().remove();
 }
 
+function addEmail() {
+    let div = document.getElementsByClassName('emailAddresses')[0];
+    let count = div.getElementsByClassName("emails").length;
+    let input = document.createElement('input');
+    input.setAttribute("type","text");
+    input.setAttribute("class","emails");
+    input.setAttribute("name","emails["+count+"]");
+    div.appendChild(input);
+}
+
 function init() {
     $(".deleteImage").bind("click", deleteImage);
 }

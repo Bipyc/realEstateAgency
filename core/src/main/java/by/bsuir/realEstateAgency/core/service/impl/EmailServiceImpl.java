@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.mail.*;
 import javax.mail.Message;
@@ -18,6 +21,7 @@ import javax.mail.internet.MimeMessage;
 
 @Service
 public class EmailServiceImpl implements EmailService {
+    ExecutorService executor = Executors.newFixedThreadPool(1);
     final String fromEmail = "Real_Estate_Agency_info@mail.ru";
     final String password = "RealEstateAgency";
     final String host = "smtp.mail.ru"; // smtp.yandex.ru smtp.mail.ru smtp.gmail.com
@@ -47,6 +51,7 @@ public class EmailServiceImpl implements EmailService {
     public boolean sendEmail(List<String> recipients, String subject, String body){
         try
         {
+
             if(recipients.size() == 0)
                 return true;
             MimeMessage msg = new MimeMessage(session);
