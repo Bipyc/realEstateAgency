@@ -140,8 +140,7 @@ public class UserController {
     }
 
     @PostMapping(params = "sendEmail")
-    private String sendEmailUsers(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
-                               CheckedList checkedList, BindingResult bindingResult, Model model) throws Exception {
+    private String sendEmailUsers(CheckedList checkedList, BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
             log.error("Bad request params for deleting Users. HTTP400");

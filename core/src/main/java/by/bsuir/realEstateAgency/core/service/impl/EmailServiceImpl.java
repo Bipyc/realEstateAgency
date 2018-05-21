@@ -63,18 +63,22 @@ public class EmailServiceImpl implements EmailService {
 
             for (String address:recipients) {
                 User user = userService.getByLoginOrEmail(address);
-                if(user != null){
-                    MimeMessage msg = new MimeMessage(session);
-                    msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
-                    msg.addHeader("format", "flowed");
-                    msg.addHeader("Content-Transfer-Encoding", "8bit");
+                try {
+                    if (user != null) {
+                        MimeMessage msg = new MimeMessage(session);
+                        msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+                        msg.addHeader("format", "flowed");
+                        msg.addHeader("Content-Transfer-Encoding", "8bit");
 
-                    msg.setFrom(new InternetAddress(fromEmail, "Real estate agency service"));
-                    msg.addRecipient(Message.RecipientType.TO, new InternetAddress(address));
-                    msg.setSubject(compileTemplate(subject, user), "UTF-8");
-                    msg.setText(compileTemplate(body, user), "UTF-8");
-                    msg.setSentDate(new Date());
-                    Transport.send(msg);
+                        msg.setFrom(new InternetAddress(fromEmail, "Real estate agency service"));
+                        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(address));
+                        msg.setSubject(compileTemplate(subject, user), "UTF-8");
+                        msg.setText(compileTemplate(body, user), "UTF-8");
+                        msg.setSentDate(new Date());
+                        Transport.send(msg);
+                    }
+                }
+                catch (Exception ex) {
                 }
             }
         }
