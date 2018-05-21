@@ -7,7 +7,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form:form method="post" modelAttribute="dealDto">
-        <p class="information-text">Deal</p>
+        <p class="information-text noselect">Deal</p>
         <br/>
         <div class="auth-block">
             <div class="auth-record">

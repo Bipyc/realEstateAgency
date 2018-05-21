@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form method="post">
-        <div class="information-text">Users list</div>
+        <div class="information-text noselect">Users list</div>
         <br />
         <div class="table-custom">
             <table class="table">

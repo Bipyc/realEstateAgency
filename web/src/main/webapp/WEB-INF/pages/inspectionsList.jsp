@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <template:page>
     <form method="post">
-        <div class="information-text">Imspections list</div>
+        <div class="information-text noselect">Imspections list</div>
         <br/>
         <div class="table-custom">
             <table class="table">

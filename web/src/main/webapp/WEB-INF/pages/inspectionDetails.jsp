@@ -8,13 +8,13 @@
 <template:page>
     <c:choose>
         <c:when test="${empty create}">
-            <div class="information-text outlined-text">Create inspection</div>
+            <div class="information-text outlined-text noselect">Create inspection</div>
         </c:when>
         <c:when test="${empty createByUser}">
-            <div class="information-text outlined-text">Add inspection</div>
+            <div class="information-text outlined-text noselect">Add inspection</div>
         </c:when>
         <c:otherwise>
-            <div class="information-text outlined-text">Edit inspection</div>
+            <div class="information-text outlined-text noselect">Edit inspection</div>
         </c:otherwise>
     </c:choose>
     <br/>

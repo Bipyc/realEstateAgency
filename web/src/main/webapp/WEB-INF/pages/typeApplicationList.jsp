@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
     <form method="post">
-        <div class="information-text">Comission</div>
+        <div class="information-text noselect">Comission</div>
         <br/>
         <div class="table-custom">
             <table class="table">
