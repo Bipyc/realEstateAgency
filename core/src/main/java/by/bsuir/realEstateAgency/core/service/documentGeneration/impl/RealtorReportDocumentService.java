@@ -89,7 +89,7 @@ public class RealtorReportDocumentService extends AbstractDocumentService<Intege
         }
         Security.addProvider(new BouncyCastleProvider());
         writer.setEncryption(PdfUtil.USER_PASSWORD.getBytes(), PdfUtil.OWNER_PASSWORD.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
-        saveFile("realtorReport", "pdf", outputStream);
+        //saveFile("realtorReport", "pdf", outputStream);
 
         return outputStream;
     }
@@ -110,7 +110,7 @@ public class RealtorReportDocumentService extends AbstractDocumentService<Intege
         }
         csvWriter.flush();
         csvWriter.close();
-        saveFile("realtorsReport", "csv", outputStream);
+        //saveFile("realtorsReport", "csv", outputStream);
         return outputStream;
     }
 
@@ -135,7 +135,7 @@ public class RealtorReportDocumentService extends AbstractDocumentService<Intege
         ExcelUtil.createTable(agreementInfo, wardStat, "Realtor report", 0, 0);
         styleTable(workbook, agreementInfo);
         workbook.write(outputStream);
-        saveFile("realtorsReport", "xlsx", outputStream);
+        //saveFile("realtorsReport", "xlsx", outputStream);
 
         return outputStream;
     }

@@ -94,4 +94,9 @@ public class UserServiceImpl implements UserService {
     public List<Realtor> findAllRealtor() {
         return userDao.findAllRealtor();
     }
+
+    @Override
+    public List<User> findAll(List<Long> keys) {
+        return userDao.findAll(keys);
+    }
 }

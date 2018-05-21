@@ -23,4 +23,6 @@ public interface UserService extends FindAllInterface<User> {
     void removeList(List<Long> keys);
 
     List<Realtor> findAllRealtor();
+
+    List<User> findAll(List<Long> keys);
 }

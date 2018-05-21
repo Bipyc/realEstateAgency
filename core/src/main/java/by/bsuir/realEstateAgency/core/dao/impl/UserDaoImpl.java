@@ -46,6 +46,13 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
     }
 
     @Override
+    public List<User> findAll(List<Long> keys) {
+        return sessionFactory.getCurrentSession().createQuery("select u from User u where u.id in (:list)")
+                .setParameterList("list", keys)
+                .getResultList();
+    }
+
+    @Override
     public User get(Long key) {
         return sessionFactory.getCurrentSession().get(User.class, key);
     }

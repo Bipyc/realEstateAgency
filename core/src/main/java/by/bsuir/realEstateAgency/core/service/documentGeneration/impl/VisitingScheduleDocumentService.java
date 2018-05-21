@@ -81,7 +81,7 @@ public class VisitingScheduleDocumentService extends AbstractDocumentService<Int
         }
         Security.addProvider(new BouncyCastleProvider());
         writer.setEncryption(PdfUtil.USER_PASSWORD.getBytes(), PdfUtil.OWNER_PASSWORD.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
-        saveFile("schedule", "pdf", outputStream);
+        //saveFile("schedule", "pdf", outputStream);
 
         return outputStream;
     }
@@ -102,7 +102,7 @@ public class VisitingScheduleDocumentService extends AbstractDocumentService<Int
         }
         csvWriter.flush();
         csvWriter.close();
-        saveFile("schedule", "csv", outputStream);
+        //saveFile("schedule", "csv", outputStream);
         return outputStream;
     }
 
@@ -125,7 +125,7 @@ public class VisitingScheduleDocumentService extends AbstractDocumentService<Int
         ExcelUtil.createTable(agreementInfo, wardStat, "Schedule on " + dateFormat.format(new Date()), 0, 0);
         styleTable(workbook, agreementInfo);
         workbook.write(outputStream);
-        saveFile("schedule", "xlsx", outputStream);
+        //saveFile("schedule", "xlsx", outputStream);
 
         return outputStream;
     }
