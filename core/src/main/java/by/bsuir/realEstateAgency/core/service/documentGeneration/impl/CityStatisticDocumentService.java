@@ -113,7 +113,7 @@ public class CityStatisticDocumentService extends AbstractDocumentService<Intege
             Long[] longs = applicationService.applicationCountByCity(city.getId());
             wardStat.add(new String[]{city.getName(), Long.toString(longs[0]),Long.toString(longs[1])});
         }
-        ExcelUtil.createTable(agreementInfo, wardStat, "City Statistic", 0, 1);
+        ExcelUtil.createTable(agreementInfo, wardStat, "City Statistic", 0, 0);
         styleTable(workbook, agreementInfo);
         workbook.write(outputStream);
         saveFile("schedule", "xlsx", outputStream);

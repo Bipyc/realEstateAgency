@@ -14,7 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-abstract class AbstractDocumentService<T> {
+public abstract class AbstractDocumentService<T> {
     private static final String OUTPUT_DIRECTORY = "C:/Temp/";
     private static final Integer MAX_WIDTH = 200;
     static void saveFile(String type, String extension, ByteArrayOutputStream outputStream) throws IOException {
@@ -76,7 +76,7 @@ abstract class AbstractDocumentService<T> {
             sheet.setColumnWidth(i, columnMaxWidths.get(i) * 50);
     }
 
-    abstract ByteArrayOutputStream generatePdf(T key) throws IOException, DocumentException;
-    abstract ByteArrayOutputStream generateCSV(T key) throws IOException;
-    abstract ByteArrayOutputStream generateExcel(T key) throws IOException;
+    public abstract ByteArrayOutputStream generatePdf(T key) throws IOException, DocumentException;
+    public abstract ByteArrayOutputStream generateCSV(T key) throws IOException;
+    public abstract ByteArrayOutputStream generateExcel(T key) throws IOException;
 }

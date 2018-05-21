@@ -208,7 +208,7 @@ public class HistoryDealsDocumentService extends AbstractDocumentService<Integer
                     "$"+deal.getPrice().toString(),"$"+deal.getCommission()});
         }
 
-        ExcelUtil.createTable(agreementInfo, wardStat, "History Deals for " +currentYear+ " year", 0, 1);
+        ExcelUtil.createTable(agreementInfo, wardStat, "History Deals for " +currentYear+ " year", 0, 0);
         styleTable(workbook, agreementInfo);
         workbook.write(outputStream);
         saveFile("historyDeals", "xlsx", outputStream);

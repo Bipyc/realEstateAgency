@@ -132,7 +132,7 @@ public class RealtorReportDocumentService extends AbstractDocumentService<Intege
                     realtor.getLastName(), realtor.getPatronymic(), realtor.getSalary().toString(),
                     Long.toString((Long) listDeal[0]), "$" + new BigDecimal((Double) listDeal[1]).setScale(2).toString()});
         }
-        ExcelUtil.createTable(agreementInfo, wardStat, "Realtor report", 0, 1);
+        ExcelUtil.createTable(agreementInfo, wardStat, "Realtor report", 0, 0);
         styleTable(workbook, agreementInfo);
         workbook.write(outputStream);
         saveFile("realtorsReport", "xlsx", outputStream);

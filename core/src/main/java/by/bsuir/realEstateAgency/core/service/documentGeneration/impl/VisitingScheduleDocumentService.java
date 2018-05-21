@@ -122,7 +122,7 @@ public class VisitingScheduleDocumentService extends AbstractDocumentService<Int
                     inspection.getImmobility().getOwner().getPhone(),
                     inspection.getImmobility().getOwner().getFirstName()});
         }
-        ExcelUtil.createTable(agreementInfo, wardStat, "Schedule on " + dateFormat.format(new Date()), 0, 1);
+        ExcelUtil.createTable(agreementInfo, wardStat, "Schedule on " + dateFormat.format(new Date()), 0, 0);
         styleTable(workbook, agreementInfo);
         workbook.write(outputStream);
         saveFile("schedule", "xlsx", outputStream);

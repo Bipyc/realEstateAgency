@@ -173,7 +173,7 @@ public class YearStatisticDocumentService extends AbstractDocumentService<Intege
             startCal.add(Calendar.MONTH, 1);
         }
 
-        ExcelUtil.createTable(agreementInfo, wardStat, "Year statistic", 0, 1);
+        ExcelUtil.createTable(agreementInfo, wardStat, "Year statistic", 0, 0);
         styleTable(workbook, agreementInfo);
         workbook.write(outputStream);
         saveFile("yearStatistic", "xlsx", outputStream);
