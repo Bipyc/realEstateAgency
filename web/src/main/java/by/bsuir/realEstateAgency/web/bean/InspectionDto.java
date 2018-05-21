@@ -21,7 +21,6 @@ public class InspectionDto {
     @Min(1L)
     private Long immobilityId;
 
-    @Future
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 

@@ -27,10 +27,10 @@
                 </sec:authorize>
                 <template:form_elem label="Name*" path="name"/>
                 <template:form_elem label="Description*" path="description" type="textarea"/>
-                <template:form_elem label="Price*" path="price"/>
+                <template:form_elem label="Price*" type="number" path="price"/>
                 <template:form_elem label="City*" path="cityName"/>
-                <template:form_elem label="Number of rooms*" path="numberOfRooms"/>
-                <template:form_elem label="Square*" path="square"/>
+                <template:form_elem label="Number of rooms*" type="number" path="numberOfRooms"/>
+                <template:form_elem label="Square*" type="number" path="square"/>
                 <template:form_elem label="Address*" path="address"/>
                 <div class="choise">
                     <div class="form-group">
@@ -65,11 +65,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" name="save" class="btn btn-success">
+                <button type="submit" name="save" class="btn btn-success login-button">
                     Save
                 </button>
                 <c:if test="${empty create}">
-                    <button type="submit" name="remove" class="btn btn-danger">
+                    <button type="submit" name="remove" class="btn btn-danger login-button">
                         Remove
                     </button>
                 </c:if>

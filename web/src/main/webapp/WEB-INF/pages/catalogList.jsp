@@ -4,15 +4,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
+    <div class="information-text">Catalog</div>
+    <br/>
     <form:form method="get" modelAttribute="sf" class="search-form">
         <div class="container-fluid">
-            <div class="search">
-                <div class="information-text">Search</div>
-                <br/>
-                <div class="col-sm-3"></div>
-                <div class="col-sm-6">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 search">
+                <div>
                     <div class="row">
-
+                        <div class="information-text">Search</div>
+                        <br/>
                         <div class="col-sm-6">
                             <label class="outlined-text align-middle">City: </label>
                         </div>
@@ -78,13 +79,11 @@
 
                     </div>
                 </div>
-                <div class="col-sm-3"></div>
-
             </div>
+            <div class="col-sm-3"></div>
         </div>
         <sec:csrfInput/>
     </form:form>
-    <div class="information-text">Catalog</div>
     <br/>
     <div class="table-custom">
         <table class="table">

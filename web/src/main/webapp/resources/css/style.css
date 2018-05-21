@@ -15,6 +15,7 @@ body, html {
     font-family: "Arial Black", Gadget, sans-serif;
     min-height: 100% !important;
     height: 100%;
+    background-color: black;
 }
 
 .wrapper-bg {
@@ -274,7 +275,8 @@ body, html {
 }
 
 .login-button:hover {
-    color: var(--main-hover-font-color);
+    color: var(--main-font-color);
+    transform: scale(1.03);
 }
 
 .auth-block {
@@ -458,10 +460,15 @@ img {
 
 .search{
     color: white;
+    border: 4px solid var(--footer-background-color);
+    background-color: var(--footer-background-color);
+    border-radius: 30px;
 }
 
 .search .btn{
-    width: 100%;
+    width: 95%;
+    margin:0 auto;
+    display:block;
 }
 
 .search .select-style{
@@ -490,9 +497,7 @@ img {
 }
 
 .search-form{
-    border: 4px solid var(--footer-background-color);
-    background-color: var(--footer-background-color);
-    border-radius: 30px;
+
 }
 
 .search .information-text{
@@ -528,3 +533,189 @@ img {
 .information-description-block label{
     color: #0cd5ff;
 }
+.info{
+    font-family: arial;
+    position: absolute;
+    top:0;
+    left:0;
+    padding: 15px 0;
+    font-size: 150%;
+    text-transform: capitalize;
+    color: var(--main-font-color);
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.18);
+    width:100%;
+    text-align:center
+}
+
+.info a{
+    text-decoration: none;
+    color: var(--main-font-color);
+}
+
+.info a:hover{
+    color: black;
+}
+
+.info a:after{
+    content:" | ";
+    color: var(--main-font-color);
+}
+
+.info a:last-of-type:after{content:""}
+
+.box{
+    text-align: center;
+    position: relative;
+}
+
+.box div{
+    width: 20%;
+    height: 80px;
+    line-height: 80px;
+    color: black;
+    background-color: #fff;
+    font-size: 2.5vw;
+    position: absolute;
+    top:490px;
+    left:40%;
+    text-transform: capitalize;
+    animation: moving 8s linear infinite;
+    -webkit-animation: moving 8s linear infinite;
+    -moz-animation: moving 8s linear infinite;
+    -o-animation: moving 8s linear infinite;
+    white-space:nowrap;
+    transform-origin: 50% -400%;
+    -webkittransform-origin: 50% -400%;
+    -moz-transform-origin: 50% -400%;
+    -o-transform-origin: 50% -400%;
+}
+
+.box div:before{
+    content: "";
+    width: 6%;
+    height: 25px;
+    background-color:#fff;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    left:47%;
+    top:-350px;
+}
+
+.box div:after{
+    content: "";
+    width: 3px;
+    height: 335px;
+    background-color: #fff;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -330px;
+}
+
+.box p{
+    margin-top: 30px;
+    position: absolute;
+    top:560px;
+    left:30%;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color:#fff;
+    width: 40%;
+}
+
+.box p span{
+    display: block;
+    font-size:300%
+}
+
+.box .btn-prim {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: #fffbfb !important;
+    outline: none;
+    width: 40%;
+    margin-top: 20px;
+    font-size: 2.5vw;
+    font-weight: normal;
+    padding: 5px;
+}
+
+.box .btn-prim:hover {
+    background-color: rgba(255, 255, 255, 0.91);
+    color: black;
+}
+
+.box .btn-prim:active {
+    transform: translateY(3px);
+}
+
+.box .outlined-text {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+@keyframes moving{
+    0%,100%{
+        transform: rotate(0)
+    }
+    25%{
+        transform: rotate(3deg);
+    }
+    50%{
+        transform: rotate(-3deg)
+    }
+}
+
+@-webkit-keyframes moving{
+    0%,100%{
+        transform: rotate(0)
+    }
+    25%{
+        transform: rotate(3deg);
+    }
+    50%{
+        transform: rotate(-3deg)
+    }
+}
+
+@-moz-keyframes moving{
+    0%,100%{
+        transform: rotate(0)
+    }
+    25%{
+        transform: rotate(3deg);
+    }
+    50%{
+        transform: rotate(-3deg)
+    }
+}
+
+@-o-keyframes moving{
+    0%,100%{
+        transform: rotate(0)
+    }
+    25%{
+        transform: rotate(3deg);
+    }
+    50%{
+        transform: rotate(-3deg)
+    }
+}
+
+.error-bg {
+    flex-flow: column;
+    min-height: 100%;
+    color: #b4b4b4;
+    display: flex;
+    flex-direction: column;
+    background: url("../img/errorBackground.png") repeat center center fixed;
+    background-color: black;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
