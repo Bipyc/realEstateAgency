@@ -5,6 +5,7 @@ import by.bsuir.realEstateAgency.core.model.Deal;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -64,5 +65,36 @@ public class DealDaoImpl extends AbstractDaoImpl<Deal> implements DealDao {
     @Override
     public boolean checkUser(List<Long> keys, Long userId) {
         return checkUser(keys, userId, "select count(d) from Deal d Where d.id in (:list) and d.application.realtor.id=:userId");
+    }
+
+    @Override
+    public List<Deal> findAllInTimeIntervalBuUser(Long userId, Date startDate, Date finishDate) {
+        return sessionFactory.getCurrentSession().
+                createQuery("select d from Deal d Where (d.application.realtor.id=:userId or " +
+                        "d.client.id=:userId) and d.date between :startDate and :finishDate " +
+                        "ORDER BY d.id DESC")
+                .setParameter("userId", userId)
+                .setParameter("startDate", startDate)
+                .setParameter("finishDate", finishDate)
+                .getResultList();
+    }
+
+    @Override
+    public Object[] getDealAverageByUser(Long userId) {
+        return (Object[]) sessionFactory.getCurrentSession().
+                createQuery("select count(d), avg(d.commission) from Deal d Where (d.application.realtor.id=:userId or " +
+                        "d.client.id=:userId)")
+                .setParameter("userId", userId)
+                .uniqueResult();
+    }
+
+    @Override
+    public Object[] getSumDealInTimeInterval( Date startDate, Date finishDate) {
+        return (Object[]) sessionFactory.getCurrentSession().
+                createQuery("select count(d), sum(d.commission) from Deal d Where " +
+                        "d.date between :startDate and :finishDate")
+                .setParameter("startDate", startDate)
+                .setParameter("finishDate", finishDate)
+                .uniqueResult();
     }
 }

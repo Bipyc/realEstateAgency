@@ -62,4 +62,9 @@ public class InspectionServiceImpl extends AbstractService<Inspection> implement
     public long countByUser(User user) {
         return inspectionDao.countByUser(user.getId());
     }
+
+    @Override
+    public List<Inspection> getAllToday(Long userId) {
+        return inspectionDao.getAllToday(userId);
+    }
 }

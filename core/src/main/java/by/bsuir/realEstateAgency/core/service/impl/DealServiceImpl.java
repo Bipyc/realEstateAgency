@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,5 +64,20 @@ public class DealServiceImpl extends AbstractService<Deal> implements DealServic
     @Override
     public long countByUser(User user) {
         return dealDao.countByUser(user.getId());
+    }
+
+    @Override
+    public List<Deal> findAllInTimeIntervalBuUser(Long userId, Date startDate, Date finishDate) {
+        return dealDao.findAllInTimeIntervalBuUser(userId, startDate, finishDate);
+    }
+
+    @Override
+    public Object[] getDealAverageByUser(Long userId) {
+        return dealDao.getDealAverageByUser(userId);
+    }
+
+    @Override
+    public Object[] getSumDealInTimeInterval(Date startDate, Date finishDate) {
+        return dealDao.getSumDealInTimeInterval(startDate, finishDate);
     }
 }

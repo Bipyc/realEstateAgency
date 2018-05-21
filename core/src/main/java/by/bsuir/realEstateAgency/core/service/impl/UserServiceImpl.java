@@ -2,6 +2,7 @@ package by.bsuir.realEstateAgency.core.service.impl;
 
 import by.bsuir.realEstateAgency.core.dao.InspectionDao;
 import by.bsuir.realEstateAgency.core.dao.UserDao;
+import by.bsuir.realEstateAgency.core.model.Realtor;
 import by.bsuir.realEstateAgency.core.model.User;
 import by.bsuir.realEstateAgency.core.service.ImmobilityService;
 import by.bsuir.realEstateAgency.core.service.UserService;
@@ -87,5 +88,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByLoginOrEmail(String key) {
         return userDao.getByLoginOrEmail(key);
+    }
+
+    @Override
+    public List<Realtor> findAllRealtor() {
+        return userDao.findAllRealtor();
     }
 }

@@ -22,4 +22,6 @@ public interface ApplicationService extends FindAllInterface<Application>, Delet
     void removeList(List<Long> keys, User user);
 
     Application findLastApplicationByImmobility(Long key);
+
+    Long[] applicationCountByCity(Long id);
 }

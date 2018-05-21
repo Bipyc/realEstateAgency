@@ -5,6 +5,7 @@ import by.bsuir.realEstateAgency.core.dao.common.FindAllByUserDao;
 import by.bsuir.realEstateAgency.core.model.Deal;
 import by.bsuir.realEstateAgency.core.model.Immobility;
 
+import java.util.Date;
 import java.util.List;
 
 public interface DealDao extends FindAllByUserDao<Deal>, CheckUserInterface {
@@ -23,4 +24,10 @@ public interface DealDao extends FindAllByUserDao<Deal>, CheckUserInterface {
     void deletingApplications(List<Long> keys);
 
     void deletingUser(List<Long> keys);
+
+    List<Deal> findAllInTimeIntervalBuUser(Long userId, Date startDate, Date finishDate);
+
+    Object[] getDealAverageByUser(Long userId);
+
+    Object[] getSumDealInTimeInterval( Date startDate, Date finishDate);
 }
