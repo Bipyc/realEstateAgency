@@ -47,16 +47,17 @@ public class DealController {
 
     @GetMapping
     private String getApplications(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
+                                   @RequestParam(name = "count", defaultValue = "10") int countOnPage,
                                    Authentication authentication, Model model) {
         PagedListPage pagedListPage =  null;
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (userDetails.getUser() instanceof Admin) {
-            pagedListPage = pageService.getPagedList(pageNumber, dealService);
+            pagedListPage = pageService.getPagedList(pageNumber, countOnPage, dealService);
         }
         else {
-            pagedListPage = pageService.getPagedList(pageNumber, dealService, userDetails.getUser());
+            pagedListPage = pageService.getPagedList(pageNumber, countOnPage, dealService, userDetails.getUser());
         }
-        model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, dealService));
+        model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, countOnPage, dealService));
         return "dealsList";
     }
 

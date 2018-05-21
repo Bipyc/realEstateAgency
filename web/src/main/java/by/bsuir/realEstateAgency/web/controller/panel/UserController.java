@@ -55,8 +55,9 @@ public class UserController {
 
     @GetMapping
     private String getUsers(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
+                            @RequestParam(name = "count", defaultValue = "10") int countOnPage,
                             Model model) {
-        model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, userService));
+        model.addAttribute(PAGED_LIST_ATTRIBUTE, pageService.getPagedList(pageNumber, countOnPage, userService));
         return "usersList";
     }
 
@@ -80,7 +81,7 @@ public class UserController {
         if (!bindingResult.hasErrors()) {
             try {
                 userFacade.saveOrUpdate(user);
-                return "redirect:/users/" + user.getId();
+                return "redirect:/panel/users/" + user.getId();
             } catch (ValueNotUniqueException e) {
                 model.addAttribute(ERROR_MESSAGE_ATTRIBUTE, "some values are not unique");
             }

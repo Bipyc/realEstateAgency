@@ -54,14 +54,15 @@ public class ApplicationController {
 
     @GetMapping
     private String getApplications(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
+                                   @RequestParam(name = "count", defaultValue = "10") int countOnPage,
                                    Authentication authentication, Model model) {
         PagedListPage pagedListPage =  null;
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (userDetails.getUser() instanceof Admin) {
-            pagedListPage = pageService.getPagedList(pageNumber, applicationService);
+            pagedListPage = pageService.getPagedList(pageNumber, countOnPage, applicationService);
         }
         else {
-            pagedListPage = pageService.getPagedList(pageNumber, applicationService, userDetails.getUser());
+            pagedListPage = pageService.getPagedList(pageNumber, countOnPage, applicationService, userDetails.getUser());
         }
         model.addAttribute(PAGED_LIST_ATTRIBUTE, pagedListPage);
         return "applicationsList";

@@ -4,6 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <template:page>
+    <span>Count on page</span>
+    <a href="<c:url value="/panel/users?count=5"/>">5</a>
+    <a href="<c:url value="/panel/users?count=10"/>">10</a>
     <form method="post">
         <div class="information-text noselect">Users list</div>
         <br />
@@ -58,5 +61,5 @@
             <sec:csrfInput/>
         </div>
     </form>
-    <template:pagination targetPage="users" pagination="${pagedList.pagination}"/>
+    <template:pagination targetPage="panel/users" pagination="${pagedList.pagination}"/>
 </template:page>

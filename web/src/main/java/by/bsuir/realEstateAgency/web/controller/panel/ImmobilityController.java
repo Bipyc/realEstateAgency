@@ -48,14 +48,15 @@ public class ImmobilityController {
 
     @GetMapping
     private String getImmobilities(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
+                                   @RequestParam(name = "count", defaultValue = "10") int countOnPage,
                                    Authentication authentication, Model model) {
         PagedListPage pagedListPage =  null;
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (userDetails.getUser() instanceof Admin) {
-            pagedListPage = pageService.getPagedList(pageNumber, immobilityService);
+            pagedListPage = pageService.getPagedList(pageNumber, countOnPage, immobilityService);
         }
         else {
-            pagedListPage = pageService.getPagedList(pageNumber, immobilityService, userDetails.getUser());
+            pagedListPage = pageService.getPagedList(pageNumber, countOnPage, immobilityService, userDetails.getUser());
         }
         model.addAttribute(PAGED_LIST_ATTRIBUTE, pagedListPage);
         return "immobilitiesList";

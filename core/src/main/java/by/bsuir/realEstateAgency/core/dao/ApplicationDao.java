@@ -33,4 +33,6 @@ public interface ApplicationDao extends FindAllByUserDao<Application>, CheckUser
     void canceledApplicationByImmobilities(List<Long> keys);
 
     Long[] applicationCountByCity(Long id);
+
+    void deleteUser(List<Long> keys);
 }

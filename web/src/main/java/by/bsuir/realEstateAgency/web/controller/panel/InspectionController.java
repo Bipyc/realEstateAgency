@@ -50,14 +50,15 @@ public class InspectionController {
 
     @GetMapping
     private String getInspections(@RequestParam(name = PAGE_NUMBER_REQUEST_PARAM, defaultValue = "1") int pageNumber,
+                                  @RequestParam(name = "count", defaultValue = "10") int countOnPage,
                                   Authentication authentication, Model model) {
         PagedListPage pagedListPage =  null;
         AuthUserDetails userDetails = (AuthUserDetails) authentication.getPrincipal();
         if (userDetails.getUser() instanceof Admin) {
-            pagedListPage = pageService.getPagedList(pageNumber, inspectionService);
+            pagedListPage = pageService.getPagedList(pageNumber, countOnPage, inspectionService);
         }
         else {
-            pagedListPage = pageService.getPagedList(pageNumber, inspectionService, userDetails.getUser());
+            pagedListPage = pageService.getPagedList(pageNumber, countOnPage, inspectionService, userDetails.getUser());
         }
         model.addAttribute(PAGED_LIST_ATTRIBUTE, pagedListPage);
         return "inspectionsList";
