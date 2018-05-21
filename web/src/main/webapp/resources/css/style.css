@@ -94,7 +94,7 @@ body, html {
 }
 
 .header .navbar-brand:hover {
-    color: var(--main-hover-font-color);
+    color: var(--main-font-color);
 }
 
 .content_dark_background {
@@ -351,12 +351,20 @@ body, html {
     font-size: 18px;
 }
 
+.btn-info{
+    color: white !important;
+}
+
+.btn-info:hover{
+    color: #09ffff !important;
+}
+
 .table a {
-    color: #92d8f1;
+    color: #aaeff1;
 }
 
 .table a:hover {
-    color: #5ff3ff;
+    color: #09ffff;
     text-decoration: none;
 }
 
@@ -753,4 +761,20 @@ th{
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
+}
+
+.email-record{
+    margin-left: 10px;
+    color: #0cd5ff;
+    font-size: 20px;
+}
+
+.email-form .control-button{
+    margin-left: 0px;
+    width: 100%;
+}
+
+.email-form textarea{
+    font-size: 20px;
+    height: 20vw;
 }
