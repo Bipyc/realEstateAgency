@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 @Controller
@@ -44,29 +46,28 @@ public class DocumentController {
         AbstractDocumentService<Integer> integerAbstractDocumentService = abstractDocumentServices.get(documentId);
         try {
             String filename;
-            ByteArrayOutputStream outputStream = null;
-
+            byte[] byreArray = null;
             switch (type){
                 case 0:
                     httpServletResponse.addHeader("Content-Type", "application/pdf");
                     filename = "output.pdf";
                     httpServletResponse.addHeader("Content-Disposition", "inline; filename=" + filename);
-                    outputStream = integerAbstractDocumentService.generatePdf(userDetails.getUser().getId().intValue());
+                    byreArray = integerAbstractDocumentService.generatePdf(userDetails.getUser().getId().intValue()).toByteArray();
                     break;
                 case 1:
                     httpServletResponse.addHeader("Content-Type", "application/vnd.ms-excel");
                     filename = "output.xlsx";
                     httpServletResponse.addHeader("Content-Disposition", "inline; filename=" + filename);
-                    outputStream = integerAbstractDocumentService.generateExcel(userDetails.getUser().getId().intValue());
+                    byreArray = integerAbstractDocumentService.generateExcel(userDetails.getUser().getId().intValue()).toByteArray();
                     break;
                 case 2:
                     httpServletResponse.addHeader("Content-Type", "application/vnd.ms-excel");
                     filename = "output.csv";
                     httpServletResponse.addHeader("Content-Disposition", "inline; filename=" + filename);
-                    outputStream = integerAbstractDocumentService.generateCSV(userDetails.getUser().getId().intValue());
-            }
+                    byreArray = integerAbstractDocumentService.generateCSV(userDetails.getUser().getId().intValue()).toString().getBytes("WINDOWS-1251");
 
-            httpServletResponse.getOutputStream().write(outputStream.toByteArray());
+            }
+            httpServletResponse.getOutputStream().write(byreArray);
         } catch (IOException | DocumentException e) {
             log.error("Internat server error",e);
             throw new RuntimeException(e);
